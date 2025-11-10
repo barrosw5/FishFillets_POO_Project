@@ -1,12 +1,11 @@
 package pt.iscte.poo.game;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import objects.Water;
-import objects.BigFish;
-import objects.GameObject;
-import objects.SmallFish;
+import java.util.Scanner;
+import objects.*;
 import pt.iscte.poo.utils.Point2D;
 
 public class Room {
@@ -64,24 +63,51 @@ public class Room {
 	}
 	
 	public static Room readRoom(File f, GameEngine engine) {
-		Room r = new Room();
-		r.setEngine(engine);
-		r.setName(f.getName());
+		try {
+			Room r = new Room();
+			r.setEngine(engine);
+			r.setName(f.getName());
+
+			Scanner sc = new Scanner(f);
+
+			while(sc.hasNext()){
+				for(int i = 0; i < 10; i++){
+					String linha = sc.nextLine();
+					char[] caracteres = linha.toCharArray();
+					for(int j = 0; j < caracteres.length; j++){
+						switch(caracteres[j]){
+							case ' ':
+								GameObject water = new Water(r);
+								water.setPosition(new Point2D(j, i));
+								r.addObject(water);
+							case 'W':
+								GameObject wall = new Wall(r);
+								wall.setPosition(new Point2D(j, i));
+								r.addObject(wall);
+							case 'B':
+								GameObject bf = BigFish.getInstance();
+								bf.setPosition(j, i);
+								r.addObject(bf);
+							case 'S':
+								GameObject sf = SmallFish.getInstance();
+								sf.setPosition(j, i);
+								r.addObject(sf);
+							case 'H':
+								GameObject steelHorizontal = new SteelHorizontal(r);
+								steelHorizontal.setPosition(new Point2D(j, i));
+								r.addObject(steelHorizontal);
+						}
+					}
+				}
+			}
+
+			sc.close();
 		
-		GameObject water = new Water(r);
-		water.setPosition(new Point2D(0, 0));
-		r.addObject(water);
-		
-		GameObject bf = BigFish.getInstance();
-		bf.setPosition(2, 2);
-		r.addObject(bf);
-		
-		GameObject sf = SmallFish.getInstance();
-		sf.setPosition(3, 3);
-		r.addObject(sf);
-		
-		return r;
-		
+			return r;
+		} catch (FileNotFoundException e) {
+			System.err.println("Que erro estranho né?");
+		}
+		return null;
 	}
 	
 }

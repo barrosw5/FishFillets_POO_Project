@@ -2,15 +2,15 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class SteelVertical extends GameObject {
+public class Trap extends GameObject {
 
-	public SteelVertical(Room room) {
+	public Trap(Room room) {
 		super(room);
 	}
 
 	@Override
 	public String getName() {
-		return "steelVertical";
+		return "trap";
 	}
 
 	@Override

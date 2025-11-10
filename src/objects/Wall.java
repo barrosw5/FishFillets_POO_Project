@@ -18,6 +18,4 @@ public class Wall extends GameObject {
 		return 1;
 	}
 
-	// Olá a todos!
-
 }

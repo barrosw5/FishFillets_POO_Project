@@ -80,22 +80,27 @@ public class Room {
 								GameObject water = new Water(r);
 								water.setPosition(new Point2D(j, i));
 								r.addObject(water);
+								break;
 							case 'W':
 								GameObject wall = new Wall(r);
 								wall.setPosition(new Point2D(j, i));
 								r.addObject(wall);
+								break;
 							case 'B':
 								GameObject bf = BigFish.getInstance();
 								bf.setPosition(j, i);
 								r.addObject(bf);
+								break;
 							case 'S':
 								GameObject sf = SmallFish.getInstance();
 								sf.setPosition(j, i);
 								r.addObject(sf);
+								break;
 							case 'H':
 								GameObject steelHorizontal = new SteelHorizontal(r);
 								steelHorizontal.setPosition(new Point2D(j, i));
 								r.addObject(steelHorizontal);
+								break;
 						}
 					}
 				}

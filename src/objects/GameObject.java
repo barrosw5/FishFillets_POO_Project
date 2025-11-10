@@ -8,9 +8,11 @@ public abstract class GameObject implements ImageTile{
 	
 	private Point2D position;
 	private Room room;
+	private boolean isMovel;
 	
-	public GameObject(Room room) {
+	public GameObject(Room room, boolean isMovel) {
 		this.room = room;
+		this.isMovel = isMovel;
 	}
 	
 	public GameObject(Point2D position, Room room) {
@@ -38,5 +40,11 @@ public abstract class GameObject implements ImageTile{
 	public void setRoom(Room room) {
 		this.room = room;
 	}
+
+	public boolean getIsMovel() {
+		return isMovel;
+	}
+
+
 	
 }

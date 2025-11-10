@@ -5,7 +5,7 @@ import pt.iscte.poo.game.Room;
 public class SteelHorizontal extends GameObject {
 
 	public SteelHorizontal(Room room) {
-		super(room);
+		super(room, false);
 	}
 
 	@Override

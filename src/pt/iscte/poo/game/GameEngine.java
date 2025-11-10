@@ -1,15 +1,20 @@
 package pt.iscte.poo.game;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
+import javax.swing.text.Position;
 
 import objects.SmallFish;
 import objects.BigFish;
+import objects.GameObject;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.observer.Observer;
 import pt.iscte.poo.utils.Direction;
+import pt.iscte.poo.utils.Vector2D;
 
 public class GameEngine implements Observer {
 	
@@ -47,6 +52,21 @@ public class GameEngine implements Observer {
 		}
 		ImageGUI.getInstance().update();
 	}
+
+	// public boolean canMove(Point2D pos, Vector2D dir){
+	// 	Point2D finalPos = pos.plus(dir);
+		
+	// 	for ( GameObject obj: currentRoom.getObjects() ) {
+	// 		if ( obj.getPosition().equals(finalPos)) {
+				
+	// 			if ( obj.getIsMovel() == false ) {
+	// 				return false;
+	// 			}
+	// 		}
+	// 	}
+
+	// 	return true;
+	// }
 
 	private void processTick() {		
 		lastTickProcessed++;

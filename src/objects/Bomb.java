@@ -5,7 +5,7 @@ import pt.iscte.poo.game.Room;
 public class Bomb extends GameObject {
 
 	public Bomb(Room room) {
-		super(room);
+		super(room, true);
 	}
 
 	@Override

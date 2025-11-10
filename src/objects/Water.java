@@ -5,7 +5,7 @@ import pt.iscte.poo.game.Room;
 public class Water extends GameObject{
 
 	public Water(Room room) {
-		super(room);
+		super(room, false);
 	}
 
 	@Override

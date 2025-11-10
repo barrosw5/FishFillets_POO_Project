@@ -5,7 +5,7 @@ import pt.iscte.poo.game.Room;
 public class Anchor extends GameObject {
 
 	public Anchor(Room room) {
-		super(room);
+		super(room, true);
 	}
 
 	@Override

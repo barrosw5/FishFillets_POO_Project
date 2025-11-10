@@ -5,7 +5,7 @@ import pt.iscte.poo.game.Room;
 public class WallWithHole extends GameObject {
 
 	public WallWithHole(Room room) {
-		super(room);
+		super(room, false);
 	}
 
 	@Override

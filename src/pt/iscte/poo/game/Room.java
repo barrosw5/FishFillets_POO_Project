@@ -75,11 +75,13 @@ public class Room {
 					String linha = sc.nextLine();
 					char[] caracteres = linha.toCharArray();
 					for(int j = 0; j < caracteres.length; j++){
+						
+						GameObject water = new Water(r);
+						water.setPosition(new Point2D(j, i));
+						r.addObject(water);
+
 						switch(caracteres[j]){
 							case ' ':
-								GameObject water = new Water(r);
-								water.setPosition(new Point2D(j, i));
-								r.addObject(water);
 								break;
 							case 'W':
 								GameObject wall = new Wall(r);

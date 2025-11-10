@@ -105,7 +105,7 @@ public class Room {
 		
 			return r;
 		} catch (FileNotFoundException e) {
-			System.err.println("Que erro estranho né?");
+			System.err.println("Lembra-te lá de quando fizeste aquela função de ler o ficheiro de texto...");
 		}
 		return null;
 	}

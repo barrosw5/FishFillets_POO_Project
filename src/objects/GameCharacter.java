@@ -18,6 +18,10 @@ public abstract class GameCharacter extends GameObject {
 		}
 	}
 
+	public void pushObject(GameObject obj, Point2D from, Point2D to) {
+		obj.setPosition(to);
+	}
+
 	@Override
 	public int getLayer() {
 		return 2;

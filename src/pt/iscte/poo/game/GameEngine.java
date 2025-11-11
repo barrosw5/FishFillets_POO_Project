@@ -17,12 +17,13 @@ public class GameEngine implements Observer {
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
+	private int playedLevels = 0;
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
 		loadGame();
-		currentRoom = rooms.get("room0.txt");			//room0 nao está a corresponder com o txt
-		updateGUI();		
+		currentRoom = rooms.get("room0.txt");		//room0 nao está a corresponder com o txt
+		updateGUI();
 		SmallFish.getInstance().setRoom(currentRoom);
 		BigFish.getInstance().setRoom(currentRoom);
 	}
@@ -36,6 +37,18 @@ public class GameEngine implements Observer {
 
 	@Override
 	public void update(Observed source) {
+		System.out.println("SmallFish won: " + SmallFish.getInstance().hasWon());		//debug
+		System.out.println("BigFish won: " + BigFish.getInstance().hasWon());
+
+		if(SmallFish.getInstance().hasWon() && BigFish.getInstance().hasWon()){
+			playedLevels++;
+			if(playedLevels < rooms.size()){
+				currentRoom = rooms.get("room" + playedLevels + ".txt");	//incrementa playedLevels para ir para outra sala
+			}
+			else{
+				//show score
+			}
+		}
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
 			int k = ImageGUI.getInstance().keyPressed();

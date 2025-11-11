@@ -7,7 +7,7 @@ import pt.iscte.poo.utils.Vector2D;
 public abstract class GameCharacter extends GameObject {
 	private static final boolean isMovel = true;
 	private boolean direction = true; 	// true é esquerda, false é direita
-	private boolean hasWon;	// tentar fazer com que o peixe fora do ecra nao seja mais jogavel
+	private boolean hasWon = false;	// tentar fazer com que o peixe fora do ecra nao seja mais jogavel
 
 	public GameCharacter(Room room) {
 		super(room, isMovel);
@@ -21,12 +21,26 @@ public abstract class GameCharacter extends GameObject {
             } else if (dir.getX() < 0 && direction == false) {
                 direction = true;  	// mover png para a esquerda
             }
-			setPosition(startPosition.plus(dir));		
+			Point2D finalPosition = startPosition.plus(dir);
+
+			if (finalPosition.getX() < 0 || finalPosition.getX() > 9 ||
+				finalPosition.getY() < 0 || finalPosition.getY() > 9){
+					
+				hasWon = true;
+				// remove peixe da sala
+    			getRoom().removeObject(this);
+			}
+			else
+				setPosition(finalPosition);
 		}
 	}
 
 	public boolean getDirection(){
 		return direction;
+	}
+
+	public boolean hasWon(){
+		return hasWon;
 	}
 
 	public void pushObject(GameObject obj, Point2D from, Point2D to) {

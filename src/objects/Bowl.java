@@ -2,10 +2,10 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class Bowl extends GameObject {
+public class Bowl extends MovableObject {
 
 	public Bowl(Room room) {
-		super(room, true);
+		super(room);
 	}
 
 	@Override

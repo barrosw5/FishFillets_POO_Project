@@ -2,10 +2,10 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class SteelHorizontal extends GameObject {
+public class SteelHorizontal extends NonMovable {
 
 	public SteelHorizontal(Room room) {
-		super(room, false);
+		super(room);
 	}
 
 	@Override

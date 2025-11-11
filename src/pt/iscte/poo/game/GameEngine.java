@@ -22,7 +22,7 @@ public class GameEngine implements Observer {
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
-	private final int SPACEBAR = 32;
+	private final int SPACEBAR = 32;	// código para a spacebar utilizado no ImageGUI.getInstance().keyPressed()
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();

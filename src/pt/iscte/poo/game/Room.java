@@ -109,9 +109,9 @@ public class Room {
 								r.addObject(steelVertical);
 								break;
 							case 'C':
-								GameObject bowl = new Bowl(r);
-								bowl.setPosition(new Point2D(j, i));
-								r.addObject(bowl);
+								GameObject cup = new Cup(r);
+								cup.setPosition(new Point2D(j, i));
+								r.addObject(cup);
 								break;
 							case 'R':
 								GameObject rock = new Rock(r);
@@ -139,9 +139,9 @@ public class Room {
 								r.addObject(log);
 								break;
 							case 'X':
-								GameObject wallWithHole = new WallWithHole(r);
-								wallWithHole.setPosition(new Point2D(j, i));
-								r.addObject(wallWithHole);
+								GameObject holedWall = new HoledWall(r);
+								holedWall.setPosition(new Point2D(j, i));
+								r.addObject(holedWall);
 								break;
 						}
 					}

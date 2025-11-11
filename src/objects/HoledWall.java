@@ -2,25 +2,20 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class Bowl extends MovableObject {
+public class HoledWall extends NonMovable {
 
-	public Bowl(Room room) {
+	public HoledWall(Room room) {
 		super(room);
 	}
 
 	@Override
 	public String getName() {
-		return "bowl";
+		return "holedWall";
 	}
 
 	@Override
 	public int getLayer() {
 		return 1;
-	}
-
-	@Override
-	public boolean isLight() {
-		return true;
 	}
 
 }

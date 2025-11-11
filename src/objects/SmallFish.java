@@ -26,20 +26,19 @@ public class SmallFish extends GameCharacter {
 		return 1;
 	}
 
-	@Override // Feito 
+	@Override
 	public boolean canMove(Point2D pos, Vector2D dir) {
-    Point2D finalPos = pos.plus(dir);
+		Point2D finalPos = pos.plus(dir);
 
-    for (GameObject obj : this.getRoom().getObjects()) {
-       if ( obj.getPosition().equals(finalPos)) {
-				if ( (obj instanceof MovableObject || obj instanceof NonMovable) && ! (obj instanceof Trap) && !( obj instanceof HoledWall)) {
-					return false;
+		for (GameObject obj : this.getRoom().getObjects()) {
+		if ( obj.getPosition().equals(finalPos)) {
+					if ( (obj instanceof MovableObject || obj instanceof NonMovable) && ! (obj instanceof Trap) && !( obj instanceof HoledWall)) {
+						return false;
+					}
 				}
-			}
-    }
+		}
 
-   
-    return true;
-}
+    	return true;
+	}
 
 }

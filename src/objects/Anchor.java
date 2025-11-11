@@ -20,7 +20,7 @@ public class Anchor extends MovableObject {
 
 	@Override
 	public boolean isLight() {
-		
+		return false;
 	}
 
 }

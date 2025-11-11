@@ -18,4 +18,9 @@ public class Bomb extends MovableObject {
 		return 1;
 	}
 
+	@Override
+	public boolean isLight() {
+		return true;
+	}
+
 }

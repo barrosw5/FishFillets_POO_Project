@@ -47,8 +47,8 @@ The main goal is to develop the **game engine** that allows two user-controlled 
 ### Movable Objects
 | Object   | Weight | Movement / Effect |
 |----------|--------|------------------|
-| Bowl     | Light  | Can move in all 4 directions |
-| Rock     | Heavy  | Can move in all 4 directions |
+| Cup      | Light  | Can move in all 4 directions |
+| Stone    | Heavy  | Can move in all 4 directions |
 | Anchor   | Heavy  | Can move horizontally, 1 position |
 | Bomb     | Light  | Explodes when sinking, removes adjacent objects, may kill fish |
 | Trap     | Heavy  | Kills big fish; small fish can pass through |
@@ -56,10 +56,10 @@ The main goal is to develop the **game engine** that allows two user-controlled 
 ### Fixed Objects
 | Object           | Effect |
 |-----------------|--------|
-| Log              | Removed if a heavy object falls on it |
-| Steel Pipe       | Can support any object |
+| Trunk            | Removed if a heavy object falls on it |
+| Vertical/Horizontal Steel Pipe   | Can support any object |
 | Wall             | Can support any object |
-| Wall with Hole   | Can support any object but can be passed by small fish or bowls |
+| Holed Wall   | Can support any object but can be passed by small fish or bowls |
 
 ---
 

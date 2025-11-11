@@ -2,20 +2,25 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class Log extends NonMovable {
+public class Stone extends MovableObject {
 
-	public Log(Room room) {
+	public Stone(Room room) {
 		super(room);
 	}
 
 	@Override
 	public String getName() {
-		return "log";
+		return "stone";
 	}
 
 	@Override
 	public int getLayer() {
 		return 1;
+	}
+
+	@Override
+	public boolean isLight() {
+		return false;
 	}
 
 }

@@ -21,6 +21,8 @@ public class GameEngine implements Observer {
 	private Map<String,Room> rooms;
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
+	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
+	private final int SPACEBAR = 32;
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
@@ -43,8 +45,18 @@ public class GameEngine implements Observer {
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
 			int k = ImageGUI.getInstance().keyPressed();
-			SmallFish.getInstance().move(Direction.directionFor(k).asVector());
-			BigFish.getInstance().move(Direction.directionFor(k).asVector());
+
+			if(k == SPACEBAR){
+				playingFish = !playingFish;
+			}
+			else{
+				if(playingFish){
+					SmallFish.getInstance().move(Direction.directionFor(k).asVector());
+				}
+				else{
+					BigFish.getInstance().move(Direction.directionFor(k).asVector());
+				}
+			}
 		}
 		int t = ImageGUI.getInstance().getTicks();
 		while (lastTickProcessed < t) {

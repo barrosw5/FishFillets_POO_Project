@@ -37,13 +37,16 @@ public class GameEngine implements Observer {
 
 	@Override
 	public void update(Observed source) {
-		System.out.println("SmallFish won: " + SmallFish.getInstance().hasWon());		//debug
-		System.out.println("BigFish won: " + BigFish.getInstance().hasWon());
 
 		if(SmallFish.getInstance().hasWon() && BigFish.getInstance().hasWon()){
 			playedLevels++;
 			if(playedLevels < rooms.size()){
 				currentRoom = rooms.get("room" + playedLevels + ".txt");	//incrementa playedLevels para ir para outra sala
+				SmallFish.getInstance().resetWin();
+				BigFish.getInstance().resetWin();			// win reset para não passar os niveis todos
+				updateGUI();
+				SmallFish.getInstance().setRoom(currentRoom);
+				BigFish.getInstance().setRoom(currentRoom);
 			}
 			else{
 				//show score

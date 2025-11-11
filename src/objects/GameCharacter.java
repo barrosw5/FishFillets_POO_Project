@@ -43,6 +43,10 @@ public abstract class GameCharacter extends GameObject {
 		return hasWon;
 	}
 
+	public void resetWin(){
+		hasWon = !hasWon;
+	}
+
 	public void pushObject(GameObject obj, Point2D from, Point2D to) {
 		obj.setPosition(to);
 	}

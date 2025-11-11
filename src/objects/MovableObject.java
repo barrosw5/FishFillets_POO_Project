@@ -8,4 +8,6 @@ public abstract class MovableObject extends GameObject {
     public MovableObject(Room room) {
         super(room, isMovable);
     }
+
+    public abstract boolean isLight();
 }

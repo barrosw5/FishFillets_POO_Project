@@ -2,10 +2,10 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class Bomb extends GameObject {
+public class Bomb extends MovableObject {
 
 	public Bomb(Room room) {
-		super(room, true);
+		super(room);
 	}
 
 	@Override

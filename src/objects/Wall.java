@@ -2,10 +2,10 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class Wall extends GameObject {
+public class Wall extends NonMovable {
 
 	public Wall(Room room) {
-		super(room, false);
+		super(room);
 	}
 
 	@Override

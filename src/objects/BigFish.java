@@ -34,7 +34,7 @@ public class BigFish extends GameCharacter {
 		
 		for ( GameObject obj: BigFish.getInstance().getRoom().getObjects() ) {
 			if ( obj.getPosition().equals(finalPos)) {
-				if ( obj instanceof MovableObject || obj instanceof NonMovable) {
+				if ( obj instanceof MovableObject || obj instanceof NonMovable || obj instanceof GameCharacter) {
 					return false;
 				}
 			}

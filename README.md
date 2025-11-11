@@ -48,7 +48,7 @@ The main goal is to develop the **game engine** that allows two user-controlled 
 | Object   | Weight | Movement / Effect |
 |----------|--------|------------------|
 | Bowl     | Light  | Can move in all 4 directions |
-| Stone    | Heavy  | Can move in all 4 directions |
+| Rock     | Heavy  | Can move in all 4 directions |
 | Anchor   | Heavy  | Can move horizontally, 1 position |
 | Bomb     | Light  | Explodes when sinking, removes adjacent objects, may kill fish |
 | Trap     | Heavy  | Kills big fish; small fish can pass through |

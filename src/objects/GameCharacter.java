@@ -6,6 +6,7 @@ import pt.iscte.poo.utils.Vector2D;
 
 public abstract class GameCharacter extends GameObject {
 	private static final boolean isMovel = true;
+	private static boolean direction; 	// true é esquerda, false é direita
 
 	public GameCharacter(Room room) {
 		super(room, isMovel);
@@ -13,9 +14,21 @@ public abstract class GameCharacter extends GameObject {
 	
 	public void move(Vector2D dir) { 
 		Point2D startPosition = getPosition();
-		if ( canMove(startPosition, dir)) {
+		if (canMove(startPosition, dir)) {
+			if(dir.getX() > 0 && getDirection() == true)
+				changeDirection();
+			if(dir.getX() < 0 && getDirection() == false)
+				changeDirection();
 			setPosition(startPosition.plus(dir));		
 		}
+	}
+
+	public boolean getDirection(){
+		return direction;
+	}
+
+	public void changeDirection(){
+		direction = !direction;
 	}
 
 	public void pushObject(GameObject obj, Point2D from, Point2D to) {

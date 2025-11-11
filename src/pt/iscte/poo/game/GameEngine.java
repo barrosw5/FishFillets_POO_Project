@@ -17,7 +17,7 @@ public class GameEngine implements Observer {
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
-	private int playedLevels = 0;
+	public static int playedLevels = 0;
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();

@@ -15,12 +15,13 @@ public abstract class GameCharacter extends GameObject {
 	
 	public void move(Vector2D dir) { 
 		Point2D startPosition = getPosition();
-		if (canMove(startPosition, dir)) {
+		if (canMoveFish(startPosition, dir)) {
 			if (dir.getX() > 0 && direction == true) {
                 direction = false; 	// mover png para a direita
             } else if (dir.getX() < 0 && direction == false) {
                 direction = true;  	// mover png para a esquerda
             }
+			setPosition(startPosition.plus(dir));		
 			Point2D finalPosition = startPosition.plus(dir);
 
 			if (finalPosition.getX() < 0 || finalPosition.getX() > 9 ||
@@ -59,5 +60,5 @@ public abstract class GameCharacter extends GameObject {
 	// O CanMove garante que o peixe não vai em direção ou passe algo que não é suposto
 	// Está implementado como abstrato no GameCharacter 
 	//cada peixe tem o seu visto que os dois têm regras movimentação diferentes
-	public abstract boolean canMove(Point2D pos, Vector2D dir);
+	public abstract boolean canMoveFish(Point2D pos, Vector2D dir);
 }

@@ -29,19 +29,19 @@ public class SmallFish extends GameCharacter {
 	}
 
 	@Override  
-	public boolean canMove(Point2D pos, Vector2D dir) {
+	public boolean canMoveFish(Point2D pos, Vector2D dir) {
 		if(hasWon())
 			return false;
-
+	
 		Point2D finalPos = pos.plus(dir);
 
 		for (GameObject obj : this.getRoom().getObjects()) {
 			if (obj.getPosition().equals(finalPos)) {
 
-				// O SmallFish é bloqueado por tudo, com exceção da Trap e do HoledWall
-				if (obj instanceof Cup) {
+				// O SmallFish é bloqueado por tuPorquedo, com exceção da Trap e do HoledWall
+				// Can move é usado para mover Objetos que NÃO SÃO peixes
+				if ( obj instanceof MovableObject && obj.canMove(finalPos.plus(dir), this)) {
 					Point2D finalObPos = finalPos.plus(dir);
-					// if (...) verificar se o objeto pode ser empurrado
 					pushObject(obj, finalPos, finalObPos);
 					return true;
 				}
@@ -57,3 +57,4 @@ public class SmallFish extends GameCharacter {
 		return true;
 	}
 }
+

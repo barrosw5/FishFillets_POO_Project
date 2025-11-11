@@ -1,6 +1,7 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
+import pt.iscte.poo.utils.Point2D;
 
 public class Bomb extends MovableObject {
 
@@ -22,5 +23,13 @@ public class Bomb extends MovableObject {
 	public boolean isLight() {
 		return true;
 	}
+
+
+	@Override
+	public boolean canMove(Point2D to, GameObject cla) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'canMove'");
+	}
+
 
 }

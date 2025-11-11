@@ -11,8 +11,11 @@ public abstract class GameCharacter extends GameObject {
 		super(room, isMovel);
 	}
 	
-	public void move(Vector2D dir) {
+	public void move(Vector2D dir) { 
 		Point2D startPosition = getPosition();
+
+		// O CanMove garante que o peixe não vai em direção ou passe algo que não é suposto. 
+		// Está implementado como abstrato no GameCharacter e cada peixe tem o seu visto que os dois têm regras movimentação diferentes
 		if ( canMove(startPosition, dir)) {
 			setPosition(startPosition.plus(dir));		
 		}

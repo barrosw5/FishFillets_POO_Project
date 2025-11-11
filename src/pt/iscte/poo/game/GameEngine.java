@@ -41,7 +41,7 @@ public class GameEngine implements Observer {
 	}
 
 	@Override
-	public void update(Observed source) {
+	public void update(Observed source) {			//TODO BOWL ERROR
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
 			int k = ImageGUI.getInstance().keyPressed();

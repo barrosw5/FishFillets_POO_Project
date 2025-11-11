@@ -26,47 +26,29 @@ public class SmallFish extends GameCharacter {
 		return 1;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override  
-=======
-	@Override
->>>>>>> 233a844dcdc1b537bf55db5ca24f355ab2fa2c46
 	public boolean canMove(Point2D pos, Vector2D dir) {
 		Point2D finalPos = pos.plus(dir);
 
-<<<<<<< HEAD
-    for (GameObject obj : this.getRoom().getObjects()) {
-       if ( obj.getPosition().equals(finalPos)) {
-		// O SmallFish é bloqueado por tudo, com exeção da Trap e do HoledWall 
-				if ( obj instanceof Cup) {
+		for (GameObject obj : this.getRoom().getObjects()) {
+			if (obj.getPosition().equals(finalPos)) {
+
+				// O SmallFish é bloqueado por tudo, com exceção da Trap e do HoledWall
+				if (obj instanceof Cup) {
 					Point2D finalObPos = finalPos.plus(dir);
-					//if ( )
+					// if (...) verificar se o objeto pode ser empurrado
 					pushObject(obj, finalPos, finalObPos);
 					return true;
 				}
-				if ( (obj instanceof MovableObject || obj instanceof NonMovable) && ! (obj instanceof Trap) && !( obj instanceof HoledWall)) {
-					return false;
-=======
-=======
-	@Override
-	public boolean canMove(Point2D pos, Vector2D dir) {
-		Point2D finalPos = pos.plus(dir);
 
->>>>>>> cae078089436d9ae4c33686f1c9794c1390ff495
-		for (GameObject obj : this.getRoom().getObjects()) {
-		if ( obj.getPosition().equals(finalPos)) {
-					if ( (obj instanceof MovableObject || obj instanceof NonMovable) && ! (obj instanceof Trap) && !( obj instanceof HoledWall)) {
-						return false;
-					}
-<<<<<<< HEAD
->>>>>>> 233a844dcdc1b537bf55db5ca24f355ab2fa2c46
-=======
->>>>>>> cae078089436d9ae4c33686f1c9794c1390ff495
+				if ((obj instanceof MovableObject || obj instanceof NonMovable)
+						&& !(obj instanceof Trap)
+						&& !(obj instanceof HoledWall)) {
+					return false;
 				}
+			}
 		}
 
-    	return true;
+		return true;
 	}
-
 }

@@ -16,13 +16,14 @@ import pt.iscte.poo.observer.Observer;
 import pt.iscte.poo.utils.Direction;
 import pt.iscte.poo.utils.Vector2D;
 
+import java.awt.event.KeyEvent;
+
 public class GameEngine implements Observer {
 	
 	private Map<String,Room> rooms;
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
-	private final int SPACEBAR = 32;	// código para a spacebar utilizado no ImageGUI.getInstance().keyPressed()
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
@@ -45,18 +46,24 @@ public class GameEngine implements Observer {
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
 			int k = ImageGUI.getInstance().keyPressed();
-			
-
-			if(k == SPACEBAR){
-				playingFish = !playingFish;
-			}
-			else{
-				if(playingFish){
-					SmallFish.getInstance().move(Direction.directionFor(k).asVector());
-				}
-				else{
-					BigFish.getInstance().move(Direction.directionFor(k).asVector());
-				}
+									// switch para reconhecer input de teclado
+			switch (k) {			// não para jogo ao receber tecla indesejada 
+				case KeyEvent.VK_SPACE:
+					playingFish = !playingFish;
+					break;
+				case KeyEvent.VK_LEFT:
+				case KeyEvent.VK_RIGHT:
+				case KeyEvent.VK_DOWN:
+				case KeyEvent.VK_UP:
+					if(playingFish){
+						SmallFish.getInstance().move(Direction.directionFor(k).asVector());
+					}
+					else
+						BigFish.getInstance().move(Direction.directionFor(k).asVector());
+					break;
+				default:
+					System.out.println("DEBUG: Tecla numero " + k + " clicada (Sem efeito).");
+					break;
 			}
 		}
 		int t = ImageGUI.getInstance().getTicks();

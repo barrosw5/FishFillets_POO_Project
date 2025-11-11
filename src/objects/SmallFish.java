@@ -26,10 +26,15 @@ public class SmallFish extends GameCharacter {
 		return 1;
 	}
 
+<<<<<<< HEAD
 	@Override  
+=======
+	@Override
+>>>>>>> 233a844dcdc1b537bf55db5ca24f355ab2fa2c46
 	public boolean canMove(Point2D pos, Vector2D dir) {
-    Point2D finalPos = pos.plus(dir);
+		Point2D finalPos = pos.plus(dir);
 
+<<<<<<< HEAD
     for (GameObject obj : this.getRoom().getObjects()) {
        if ( obj.getPosition().equals(finalPos)) {
 		// O SmallFish é bloqueado por tudo, com exeção da Trap e do HoledWall 
@@ -41,12 +46,17 @@ public class SmallFish extends GameCharacter {
 				}
 				if ( (obj instanceof MovableObject || obj instanceof NonMovable) && ! (obj instanceof Trap) && !( obj instanceof HoledWall)) {
 					return false;
+=======
+		for (GameObject obj : this.getRoom().getObjects()) {
+		if ( obj.getPosition().equals(finalPos)) {
+					if ( (obj instanceof MovableObject || obj instanceof NonMovable) && ! (obj instanceof Trap) && !( obj instanceof HoledWall)) {
+						return false;
+					}
+>>>>>>> 233a844dcdc1b537bf55db5ca24f355ab2fa2c46
 				}
-			}
-    }
+		}
 
-   
-    return true;
-}
+    	return true;
+	}
 
 }

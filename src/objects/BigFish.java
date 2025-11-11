@@ -27,7 +27,7 @@ public class BigFish extends GameCharacter {
 	}
 
 	@Override
-	public boolean canMove(Point2D pos, Vector2D dir) { // Creio que está feito 
+	public boolean canMove(Point2D pos, Vector2D dir) {
 		Point2D finalPos = pos.plus(dir);
 		
 		for ( GameObject obj: BigFish.getInstance().getRoom().getObjects() ) {

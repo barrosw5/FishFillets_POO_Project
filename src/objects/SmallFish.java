@@ -26,26 +26,20 @@ public class SmallFish extends GameCharacter {
 		return 1;
 	}
 
-	@Override // Em produção 
+	@Override // Feito 
 	public boolean canMove(Point2D pos, Vector2D dir) {
     Point2D finalPos = pos.plus(dir);
 
     for (GameObject obj : this.getRoom().getObjects()) {
-        if (!obj.getPosition().equals(finalPos))
-            continue; // ignora objetos noutras posições
-
-        if (obj instanceof Water ||
-            obj instanceof HoledWall ||
-            obj instanceof Trap ) {
-            return true;
-        }
-
-        
-        return false;
+       if ( obj.getPosition().equals(finalPos)) {
+				if ( (obj instanceof MovableObject || obj instanceof NonMovable) && ! (obj instanceof Trap) && !( obj instanceof HoledWall)) {
+					return false;
+				}
+			}
     }
 
-    // Nunca devia acontecer (tabuleiro sempre preenchido)
-    return false;
+   
+    return true;
 }
 
 }

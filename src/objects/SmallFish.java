@@ -7,6 +7,8 @@ import pt.iscte.poo.utils.Vector2D;
 public class SmallFish extends GameCharacter {
 
 	private static SmallFish sf = new SmallFish(null);
+	private static final String sfNameLeft = "smallFishLeft";
+	private static final String sfNameRight = "smallFishRight";
 	
 	private SmallFish(Room room) {
 		super(room);
@@ -18,7 +20,7 @@ public class SmallFish extends GameCharacter {
 	
 	@Override
 	public String getName() {
-		return "smallFishLeft";
+		return getDirection() ? sfNameLeft : sfNameRight;
 	}
 
 	@Override

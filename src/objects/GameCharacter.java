@@ -6,7 +6,8 @@ import pt.iscte.poo.utils.Vector2D;
 
 public abstract class GameCharacter extends GameObject {
 	private static final boolean isMovel = true;
-	private boolean direction; 	// true é esquerda, false é direita
+	private boolean direction = true; 	// true é esquerda, false é direita
+	private boolean hasWon;	// tentar fazer com que o peixe fora do ecra nao seja mais jogavel
 
 	public GameCharacter(Room room) {
 		super(room, isMovel);

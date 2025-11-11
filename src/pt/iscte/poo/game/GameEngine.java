@@ -1,22 +1,15 @@
 package pt.iscte.poo.game;
 
-import java.awt.geom.Point2D;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
-import javax.swing.text.Position;
-
-import objects.SmallFish;
 import objects.BigFish;
-import objects.GameObject;
+import objects.SmallFish;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.observer.Observer;
 import pt.iscte.poo.utils.Direction;
-import pt.iscte.poo.utils.Vector2D;
-
-import java.awt.event.KeyEvent;
 
 public class GameEngine implements Observer {
 	
@@ -28,7 +21,7 @@ public class GameEngine implements Observer {
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
 		loadGame();
-		currentRoom = rooms.get("room0.txt");
+		currentRoom = rooms.get("room0.txt");			//room0 nao está a corresponder com o txt
 		updateGUI();		
 		SmallFish.getInstance().setRoom(currentRoom);
 		BigFish.getInstance().setRoom(currentRoom);

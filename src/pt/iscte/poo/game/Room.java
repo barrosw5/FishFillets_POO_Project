@@ -114,9 +114,9 @@ public class Room {
 								r.addObject(cup);
 								break;
 							case 'R':
-								GameObject rock = new Rock(r);
-								rock.setPosition(new Point2D(j, i));
-								r.addObject(rock);
+								GameObject stone = new Stone(r);
+								stone.setPosition(new Point2D(j, i));
+								r.addObject(stone);
 								break;
 							case 'A':
 								GameObject anchor = new Anchor(r);
@@ -134,9 +134,9 @@ public class Room {
 								r.addObject(trap);
 								break;
 							case 'Y':
-								GameObject log = new Log(r);
-								log.setPosition(new Point2D(j, i));
-								r.addObject(log);
+								GameObject trunk = new Trunk(r);
+								trunk.setPosition(new Point2D(j, i));
+								r.addObject(trunk);
 								break;
 							case 'X':
 								GameObject holedWall = new HoledWall(r);

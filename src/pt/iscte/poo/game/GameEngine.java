@@ -45,6 +45,7 @@ public class GameEngine implements Observer {
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
 			int k = ImageGUI.getInstance().keyPressed();
+			
 
 			if(k == SPACEBAR){
 				playingFish = !playingFish;
@@ -64,21 +65,6 @@ public class GameEngine implements Observer {
 		}
 		ImageGUI.getInstance().update();
 	}
-
-	// public boolean canMove(Point2D pos, Vector2D dir){
-	// 	Point2D finalPos = pos.plus(dir);
-		
-	// 	for ( GameObject obj: currentRoom.getObjects() ) {
-	// 		if ( obj.getPosition().equals(finalPos)) {
-				
-	// 			if ( obj.getIsMovel() == false ) {
-	// 				return false;
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return true;
-	// }
 
 	private void processTick() {		
 		lastTickProcessed++;

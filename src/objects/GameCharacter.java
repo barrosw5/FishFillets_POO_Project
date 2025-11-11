@@ -13,7 +13,9 @@ public abstract class GameCharacter extends GameObject {
 	
 	public void move(Vector2D dir) {
 		Point2D startPosition = getPosition();
-		setPosition(startPosition.plus(dir));		
+		if ( canMove(startPosition, dir)) {
+			setPosition(startPosition.plus(dir));		
+		}
 	}
 
 	@Override
@@ -21,4 +23,6 @@ public abstract class GameCharacter extends GameObject {
 		return 2;
 	}
 	
+
+	public abstract boolean canMove(Point2D pos, Vector2D dir);
 }

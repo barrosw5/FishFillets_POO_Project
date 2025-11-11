@@ -18,4 +18,9 @@ public class Rock extends MovableObject {
 		return 1;
 	}
 
+	@Override
+	public boolean isLight() {
+		return false;
+	}
+
 }

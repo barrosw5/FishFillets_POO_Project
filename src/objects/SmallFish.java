@@ -39,6 +39,7 @@ public class SmallFish extends GameCharacter {
 			if (obj.getPosition().equals(finalPos)) {
 
 				// O SmallFish é bloqueado por tuPorquedo, com exceção da Trap e do HoledWall
+				// Can move é usado para mover Objetos que NÃO SÃO peixes
 				if ( obj instanceof MovableObject && obj.canMove(finalPos.plus(dir), this)) {
 					Point2D finalObPos = finalPos.plus(dir);
 					pushObject(obj, finalPos, finalObPos);

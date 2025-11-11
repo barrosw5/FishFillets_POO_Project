@@ -1,22 +1,15 @@
 package pt.iscte.poo.game;
 
-import java.awt.geom.Point2D;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
-import javax.swing.text.Position;
-
-import objects.SmallFish;
 import objects.BigFish;
-import objects.GameObject;
+import objects.SmallFish;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.observer.Observer;
 import pt.iscte.poo.utils.Direction;
-import pt.iscte.poo.utils.Vector2D;
-
-import java.awt.event.KeyEvent;
 
 public class GameEngine implements Observer {
 	
@@ -24,12 +17,13 @@ public class GameEngine implements Observer {
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
+	private int playedLevels = 0;
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
 		loadGame();
-		currentRoom = rooms.get("room0.txt");
-		updateGUI();		
+		currentRoom = rooms.get("room0.txt");		//room0 nao está a corresponder com o txt
+		updateGUI();
 		SmallFish.getInstance().setRoom(currentRoom);
 		BigFish.getInstance().setRoom(currentRoom);
 	}
@@ -43,6 +37,18 @@ public class GameEngine implements Observer {
 
 	@Override
 	public void update(Observed source) {
+		System.out.println("SmallFish won: " + SmallFish.getInstance().hasWon());		//debug
+		System.out.println("BigFish won: " + BigFish.getInstance().hasWon());
+
+		if(SmallFish.getInstance().hasWon() && BigFish.getInstance().hasWon()){
+			playedLevels++;
+			if(playedLevels < rooms.size()){
+				currentRoom = rooms.get("room" + playedLevels + ".txt");	//incrementa playedLevels para ir para outra sala
+			}
+			else{
+				//show score
+			}
+		}
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
 			int k = ImageGUI.getInstance().keyPressed();

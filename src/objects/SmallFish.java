@@ -25,11 +25,14 @@ public class SmallFish extends GameCharacter {
 
 	@Override
 	public int getLayer() {
-		return 1;
+		return 2;
 	}
 
 	@Override  
 	public boolean canMoveFish(Point2D pos, Vector2D dir) {
+		if(hasWon())
+			return false;
+	
 		Point2D finalPos = pos.plus(dir);
 
 		for (GameObject obj : this.getRoom().getObjects()) {
@@ -53,3 +56,4 @@ public class SmallFish extends GameCharacter {
 		return true;
 	}
 }
+

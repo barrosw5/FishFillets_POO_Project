@@ -3,15 +3,15 @@ package objects;
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 
-public class Rock extends MovableObject {
+public class Stone extends MovableObject {
 
-	public Rock(Room room) {
+	public Stone(Room room) {
 		super(room);
 	}
 
 	@Override
 	public String getName() {
-		return "rock";
+		return "stone";
 	}
 
 	@Override

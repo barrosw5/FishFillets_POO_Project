@@ -18,17 +18,15 @@ public class GameEngine implements Observer {
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
 	public static int playedLevels = 0;
+	private boolean onePlayer = false; // verifica se está só um player em jogo ou não
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
 		loadGame();
-		currentRoom = rooms.get("room0.txt");		//room0 nao está a corresponder com o txt
+		currentRoom = rooms.get("room" + playedLevels + ".txt");		//por alguma razao as posições iniciais dos peixes estão a ser as do ultimo nivel
 		updateGUI();
 		SmallFish.getInstance().setRoom(currentRoom);
 		BigFish.getInstance().setRoom(currentRoom);
-
-
-		
 	}
 
 	private void loadGame() {
@@ -47,24 +45,28 @@ public class GameEngine implements Observer {
 				currentRoom = rooms.get("room" + playedLevels + ".txt");	//incrementa playedLevels para ir para outra sala
 				SmallFish.getInstance().resetWin();
 				BigFish.getInstance().resetWin();			// win reset para não passar os niveis todos
-				updateGUI();
 				SmallFish.getInstance().setRoom(currentRoom);
 				BigFish.getInstance().setRoom(currentRoom);
-
-
-				
+				updateGUI();
 			}
 			else{
 				//show score
 			}
 		}
 
+		if((SmallFish.getInstance().hasWon() || BigFish.getInstance().hasWon()) && !onePlayer){
+			playingFish = !playingFish;
+			onePlayer = true;			// faz com que ao um dos peixes ganhar ele fica unplayable 
+		}								// e desta forma só um deles fica ativo
+
 		if (ImageGUI.getInstance().wasKeyPressed()) {
 			int k = ImageGUI.getInstance().keyPressed();
 									// switch para reconhecer input de teclado
-			switch (k) {			// não para jogo ao receber tecla indesejada 
+			switch (k) {
 				case KeyEvent.VK_SPACE:
-					playingFish = !playingFish;
+					if(!onePlayer){
+						playingFish = !playingFish;		// caso um dos peixes já tenha ganho a spacebar fica useless
+					}
 					break;
 				case KeyEvent.VK_LEFT:
 				case KeyEvent.VK_RIGHT:

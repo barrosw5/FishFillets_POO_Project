@@ -52,4 +52,9 @@ public abstract class GameObject implements ImageTile {
 	public boolean canMove(Point2D form, Point2D to, Vector2D dir,GameObject cla){
 		return false;
 	}
+
+	@Override
+	public String toString(){
+		return "| " + this.getName() + " in position: " + this.getPosition() + " |";
+	}
 }

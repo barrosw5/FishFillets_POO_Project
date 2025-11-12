@@ -49,10 +49,13 @@ public abstract class GameObject implements ImageTile {
 	// ---------------------------------------
 	// Método canMove
 	// ---------------------------------------
-	public boolean canMove(Point2D form, Point2D to, Vector2D dir,GameObject cla){
+	public boolean canMoveLightObject(Point2D form, Point2D to, Vector2D dir,GameObject cla){
 		return false;
 	}
 
+	public boolean canMoveNonLight(Point2D form, Point2D to, Vector2D dir,GameObject cla){
+		return false;
+	}
 	@Override
 	public String toString(){
 		return "| " + this.getName() + " in position: " + this.getPosition() + " |";

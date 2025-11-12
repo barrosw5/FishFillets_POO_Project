@@ -28,6 +28,8 @@ public class SmallFish extends GameCharacter {
 		return 2;
 	}
 
+	// O peixe pequeno também, em princípio está finalizado, a sua canMove 
+
 	@Override  
 	public boolean canMoveFish(Point2D pos, Vector2D dir) {
 		if(hasWon())
@@ -40,7 +42,7 @@ public class SmallFish extends GameCharacter {
 
 				// O SmallFish é bloqueado por tuPorquedo, com exceção da Trap e do HoledWall
 				// Can move é usado para mover Objetos que NÃO SÃO peixes
-				if ( obj instanceof MovableObject && obj.canMove(finalPos,finalPos.plus(dir), dir,this)) {
+				if ( obj instanceof MovableObject && obj.canMoveLightObject(finalPos,finalPos.plus(dir), dir,this) ) {
 					Point2D finalObPos = finalPos.plus(dir);
 					pushObject(obj, finalPos, finalObPos);
 					return true;

@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Anchor extends MovableObject {
+public class Anchor extends nonLightObject {
 
     private boolean MovedOnce = false;
 
@@ -28,8 +28,8 @@ public class Anchor extends MovableObject {
     }
 
     @Override
-    public boolean canMove(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
-        if (MovedOnce) {
+    public boolean canMoveNonLight(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
+         if (MovedOnce) {
             return false;
         }
         if (!Point2D.sameDirectionHorzontal(from, to)) {
@@ -39,7 +39,7 @@ public class Anchor extends MovableObject {
             if (obj1.getPosition().equals(to)) {
                 if ((obj1 instanceof NonMovable 
 				|| obj1 instanceof MovableObject
-				|| obj1 instanceof GameCharacter) && !(obj1 instanceof HoledWall)) {
+				|| obj1 instanceof GameCharacter)) {
                     return false;
                 }
             }

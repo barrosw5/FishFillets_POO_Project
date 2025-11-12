@@ -17,7 +17,7 @@ public class GameEngine implements Observer {
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
-	public static int playedLevels = 0;
+	private int playedLevels = 0;
 	private boolean onePlayer = false; // verifica se está só um player em jogo ou não
 	
 	public GameEngine() {
@@ -92,6 +92,10 @@ public class GameEngine implements Observer {
 		}
 	}
 
+	public int getPlayedLevels(){
+		return playedLevels;
+	}
+
 	public void nextLevel(){
 		playedLevels++;
 		if(playedLevels < rooms.size()){
@@ -104,6 +108,7 @@ public class GameEngine implements Observer {
 
 	public void resetLevel(){
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
+		ImageGUI.getInstance().setStatusMessage("Level " + getPlayedLevels() + ": Good luck!");
 		onePlayer = false;
 		setupFishesForCurrentRoom();
 		updateGUI();

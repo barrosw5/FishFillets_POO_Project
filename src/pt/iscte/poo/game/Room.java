@@ -70,7 +70,7 @@ public class Room {
 
 			Scanner sc = new Scanner(f);
 
-			while(sc.hasNext()){
+			//while(sc.hasNext()){
 				for(int i = 0; i < 10; i++){
 					String linha = sc.nextLine();
 					char[] caracteres = linha.toCharArray();
@@ -146,7 +146,7 @@ public class Room {
 						}
 					}
 				}
-			}
+			//}
 
 			sc.close();
 		

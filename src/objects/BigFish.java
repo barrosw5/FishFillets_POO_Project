@@ -25,7 +25,7 @@ public class BigFish extends GameCharacter {
 
 	@Override
 	public int getLayer() {
-		return 1;
+		return 2;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class Trap extends MovableObject {
 		
 		 for ( GameObject obj1: cla.getRoom().getObjects()) {
 			if ( obj1.getPosition().equals(to)) {
-                if ( obj1 instanceof NonMovable || obj1 instanceof MovableObject || obj1 instanceof BigFish) {
+                if ( (obj1 instanceof NonMovable || obj1 instanceof MovableObject || obj1 instanceof BigFish) && !(obj1 instanceof HoledWall)) {
 					return false;
 				}
 			}

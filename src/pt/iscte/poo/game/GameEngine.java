@@ -26,6 +26,9 @@ public class GameEngine implements Observer {
 		updateGUI();
 		SmallFish.getInstance().setRoom(currentRoom);
 		BigFish.getInstance().setRoom(currentRoom);
+
+
+		
 	}
 
 	private void loadGame() {
@@ -47,6 +50,9 @@ public class GameEngine implements Observer {
 				updateGUI();
 				SmallFish.getInstance().setRoom(currentRoom);
 				BigFish.getInstance().setRoom(currentRoom);
+
+
+				
 			}
 			else{
 				//show score

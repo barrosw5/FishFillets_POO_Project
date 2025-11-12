@@ -27,8 +27,17 @@ public class Stone extends MovableObject {
 
 	@Override
 	public boolean canMove(Point2D form, Point2D to, Vector2D dir,GameObject cla) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'canMove'");
+		for (GameObject obj1 : cla.getRoom().getObjects()) {
+			if (obj1.getPosition().equals(to)) {
+				if ((obj1 instanceof MovableObject || obj1 instanceof NonMovable || obj1 instanceof GameCharacter)
+						&& !(obj1 instanceof HoledWall)) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	
 	}
 
 	

@@ -40,18 +40,7 @@ public class GameEngine implements Observer {
 	public void update(Observed source) {
 
 		if(SmallFish.getInstance().hasWon() && BigFish.getInstance().hasWon()){
-			playedLevels++;
-			if(playedLevels < rooms.size()){
-				currentRoom = rooms.get("room" + playedLevels + ".txt");	//incrementa playedLevels para ir para outra sala
-				SmallFish.getInstance().resetWin();
-				BigFish.getInstance().resetWin();			// win reset para não passar os niveis todos
-				SmallFish.getInstance().setRoom(currentRoom);
-				BigFish.getInstance().setRoom(currentRoom);
-				updateGUI();
-			}
-			else{
-				//show score
-			}
+			nextLevel();
 		}
 
 		if((SmallFish.getInstance().hasWon() || BigFish.getInstance().hasWon()) && !onePlayer){
@@ -68,6 +57,8 @@ public class GameEngine implements Observer {
 						playingFish = !playingFish;		// caso um dos peixes já tenha ganho a spacebar fica useless
 					}
 					break;
+				case KeyEvent.VK_R:
+					resetLevel();
 				case KeyEvent.VK_LEFT:
 				case KeyEvent.VK_RIGHT:
 				case KeyEvent.VK_DOWN:
@@ -99,6 +90,25 @@ public class GameEngine implements Observer {
 			ImageGUI.getInstance().clearImages();
 			ImageGUI.getInstance().addImages(currentRoom.getObjects());
 		}
+	}
+
+	public void nextLevel(){
+		playedLevels++;
+		if(playedLevels < rooms.size()){
+			resetLevel();
+		}
+		else{
+			//show score
+		}
+	}
+
+	public void resetLevel(){
+		currentRoom = rooms.get("room" + playedLevels + ".txt");	//incrementa playedLevels para ir para outra sala
+		SmallFish.getInstance().resetWin();
+		BigFish.getInstance().resetWin();			// win reset para não passar os niveis todos
+		SmallFish.getInstance().setRoom(currentRoom);
+		BigFish.getInstance().setRoom(currentRoom);
+		updateGUI();
 	}
 	
 }

@@ -84,14 +84,10 @@ public class Room {
 							case ' ':
 								break;
 							case 'B':
-								GameObject bf = BigFish.getInstance();
-								bf.setPosition(j, i);
-								r.addObject(bf);
+								r.setBigFishStartingPosition(new Point2D(j, i));
 								break;
 							case 'S':
-								GameObject sf = SmallFish.getInstance();
-								sf.setPosition(j, i);
-								r.addObject(sf);
+								r.setSmallFishStartingPosition(new Point2D(j, i));
 								break;
 							case 'W':
 								GameObject wall = new Wall(r);

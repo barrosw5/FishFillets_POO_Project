@@ -24,9 +24,8 @@ public class GameEngine implements Observer {
 		rooms = new HashMap<String,Room>();
 		loadGame();
 		currentRoom = rooms.get("room" + playedLevels + ".txt");		//por alguma razao as posições iniciais dos peixes estão a ser as do ultimo nivel
+		setupFishesForCurrentRoom();
 		updateGUI();
-		SmallFish.getInstance().setRoom(currentRoom);
-		BigFish.getInstance().setRoom(currentRoom);
 	}
 
 	private void loadGame() {
@@ -59,6 +58,7 @@ public class GameEngine implements Observer {
 					break;
 				case KeyEvent.VK_R:
 					resetLevel();
+					break;
 				case KeyEvent.VK_LEFT:
 				case KeyEvent.VK_RIGHT:
 				case KeyEvent.VK_DOWN:
@@ -103,12 +103,27 @@ public class GameEngine implements Observer {
 	}
 
 	public void resetLevel(){
-		currentRoom = rooms.get("room" + playedLevels + ".txt");	//incrementa playedLevels para ir para outra sala
-		SmallFish.getInstance().resetWin();
-		BigFish.getInstance().resetWin();			// win reset para não passar os niveis todos
-		SmallFish.getInstance().setRoom(currentRoom);
-		BigFish.getInstance().setRoom(currentRoom);
+		currentRoom = rooms.get("room" + playedLevels + ".txt");
+		onePlayer = false;
+		setupFishesForCurrentRoom();
 		updateGUI();
+	}
+
+	private void setupFishesForCurrentRoom() {
+		SmallFish sf = SmallFish.getInstance();
+		BigFish bf = BigFish.getInstance();
+
+		sf.resetWin();
+		bf.resetWin();
+
+		sf.setRoom(currentRoom);
+		bf.setRoom(currentRoom);
+
+		sf.setPosition(currentRoom.getSmallFishStartingPosition());
+		bf.setPosition(currentRoom.getBigFishStartingPosition());
+
+		currentRoom.addObject(sf);
+		currentRoom.addObject(bf);
 	}
 	
 }

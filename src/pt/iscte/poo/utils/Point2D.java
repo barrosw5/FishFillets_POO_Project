@@ -77,6 +77,10 @@ public class Point2D implements Serializable { // Added 23-Apr-2018
 		return new Point2D(x + v.getX(), y + v.getY());
 	}
 
+	public static boolean sameDirectionHorzontal(Point2D from, Point2D to) {
+		return from.getY() == to.getY();
+	}
+
 	public List<Point2D> getNeighbourhoodPoints() {
 		
 		List<Point2D> neighbours = new ArrayList<>();

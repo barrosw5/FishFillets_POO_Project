@@ -2,6 +2,7 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
+import pt.iscte.poo.utils.Vector2D;
 
 public class Cup extends MovableObject {
 
@@ -25,7 +26,7 @@ public class Cup extends MovableObject {
 	}
 
 	@Override
-	public boolean canMove(Point2D to, GameObject cla) {
+	public boolean canMove(Point2D form, Point2D to, Vector2D dir,GameObject cla) {
 
 		for (GameObject obj1 : cla.getRoom().getObjects()) {
 			if (obj1.getPosition().equals(to)) {

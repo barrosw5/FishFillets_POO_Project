@@ -2,6 +2,7 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
+import pt.iscte.poo.utils.Vector2D;
 
 public class Stone extends MovableObject {
 
@@ -25,7 +26,7 @@ public class Stone extends MovableObject {
 	}
 
 	@Override
-	public boolean canMove(Point2D to, GameObject cla) {
+	public boolean canMove(Point2D form, Point2D to, Vector2D dir,GameObject cla) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'canMove'");
 	}

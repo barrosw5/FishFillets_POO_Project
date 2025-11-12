@@ -2,6 +2,7 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
+import pt.iscte.poo.utils.Vector2D;
 
 public class Bomb extends MovableObject {
 
@@ -26,9 +27,15 @@ public class Bomb extends MovableObject {
 
 
 	@Override
-	public boolean canMove(Point2D to, GameObject cla) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'canMove'");
+	public boolean canMove(Point2D form, Point2D to, Vector2D dir,GameObject cla) {
+		for ( GameObject obj1: cla.getRoom().getObjects()) {
+			if ( obj1.getPosition().equals(to)) {
+				if ( obj1 instanceof NonMovable || obj1 instanceof MovableObject || obj1 instanceof GameCharacter) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 

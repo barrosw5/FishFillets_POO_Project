@@ -69,7 +69,7 @@ public abstract class GameObject implements ImageTile {
 
 		for ( Gravity g: gravityObjects) {
 			if ( g.canDown()) {
-				if ( g instanceof Bomb) {
+				if ( g instanceof Bomb) { // Isto ainda é provisório não está a funcionar como é suposto 
 					g.down();
 					g.Explosion();
 				}

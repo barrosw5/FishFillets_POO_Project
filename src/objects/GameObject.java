@@ -67,11 +67,11 @@ public abstract class GameObject implements ImageTile {
 			} 
 		}
 
-			for ( Gravity g: gravityObjects) { // Aqui é onde acontece, basicamente, o movimento 
-				if ( g.canDown()) {
-					g.down();
-				}
+		for ( Gravity g: gravityObjects) {
+			if ( g.canDown()) {
+				g.down();
 			}
+		}
 	
 	} 
 

@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Bomb extends isLightObject {
+public class Bomb extends isLightObject implements Gravity{
 
 	public Bomb(Room room) {
 		super(room);
@@ -35,6 +35,18 @@ public class Bomb extends isLightObject {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public boolean canDown() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'canDown'");
+	}
+
+	@Override
+	public void down() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'down'");
 	}
 
 

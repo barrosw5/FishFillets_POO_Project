@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Anchor extends nonLightObject {
+public class Anchor extends nonLightObject implements Gravity {
 
     private boolean MovedOnce = false;
 
@@ -48,5 +48,36 @@ public class Anchor extends nonLightObject {
         }
         MovedOnce = true;
         return true;
+    }
+
+    @Override
+    public boolean canDown() {
+        Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+
+        if (below.getY() >= 10) { // grid is 0-9 on both axes
+            return false;
+        }
+
+        for (GameObject obj : this.getRoom().getObjects()) {
+            if (obj == this) {
+                continue;
+            }
+            if (obj.getPosition().equals(below) && !(obj instanceof Water)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void down() {
+        if (!canDown()) {
+            return;
+        }
+
+        Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        pushObject(this, pos, below);
     }
 }

@@ -78,4 +78,8 @@ public class Anchor extends nonLightObject implements Gravity {
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
         pushObject(this, pos, below);
     }
+
+    @Override
+    public void Explosion() {
+    }
 }

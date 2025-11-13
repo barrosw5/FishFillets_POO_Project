@@ -69,11 +69,31 @@ public abstract class GameObject implements ImageTile {
 
 		for ( Gravity g: gravityObjects) {
 			if ( g.canDown()) {
-				g.down();
+				if ( g instanceof Bomb) {
+					g.down();
+					g.Explosion();
+				}
+				else {
+					g.down();
+				}
+				
 			}
 		}
 	
 	} 
+
+	public static GameObject findObject(Point2D pos, Room r) {
+		for ( GameObject obj: r.getObjects()) {
+			if ( obj.getPosition().equals(pos) && !(obj instanceof Water)) {
+				return obj;
+			}
+		}
+		return null;
+	}
+
+	public static void removeObject(GameObject obj1, Room r) {
+		r.getObjects().remove(obj1);
+	}
 
 	// ---------------------------------------
 	// Método canMove
@@ -89,4 +109,5 @@ public abstract class GameObject implements ImageTile {
 	public String toString(){
 		return "| " + this.getName() + " in position: " + this.getPosition() + " |";
 	}
+
 }

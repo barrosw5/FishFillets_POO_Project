@@ -5,6 +5,7 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public class Bomb extends isLightObject implements Gravity{
+	private static int countExplosion = 0;
 
 	public Bomb(Room room) {
 		super(room);
@@ -51,19 +52,48 @@ public class Bomb extends isLightObject implements Gravity{
                 return false;
             }
         }
+	
         return true;
 	}
 
 	@Override
 	public void down() {
 		 if (!canDown()) {
-            return;
-        }
-
+				Explosion();
+				return;
+			
+			}
         Point2D pos = this.getPosition();
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
         pushObject(this, pos, below);
 	}
 
+	@Override
+	public void Explosion() {
+
+		Point2D currentlyPos = this.getPosition();
+		Point2D rightPos = new Point2D(currentlyPos.getX() + 1, currentlyPos.getY());
+		Point2D leftPos = new Point2D(currentlyPos.getX() + -1, currentlyPos.getY());
+		Point2D upPos = new Point2D(currentlyPos.getX(), currentlyPos.getY() -1);
+		Point2D belowPos = new Point2D(currentlyPos.getX(), currentlyPos.getY() +1);
+
+		Point2D[] nearObject = { currentlyPos, rightPos, leftPos,belowPos , upPos};
+
+
+		for ( Point2D pos: nearObject) {
+			GameObject remove = GameObject.findObject(pos, this.getRoom());
+
+			if ( remove instanceof Water) {
+				continue;
+			}
+
+			if ( remove != null) {
+				// GameObject.removeObject(remove, this.getRoom());
+				this.getRoom().removeObject(remove);
+			}
+		}
+		
+
+	}
 
 }

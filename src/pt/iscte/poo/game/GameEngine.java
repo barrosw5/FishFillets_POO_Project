@@ -2,9 +2,13 @@ package pt.iscte.poo.game;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import objects.BigFish;
+import objects.GameObject;
+import objects.Gravity;
 import objects.SmallFish;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
@@ -16,6 +20,7 @@ public class GameEngine implements Observer {
 	private Map<String,Room> rooms;
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
+	private int gravityTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
 	private int playedLevels = 0;
 	private boolean onePlayer = false; // verifica se está só um player em jogo ou não
@@ -84,6 +89,7 @@ public class GameEngine implements Observer {
 
 	private void processTick() {		
 		lastTickProcessed++;
+		GameObject.GravityMove(currentRoom);
 	}
 
 	public void updateGUI() {

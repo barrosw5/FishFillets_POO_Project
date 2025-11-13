@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.ArrayList;
+import java.util.List;
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Point2D;
@@ -54,6 +56,24 @@ public abstract class GameObject implements ImageTile {
 		obj2.setPosition(to2);
 		obj1.setPosition(to1);
 	}
+
+
+	public static void GravityMove(Room r) {
+		List<Gravity> gravityObjects = new ArrayList<>();
+
+		for ( GameObject obj: r.getObjects())  {
+			if ( obj instanceof Gravity ) {
+				gravityObjects.add((Gravity) obj);
+			}
+		}
+
+			for ( Gravity g: gravityObjects) {
+				if ( g.canDown()) {
+					g.down();
+				}
+			}
+	
+	} 
 
 	// ---------------------------------------
 	// Método canMove

@@ -65,7 +65,7 @@ public class ImageGUI extends Observed {
 
     private static final int LABEL_HEIGHT = 20;
 
-    private static final long TICK_TIME = 500;
+    private static final long TICK_TIME = 750;
 
 	private static ImageGUI INSTANCE;
 

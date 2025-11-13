@@ -31,6 +31,8 @@ public class Anchor extends nonLightObject implements Gravity {
     
     @Override
     public boolean canMoveNonLight(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
+
+        
          if (MovedOnce) {
             return false;
         }
@@ -55,14 +57,11 @@ public class Anchor extends nonLightObject implements Gravity {
         Point2D pos = this.getPosition();
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
 
-        if (below.getY() >= 10) { // grid is 0-9 on both axes
+        if (below.getY() >= 10) { 
             return false;
         }
 
         for (GameObject obj : this.getRoom().getObjects()) {
-            if (obj == this) {
-                continue;
-            }
             if (obj.getPosition().equals(below) && !(obj instanceof Water)) {
                 return false;
             }

@@ -49,14 +49,6 @@ public abstract class GameCharacter extends GameObject{
 		hasWon = false;
 	}
 
-	// public void pushObject(GameObject obj, Point2D from, Point2D to) {
-	// 	obj.setPosition(to);
-	// }
-
-	// public void pushTwoObject(GameObject obj1, GameObject obj2, Point2D from, Point2D to1, Point2D to2) {
-	// 	obj2.setPosition(to2);
-	// 	obj1.setPosition(to1);
-	// }
 
 	@Override
 	public int getLayer() {

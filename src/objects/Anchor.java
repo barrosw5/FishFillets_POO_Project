@@ -27,6 +27,8 @@ public class Anchor extends nonLightObject {
         return false;
     }
 
+    
+    
     @Override
     public boolean canMoveNonLight(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
          if (MovedOnce) {

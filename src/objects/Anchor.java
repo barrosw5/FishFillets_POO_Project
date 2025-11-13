@@ -32,8 +32,7 @@ public class Anchor extends nonLightObject implements Gravity {
     @Override
     public boolean canMoveNonLight(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 
-        
-         if (MovedOnce) {
+        if (MovedOnce) {
             return false;
         }
         if (!Point2D.sameDirectionHorzontal(from, to)) {

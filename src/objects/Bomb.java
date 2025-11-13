@@ -78,7 +78,7 @@ public class Bomb extends isLightObject implements Gravity{
 		Point2D belowPos = new Point2D(currentlyPos.getX(), currentlyPos.getY() +1);
 
 		Point2D[] nearObject = { currentlyPos, rightPos, leftPos,belowPos , upPos};
-
+	
 
 		for ( Point2D pos: nearObject) {
 			GameObject remove = GameObject.findObject(pos, this.getRoom());

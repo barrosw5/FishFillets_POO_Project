@@ -19,12 +19,12 @@ public class GameEngine implements Observer {
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
 	private int playedLevels = 0;
 	private boolean onePlayer = false; // verifica se está só um player em jogo ou não
+	private boolean initialized = true;	// serve para carregar no set up fishes os peixes so no inicio
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
 		loadGame();
-		currentRoom = rooms.get("room" + playedLevels + ".txt");		//por alguma razao as posições iniciais dos peixes estão a ser as do ultimo nivel
-		setupFishesForCurrentRoom();
+		resetLevel();
 		updateGUI();
 	}
 
@@ -108,7 +108,7 @@ public class GameEngine implements Observer {
 
 	public void resetLevel(){										// Reset tem de dar reset em tudo
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
-		ImageGUI.getInstance().setStatusMessage("Level " + getPlayedLevels() + ": Good luck!");
+		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!");
 		onePlayer = false;
 		setupFishesForCurrentRoom();
 		updateGUI();
@@ -127,8 +127,11 @@ public class GameEngine implements Observer {
 		sf.setPosition(currentRoom.getSmallFishStartingPosition());
 		bf.setPosition(currentRoom.getBigFishStartingPosition());
 
-		currentRoom.addObject(sf);
-		currentRoom.addObject(bf);
+		if((SmallFish.getInstance().hasWon() && BigFish.getInstance().hasWon()) || initialized){
+			currentRoom.addObject(sf);
+			currentRoom.addObject(bf);		//só se tiverem ganho adiciona-se a nova sala
+			initialized = false;
+		}
 	}
 	
 }

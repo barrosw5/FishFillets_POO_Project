@@ -70,79 +70,77 @@ public class Room {
 
 			Scanner sc = new Scanner(f);
 
-			//while(sc.hasNext()){
-				for(int i = 0; i < 10; i++){
-					String linha = sc.nextLine();
-					char[] caracteres = linha.toCharArray();
-					for(int j = 0; j < caracteres.length; j++){
+			for(int i = 0; i < 10; i++){
+				String linha = sc.nextLine();
+				char[] caracteres = linha.toCharArray();
+				for(int j = 0; j < caracteres.length; j++){
 
-						GameObject water = new Water(r);
-						water.setPosition(new Point2D(j, i));
-						r.addObject(water);
+					GameObject water = new Water(r);
+					water.setPosition(new Point2D(j, i));
+					r.addObject(water);
 
-						switch(caracteres[j]){
-							case ' ':
-								break;
-							case 'B':
-								r.setBigFishStartingPosition(new Point2D(j, i));
-								break;
-							case 'S':
-								r.setSmallFishStartingPosition(new Point2D(j, i));
-								break;
-							case 'W':
-								GameObject wall = new Wall(r);
-								wall.setPosition(new Point2D(j, i));
-								r.addObject(wall);
-								break;
-							case 'H':
-								GameObject steelHorizontal = new SteelHorizontal(r);
-								steelHorizontal.setPosition(new Point2D(j, i));
-								r.addObject(steelHorizontal);
-								break;
-							case 'V':
-								GameObject steelVertical = new SteelVertical(r);
-								steelVertical.setPosition(new Point2D(j, i));
-								r.addObject(steelVertical);
-								break;
-							case 'C':
-								GameObject cup = new Cup(r);
-								cup.setPosition(new Point2D(j, i));
-								r.addObject(cup);
-								break;
-							case 'R':
-								GameObject stone = new Stone(r);
-								stone.setPosition(new Point2D(j, i));
-								r.addObject(stone);
-								break;
-							case 'A':
-								GameObject anchor = new Anchor(r);
-								anchor.setPosition(new Point2D(j, i));
-								r.addObject(anchor);
-								break;
-							case 'b':
-								GameObject bomb = new Bomb(r);
-								bomb.setPosition(new Point2D(j, i));
-								r.addObject(bomb);
-								break;
-							case 'T':
-								GameObject trap = new Trap(r);
-								trap.setPosition(new Point2D(j, i));
-								r.addObject(trap);
-								break;
-							case 'Y':
-								GameObject trunk = new Trunk(r);
-								trunk.setPosition(new Point2D(j, i));
-								r.addObject(trunk);
-								break;
-							case 'X':
-								GameObject holedWall = new HoledWall(r);
-								holedWall.setPosition(new Point2D(j, i));
-								r.addObject(holedWall);
-								break;
-						}
+					switch(caracteres[j]){
+						case ' ':
+							break;
+						case 'B':
+							r.setBigFishStartingPosition(new Point2D(j, i));
+							break;
+						case 'S':
+							r.setSmallFishStartingPosition(new Point2D(j, i));
+							break;
+						case 'W':
+							GameObject wall = new Wall(r);
+							wall.setPosition(new Point2D(j, i));
+							r.addObject(wall);
+							break;
+						case 'H':
+							GameObject steelHorizontal = new SteelHorizontal(r);
+							steelHorizontal.setPosition(new Point2D(j, i));
+							r.addObject(steelHorizontal);
+							break;
+						case 'V':
+							GameObject steelVertical = new SteelVertical(r);
+							steelVertical.setPosition(new Point2D(j, i));
+							r.addObject(steelVertical);
+							break;
+						case 'C':
+							GameObject cup = new Cup(r);
+							cup.setPosition(new Point2D(j, i));
+							r.addObject(cup);
+							break;
+						case 'R':
+							GameObject stone = new Stone(r);
+							stone.setPosition(new Point2D(j, i));
+							r.addObject(stone);
+							break;
+						case 'A':
+							GameObject anchor = new Anchor(r);
+							anchor.setPosition(new Point2D(j, i));
+							r.addObject(anchor);
+							break;
+						case 'b':
+							GameObject bomb = new Bomb(r);
+							bomb.setPosition(new Point2D(j, i));
+							r.addObject(bomb);
+							break;
+						case 'T':
+							GameObject trap = new Trap(r);
+							trap.setPosition(new Point2D(j, i));
+							r.addObject(trap);
+							break;
+						case 'Y':
+							GameObject trunk = new Trunk(r);
+							trunk.setPosition(new Point2D(j, i));
+							r.addObject(trunk);
+							break;
+						case 'X':
+							GameObject holedWall = new HoledWall(r);
+							holedWall.setPosition(new Point2D(j, i));
+							r.addObject(holedWall);
+							break;
 					}
 				}
-			//}
+			}
 
 			sc.close();
 		

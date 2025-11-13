@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		ImageGUI gui = ImageGUI.getInstance();
 		GameEngine engine = new GameEngine();
-		gui.setStatusMessage("Level " + engine.getPlayedLevels() + ": Good luck!");
+		//gui.setStatusMessage("Level " + engine.getPlayedLevels() + ": Good luck!");
 		gui.registerObserver(engine);
 		gui.go();
 	}

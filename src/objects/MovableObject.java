@@ -35,15 +35,6 @@ public abstract class MovableObject extends GameObject implements Resettable{
     }
 
     @Override
-    public void setRoom(Room room) {                // AVERIGUAR USO DISTO // BOM PARA A BOMBA QUANDO FOR ELIMINADA DA SALA 
-        super.setRoom(room);
-        // regista-se automaticamente na lista de reset da sala
-        if (room != null) {
-            room.registerResettable(this);
-        }
-    }
-
-    @Override
     public void reset() {
         if (startingPosition != null) {
         Room r = getRoom();

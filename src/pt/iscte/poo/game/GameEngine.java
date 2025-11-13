@@ -78,8 +78,8 @@ public class GameEngine implements Observer {
 					break;
 			}
 		}
+
 		int t = ImageGUI.getInstance().getTicks();
-		System.out.println(t);
 		while (lastTickProcessed < t) {
 			processTick();
 		}

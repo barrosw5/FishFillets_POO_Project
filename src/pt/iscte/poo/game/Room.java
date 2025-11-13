@@ -35,6 +35,9 @@ public class Room {
 
 	public void addObject(GameObject obj) {
 		objects.add(obj);
+		if(obj instanceof Resettable){
+			registerResettable((Resettable) obj);
+		}
 		engine.updateGUI();
 	}
 	
@@ -61,6 +64,10 @@ public class Room {
 	
 	public Point2D getBigFishStartingPosition() {
 		return bigFishStartingPosition;
+	}
+
+	public List<Resettable> getResettableObjects(){
+		return resettableObjects;
 	}
 
 	public void registerResettable(Resettable r) {

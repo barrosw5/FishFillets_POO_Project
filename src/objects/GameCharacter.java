@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public abstract class GameCharacter extends GameObject {
+public abstract class GameCharacter extends GameObject{
 	private static final boolean isMovel = true;
 	private boolean direction = true; 	// true é esquerda, false é direita
 	private boolean hasWon = false;	// tentar fazer com que o peixe fora do ecra nao seja mais jogavel
@@ -18,7 +18,8 @@ public abstract class GameCharacter extends GameObject {
 		if (canMoveFish(startPosition, dir)) {
 			if (dir.getX() > 0 && direction == true) {
                 direction = false; 	// mover png para a direita
-            } else if (dir.getX() < 0 && direction == false) {
+            } 
+			else if (dir.getX() < 0 && direction == false) {
                 direction = true;  	// mover png para a esquerda
             }
 			setPosition(startPosition.plus(dir));		

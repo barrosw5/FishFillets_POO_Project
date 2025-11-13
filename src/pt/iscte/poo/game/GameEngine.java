@@ -25,6 +25,7 @@ public class GameEngine implements Observer {
 		rooms = new HashMap<String,Room>();
 		loadGame();
 		resetLevel();
+
 		updateGUI();
 	}
 
@@ -110,7 +111,9 @@ public class GameEngine implements Observer {
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
 		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!");
 		onePlayer = false;
+		playingFish = true;
 		setupFishesForCurrentRoom();
+		currentRoom.resetAll();			//reseta objetos todos moviveis
 		updateGUI();
 	}
 
@@ -118,20 +121,27 @@ public class GameEngine implements Observer {
 		SmallFish sf = SmallFish.getInstance();
 		BigFish bf = BigFish.getInstance();
 
-		sf.resetWin();
-		bf.resetWin();
-
 		sf.setRoom(currentRoom);
 		bf.setRoom(currentRoom);
 
 		sf.setPosition(currentRoom.getSmallFishStartingPosition());
 		bf.setPosition(currentRoom.getBigFishStartingPosition());
 
-		if((SmallFish.getInstance().hasWon() && BigFish.getInstance().hasWon()) || initialized){
+		if(initialized){
 			currentRoom.addObject(sf);
-			currentRoom.addObject(bf);		//só se tiverem ganho adiciona-se a nova sala
+			currentRoom.addObject(bf);
 			initialized = false;
 		}
+
+		if(SmallFish.getInstance().hasWon())
+			currentRoom.addObject(sf);
+
+		if(BigFish.getInstance().hasWon())
+			currentRoom.addObject(bf);
+
+		sf.resetWin();
+		bf.resetWin();
+
 	}
 	
 }

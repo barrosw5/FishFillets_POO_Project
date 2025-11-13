@@ -15,6 +15,7 @@ public class Room {
 	private GameEngine engine;
 	private Point2D smallFishStartingPosition;
 	private Point2D bigFishStartingPosition;
+	private List<Resettable> resettableObjects = new ArrayList<>();
 	
 	public Room() {
 		objects = new ArrayList<GameObject>();
@@ -60,6 +61,18 @@ public class Room {
 	
 	public Point2D getBigFishStartingPosition() {
 		return bigFishStartingPosition;
+	}
+
+	public void registerResettable(Resettable r) {
+		if (!resettableObjects.contains(r)) {
+			resettableObjects.add(r);
+		}
+	}
+
+	public void resetAll() {
+		for (Resettable r : resettableObjects) {
+			r.reset();
+		}
 	}
 	
 	public static Room readRoom(File f, GameEngine engine) {

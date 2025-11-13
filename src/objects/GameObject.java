@@ -66,18 +66,9 @@ public abstract class GameObject implements ImageTile {
 				gravityObjects.add((Gravity) obj); // Percorro toda a room e os objetos contidos nela e os que forem "gravidade" adiciono à lista criada.
 			} 
 		}
-
+	
 		for ( Gravity g: gravityObjects) {
-			if ( g.canDown()) {
-				if ( g instanceof Bomb) { // Isto ainda é provisório não está a funcionar como é suposto 
-					g.down();
-					g.Explosion();
-				}
-				else {
-					g.down();
-				}
-				
-			}
+			g.down();
 		}
 	
 	} 

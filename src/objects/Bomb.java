@@ -39,14 +39,30 @@ public class Bomb extends isLightObject implements Gravity{
 
 	@Override
 	public boolean canDown() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'canDown'");
+		Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+
+        if (below.getY() >= 10) { 
+            return false;
+        }
+
+        for (GameObject obj : this.getRoom().getObjects()) {
+            if (obj.getPosition().equals(below) && !(obj instanceof Water)) {
+                return false;
+            }
+        }
+        return true;
 	}
 
 	@Override
 	public void down() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'down'");
+		 if (!canDown()) {
+            return;
+        }
+
+        Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        pushObject(this, pos, below);
 	}
 
 

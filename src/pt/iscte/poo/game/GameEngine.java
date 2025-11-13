@@ -88,7 +88,7 @@ public class GameEngine implements Observer {
 
 	private void processTick() {		
 		lastTickProcessed++;
-		GameObject.GravityMove(currentRoom);
+		GameObject.GravityMove(currentRoom); // Esta é a função que faz acontecer o movimento da Gravidade, ela é chamada sempre que o tempo for mexendo no jogo 
 	}
 
 	public void updateGUI() {

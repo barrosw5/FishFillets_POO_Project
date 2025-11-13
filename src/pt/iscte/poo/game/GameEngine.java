@@ -106,7 +106,7 @@ public class GameEngine implements Observer {
 		}
 	}
 
-	public void resetLevel(){
+	public void resetLevel(){										// Reset tem de dar reset em tudo
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
 		ImageGUI.getInstance().setStatusMessage("Level " + getPlayedLevels() + ": Good luck!");
 		onePlayer = false;

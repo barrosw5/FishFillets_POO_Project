@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import objects.BigFish;
 import objects.GameObject;
+import objects.Score;
 import objects.SmallFish;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
@@ -17,6 +18,7 @@ import pt.iscte.poo.utils.Direction;
 public class GameEngine implements Observer {
 	
 	private Map<String,Room> rooms;
+	private List<Score> scores;
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario

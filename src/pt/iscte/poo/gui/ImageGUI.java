@@ -3,6 +3,7 @@ package pt.iscte.poo.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -20,12 +21,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.utils.Point2D;
@@ -64,6 +68,7 @@ import pt.iscte.poo.utils.Point2D;
 public class ImageGUI extends Observed {
 
     private static final int LABEL_HEIGHT = 20;
+    private static final int SCORE_PANEL_WIDTH = 180;
 
     private static final long TICK_TIME = 750;
 
@@ -80,6 +85,8 @@ public class ImageGUI extends Observed {
     private JFrame frame;
     private JPanel panel;
     private JLabel info;
+    private JPanel scorePanel;
+    private JTextArea scoreArea;
 
     private Map<String, ImageIcon> imageDB = new HashMap<String, ImageIcon>();
 
@@ -128,14 +135,42 @@ public class ImageGUI extends Observed {
         frame = new JFrame();
         panel = new DisplayWindow();
         info = new JLabel();
+        scorePanel = new JPanel(new BorderLayout());
+        scoreArea = new JTextArea();
 
         panel.setPreferredSize(new Dimension(width, height));
         info.setPreferredSize(new Dimension(width, LABEL_HEIGHT));
 //		panel.setPreferredSize(new Dimension(N_SQUARES_WIDTH * SQUARE_SIZE, N_SQUARES_HEIGHT * SQUARE_SIZE));
 //		info.setPreferredSize(new Dimension(N_SQUARES_WIDTH * SQUARE_SIZE, LABEL_HEIGHT));
         info.setBackground(Color.BLACK);
+        info.setForeground(Color.WHITE);
+        info.setOpaque(true);
+        
+        scoreArea.setEditable(false);
+        scoreArea.setFocusable(false);
+        scoreArea.setOpaque(true);
+        scoreArea.setBackground(Color.BLACK);
+        scoreArea.setForeground(Color.WHITE);
+        scoreArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        scoreArea.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        scoreArea.setText("Pontuações ainda não disponíveis.");
+        JScrollPane scoreScroll = new JScrollPane(scoreArea);
+        scoreScroll.setBorder(BorderFactory.createEmptyBorder());
+        scoreScroll.getViewport().setBackground(Color.BLACK);
+        
+        JLabel scoreTitle = new JLabel("Pontuações", SwingConstants.CENTER);
+        scoreTitle.setForeground(Color.WHITE);
+        scoreTitle.setBorder(BorderFactory.createEmptyBorder(6, 4, 6, 4));
+        scorePanel.setLayout(new BorderLayout());
+        scorePanel.setBackground(Color.BLACK);
+        scorePanel.setPreferredSize(new Dimension(SCORE_PANEL_WIDTH, height));
+        scorePanel.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.DARK_GRAY));
+        scorePanel.add(scoreTitle, BorderLayout.NORTH);
+        scorePanel.add(scoreScroll, BorderLayout.CENTER);
+        
         frame.add(panel);
         frame.add(info, BorderLayout.NORTH);
+        frame.add(scorePanel, BorderLayout.EAST);
         frame.pack();
         frame.setResizable(false); // Added 27-Feb-2018
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -333,6 +368,28 @@ public class ImageGUI extends Observed {
     	info.setHorizontalAlignment(SwingConstants.LEFT);
     	info.setVerticalAlignment(SwingConstants.CENTER);
         info.setText(message);
+    }
+    
+    /**
+     * Updates the score panel with the provided entries.
+     *
+     * @param scores a list of strings that will be rendered line by line
+     */
+    public void setScoreEntries(List<String> scores) {
+        if (scoreArea == null) {
+            return;
+        }
+        if (scores == null || scores.isEmpty()) {
+            scoreArea.setText("Sem pontuações registadas.");
+        } else {
+            StringBuilder builder = new StringBuilder();
+            int position = 1;
+            for (String score : scores) {
+                builder.append(String.format("%2d. %s%n", position++, score));
+            }
+            scoreArea.setText(builder.toString());
+        }
+        scoreArea.setCaretPosition(0);
     }
    
     public void showMessage(String title, String message) {

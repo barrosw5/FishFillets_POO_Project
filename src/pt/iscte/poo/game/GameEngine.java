@@ -67,6 +67,10 @@ public class GameEngine implements Observer {
 				case KeyEvent.VK_RIGHT:
 				case KeyEvent.VK_DOWN:
 				case KeyEvent.VK_UP:
+				case KeyEvent.VK_A:
+				case KeyEvent.VK_W:
+				case KeyEvent.VK_S:
+				case KeyEvent.VK_D:
 					if(playingFish){
 						SmallFish.getInstance().move(Direction.directionFor(k).asVector());
 					}
@@ -92,7 +96,7 @@ public class GameEngine implements Observer {
 	}
 
 	public void updateGUI() {
-		if(currentRoom!=null) {
+		if(currentRoom != null) {
 			ImageGUI.getInstance().clearImages();
 			ImageGUI.getInstance().addImages(currentRoom.getObjects());
 		}
@@ -138,10 +142,10 @@ public class GameEngine implements Observer {
 			initialized = false;
 		}
 
-		if(SmallFish.getInstance().hasWon())
+		if(!currentRoom.getObjects().contains(SmallFish.getInstance()))
 			currentRoom.addObject(sf);
 
-		if(BigFish.getInstance().hasWon())
+		if(!currentRoom.getObjects().contains(BigFish.getInstance()))
 			currentRoom.addObject(bf);
 
 		sf.resetWin();

@@ -27,12 +27,16 @@ public enum Direction implements Serializable {
 	public static Direction directionFor(int keyCode) {
 		switch(keyCode){
 			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_S:
 				return DOWN;	
 			case KeyEvent.VK_UP:
+			case KeyEvent.VK_W:
 				return UP;
 			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_A:
 				return LEFT;
 			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_D:
 				return RIGHT;
 		}
 

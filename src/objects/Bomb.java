@@ -81,7 +81,7 @@ public class Bomb extends LightObject implements Gravity{
 		nearObjects.add(currentlyPos);
 
 		for (Point2D pos: nearObjects) {
-			GameObject remove = GameObject.findObject(pos, this.getRoom());
+			GameObject remove = findObject(pos, this.getRoom());
 
 			if (!(remove instanceof HoledWall) && !(remove instanceof Bomb)) {
 				continue;

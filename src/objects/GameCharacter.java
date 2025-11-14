@@ -54,6 +54,8 @@ public abstract class GameCharacter extends GameObject{
 	public int getLayer() {
 		return 2;
 	}
+
+	public abstract void dead();
 	
 	// O CanMove garante que o peixe não vai em direção ou passe algo que não é suposto
 	// Está implementado como abstrato no GameCharacter 

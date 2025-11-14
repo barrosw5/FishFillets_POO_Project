@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Cup extends isLightObject {
+public class Cup extends LightObject {
 
 	public Cup(Room room) {
 		super(room);

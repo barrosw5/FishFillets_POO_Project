@@ -9,9 +9,9 @@ import pt.iscte.poo.utils.Vector2D;
 // O peixe grande mexe em todos e além disso consegue, na horizontal empurrar dois seguidos. Na vertical só consegue um
 // Portanto criei a classe abstrata isLightObject e nonLightObject que derivam ambas do MovableObject
 
-public abstract class isLightObject extends MovableObject{
+public abstract class LightObject extends MovableObject{
 
-    public isLightObject(Room room) {
+    public LightObject(Room room) {
         super(room);
     }
 

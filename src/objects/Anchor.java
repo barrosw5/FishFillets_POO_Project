@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Anchor extends nonLightObject implements Gravity {
+public class Anchor extends NonLightObject implements Gravity {
 
     private boolean MovedOnce = false;
 
@@ -27,7 +27,14 @@ public class Anchor extends nonLightObject implements Gravity {
         return false;
     }
 
-    
+    @Override
+    public void reset(){
+        if (getStartingPosition() != null)
+            MovedOnce = false;
+
+        super.reset();
+        
+    }
     
     @Override
     public boolean canMoveNonLight(Point2D from, Point2D to, Vector2D dir, GameObject cla) {

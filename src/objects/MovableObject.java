@@ -16,15 +16,4 @@ public abstract class MovableObject extends GameObject{
     }
 
     public abstract boolean isLight();
-
-    // @Override
-    // public void reset() {
-    //     if (startingPosition != null) {
-    //         Room r = getRoom();
-    //         if (!r.getObjects().contains(this)) {
-    //             r.addObject(this);
-    //         }
-    //         setPosition(startingPosition);
-    //     }
-    // }
 }

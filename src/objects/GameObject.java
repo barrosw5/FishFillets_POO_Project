@@ -41,6 +41,21 @@ public abstract class GameObject implements ImageTile {
 		return position;
 	}
 
+	public Point2D getBelow(Point2D pos){
+		return new Point2D(pos.getX(), pos.getY() + 1);
+	}
+
+	public List<Point2D> getAdjacentPositions(Point2D pos) {
+		List<Point2D> adj = new ArrayList<>();
+
+		adj.add(new Point2D(pos.getX() + 1, pos.getY())); // direita
+		adj.add(new Point2D(pos.getX() - 1, pos.getY())); // esquerda
+		adj.add(new Point2D(pos.getX(), pos.getY() - 1)); // cima
+		adj.add(getBelow(pos));                           // baixo
+
+		return adj;
+	}
+
 	public Point2D getStartingPosition(){
         return startingPosition;
     }
@@ -94,10 +109,10 @@ public abstract class GameObject implements ImageTile {
 			g.down();
 		}
 	
-	} 
+	}
 
 	public static GameObject findObject(Point2D pos, Room r) {
-		for ( GameObject obj: r.getObjects()) {
+		for (GameObject obj : r.getObjects()) {
 			if ( obj.getPosition().equals(pos) && !(obj instanceof Water)) {
 				return obj;
 			}

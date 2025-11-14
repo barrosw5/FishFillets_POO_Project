@@ -1,5 +1,6 @@
 package objects;
 
+import java.util.List;
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
@@ -41,7 +42,7 @@ public class Bomb extends LightObject implements Gravity{
 	@Override
 	public boolean canDown() {
 		Point2D pos = this.getPosition();
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        Point2D below = getBelow(pos);
 
         if (below.getY() >= 10) { 
             return false;
@@ -59,11 +60,11 @@ public class Bomb extends LightObject implements Gravity{
 	@Override
 	public void down() { // Acho que finalmente conseguir por a bomba explodir como deve ser 
 		
-		if ( canDown()){ // Verifica se pode descer ( ou começar a descida), se sim faz todo o movimento e declara a varáivel como true. 
-				Point2D pos = this.getPosition();
-				Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
-				pushObject(this, pos, below);
-				controlDown = true;
+		if (canDown()){ // Verifica se pode descer ( ou começar a descida), se sim faz todo o movimento e declara a varáivel como true. 
+			Point2D pos = this.getPosition();
+			Point2D below = getBelow(pos);
+			pushObject(this, pos, below);
+			controlDown = true;
 		}
 
 		else if ( controlDown == true && ! canDown()) { // Só quando o movimento de descida foi feito e terminado, daí a variavel de controlo e o !CandDown a bomba explode
@@ -76,23 +77,17 @@ public class Bomb extends LightObject implements Gravity{
 	public void Explosion() {
 
 		Point2D currentlyPos = this.getPosition();
-		Point2D rightPos = new Point2D(currentlyPos.getX() + 1, currentlyPos.getY());
-		Point2D leftPos = new Point2D(currentlyPos.getX() + -1, currentlyPos.getY());
-		Point2D upPos = new Point2D(currentlyPos.getX(), currentlyPos.getY() -1);
-		Point2D belowPos = new Point2D(currentlyPos.getX(), currentlyPos.getY() +1);
+		List<Point2D> nearObjects = getAdjacentPositions(currentlyPos);
+		nearObjects.add(currentlyPos);
 
-		Point2D[] nearObject = { currentlyPos, rightPos, leftPos,belowPos , upPos};
-	    
-
-
-		for ( Point2D pos: nearObject) {
+		for (Point2D pos: nearObjects) {
 			GameObject remove = GameObject.findObject(pos, this.getRoom());
 
-			if ( remove instanceof Water) {
+			if (!(remove instanceof HoledWall) && !(remove instanceof Bomb)) {
 				continue;
 			}
 
-			if ( remove != null) {
+			if (remove != null) {
 				this.getRoom().removeObject(remove);
 			}
 		}

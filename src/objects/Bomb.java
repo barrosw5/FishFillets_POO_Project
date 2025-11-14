@@ -93,7 +93,6 @@ public class Bomb extends LightObject implements Gravity{
 			}
 
 			if ( remove != null) {
-				// GameObject.removeObject(remove, this.getRoom());
 				this.getRoom().removeObject(remove);
 			}
 		}

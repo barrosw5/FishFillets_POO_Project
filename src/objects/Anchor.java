@@ -7,6 +7,7 @@ import pt.iscte.poo.utils.Vector2D;
 public class Anchor extends NonLightObject implements Gravity {
 
     private boolean MovedOnce = false;
+    private boolean controlDown = false; 
 
     public Anchor(Room room) {
         super(room);
@@ -77,16 +78,37 @@ public class Anchor extends NonLightObject implements Gravity {
 
     @Override
     public void down() {
-        if (!canDown()) {
-            return;
+
+        if (canDown()) {
+            Point2D pos = this.getPosition();
+            Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+            pushObject(this, pos, below);
+            controlDown = true;
         }
 
-        Point2D pos = this.getPosition();
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
-        pushObject(this, pos, below);
+        if ( controlDown = true && !canDown()) {
+            Explosion();
+            return;
+        }
     }
 
     @Override
     public void Explosion() {
+        Point2D currenbtlyPos = this.getPosition();
+        Point2D belowPos = new Point2D(currenbtlyPos.getX(), currenbtlyPos.getY()+1);
+
+        Point2D [] area = {belowPos};
+
+        for ( Point2D pos: area) {
+            GameObject remove = GameObject.findObject(pos, getRoom());
+
+            if ( remove instanceof Water) {
+                continue;
+            }
+
+            if ( remove instanceof SmallFish) {
+                this.getRoom().removeObject(remove);
+            }
+        }
     }
 }

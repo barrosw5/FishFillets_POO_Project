@@ -120,7 +120,7 @@ public class GameEngine implements Observer {
 
 	public void resetLevel(){										// Reset tem de dar reset em tudo
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
-		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck! (R for reset)");
+		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!");
 		onePlayer = false;
 		playingFish = true;
 		setupFishesForCurrentRoom();

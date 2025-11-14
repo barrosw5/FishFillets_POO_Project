@@ -10,6 +10,7 @@ import pt.iscte.poo.utils.Vector2D;
 public abstract class GameObject implements ImageTile {
 
 	private Point2D position;
+	private Point2D startingPosition;
 	private Room room;
 	private boolean isMovable;
 
@@ -29,12 +30,24 @@ public abstract class GameObject implements ImageTile {
 
 	public void setPosition(Point2D position) {
 		this.position = position;
+
+		if (getStartingPosition() == null) {
+            setStartingPosition(position);
+        }
 	}
 
 	@Override
 	public Point2D getPosition() {
 		return position;
 	}
+
+	public Point2D getStartingPosition(){
+        return startingPosition;
+    }
+
+    public void setStartingPosition(Point2D sp){
+        startingPosition = sp;
+    }
 
 	public Room getRoom() {
 		return room;
@@ -47,6 +60,16 @@ public abstract class GameObject implements ImageTile {
 	public boolean getIsMovel() {
 		return isMovable;
 	}
+
+	public void reset() {
+        if (startingPosition != null) {
+            Room r = getRoom();
+            if (!r.getObjects().contains(this)) {
+                r.addObject(this);
+            }
+            setPosition(startingPosition);
+        }
+    }
 
 	public void pushObject(GameObject obj, Point2D from, Point2D to) {
 		obj.setPosition(to);

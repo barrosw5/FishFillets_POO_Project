@@ -18,7 +18,7 @@ import pt.iscte.poo.utils.Direction;
 public class GameEngine implements Observer {
 	
 	private Map<String,Room> rooms;
-	private List<Score> scores;
+	private List<Score> scores; // lista em que iremos colocar as pontuações dos players
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario

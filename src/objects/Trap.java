@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Trap extends nonLightObject {
+public class Trap extends NonLightObject {
 
 	public Trap(Room room) {
 		super(room);

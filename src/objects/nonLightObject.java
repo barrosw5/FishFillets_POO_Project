@@ -4,9 +4,9 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public abstract class nonLightObject extends MovableObject{
+public abstract class NonLightObject extends MovableObject{
 
-    public nonLightObject(Room room) {
+    public NonLightObject(Room room) {
         super(room);
         
     }

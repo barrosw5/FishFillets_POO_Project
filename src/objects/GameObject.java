@@ -62,12 +62,12 @@ public abstract class GameObject implements ImageTile {
 	}
 
 	public void reset() {
-        if (startingPosition != null) {
+        if (getStartingPosition() != null) {
             Room r = getRoom();
             if (!r.getObjects().contains(this)) {
                 r.addObject(this);
             }
-            setPosition(startingPosition);
+            setPosition(getStartingPosition());
         }
     }
 

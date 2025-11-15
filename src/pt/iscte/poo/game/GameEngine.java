@@ -2,7 +2,6 @@ package pt.iscte.poo.game;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ public class GameEngine implements Observer {
 		rooms = new HashMap<String,Room>();
 		loadGame();
 		resetLevel();
-
 		updateGUI();
 	}
 

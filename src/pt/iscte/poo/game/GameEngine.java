@@ -27,6 +27,7 @@ public class GameEngine implements Observer {
 	private static final String SCORES_FILE = "gamedata" + File.separator + "scores.txt";
 	private Map<String,Room> rooms;
 	private List<Score> scores; // lista em que iremos colocar as pontuações dos players
+	private int gameStartTimeTicks = 0;
 	private Room currentRoom;
 	private int lastTickProcessed = 0;
 	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
@@ -181,7 +182,9 @@ public class GameEngine implements Observer {
 
 		if (isGameOver) {
 			playedLevels = 0;
-			lastTickProcessed = 0;
+			int currentGuiTicks = ImageGUI.getInstance().getTicks(); 
+			lastTickProcessed = currentGuiTicks;
+			gameStartTimeTicks = currentGuiTicks;
 			isGameOver = false;
 		}
 
@@ -194,7 +197,7 @@ public class GameEngine implements Observer {
 		updateGUI();
 	}
 
-	private void setupFishesForCurrentRoom() {
+	private void setupFishesForCurrentRoom() {		// se possivel tentar colocar o colocar os peixes ao dar reset juntamente com o resetAll
 		SmallFish sf = SmallFish.getInstance();
 		BigFish bf = BigFish.getInstance();
 
@@ -245,7 +248,7 @@ public class GameEngine implements Observer {
 		if(isGameOver)
 			return;
 		isGameOver = true;
-		int finalTimeInTicks = lastTickProcessed; 
+		int finalTimeInTicks = lastTickProcessed - gameStartTimeTicks;
 		
 		String message = "Congratulations! You finished the game!" + "\n\nInsert your name here:";
 		String title = "Game Finished";

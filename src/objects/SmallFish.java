@@ -59,10 +59,6 @@ public class SmallFish extends GameCharacter {
 		return true;
 	}
 
-	@Override
-	public void dead() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'dead'");
-	}
+	
 }
 

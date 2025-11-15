@@ -67,6 +67,10 @@ public class BigFish extends GameCharacter {
 				
 				}
 
+				if ( obj instanceof Trap ) { // adicionado a função que mata o peixe grande quando este toca na Trap 
+					dead(bf, this);
+				}
+
 				if ( (obj instanceof MovableObject || obj instanceof NonMovable || obj instanceof GameCharacter ) ) {
 					return false; // Restrições habituais do movimento do peixe grande 
 				}
@@ -77,9 +81,4 @@ public class BigFish extends GameCharacter {
 	
 	}
 
-	@Override
-	public void dead() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'dead'");
-	} 
 }

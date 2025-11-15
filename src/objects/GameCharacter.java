@@ -55,7 +55,9 @@ public abstract class GameCharacter extends GameObject{
 		return 2;
 	}
 
-	public abstract void dead();
+	public void dead(GameObject remove, GameObject cla){ // Criada a função que vai, basicamente, matar os pexies, removendo-os do Room
+		cla.getRoom().removeObject(remove);
+	}
 	
 	// O CanMove garante que o peixe não vai em direção ou passe algo que não é suposto
 	// Está implementado como abstrato no GameCharacter 

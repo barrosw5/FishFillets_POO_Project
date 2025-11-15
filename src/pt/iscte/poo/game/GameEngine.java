@@ -153,6 +153,7 @@ public class GameEngine implements Observer {
 	}
 
 	private void updateScoresDisplay() {
+		scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore()));
 		List<String> scoreStrings = new ArrayList<>();
 		
 		for (Score s : scores) {
@@ -182,7 +183,6 @@ public class GameEngine implements Observer {
 			playedLevels = 0;
 			lastTickProcessed = 0;
 			isGameOver = false;
-			resetLevel();
 		}
 
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
@@ -190,7 +190,7 @@ public class GameEngine implements Observer {
 		onePlayer = false;
 		playingFish = true;
 		setupFishesForCurrentRoom();
-		currentRoom.resetAll();			//reseta objetos todos moviveis
+		currentRoom.resetAll();			//reseta todos os objetos moviveis
 		updateGUI();
 	}
 
@@ -247,10 +247,9 @@ public class GameEngine implements Observer {
 		isGameOver = true;
 		int finalTimeInTicks = lastTickProcessed; 
 		
-		String playerName = JOptionPane.showInputDialog(null, 				//tenta usar o biblioteca do iscte
-			"Congratulations! You finished the game!" + "\n\nInsert your name here:", 
-			"Game Finished", 
-			JOptionPane.PLAIN_MESSAGE);
+		String message = "Congratulations! You finished the game!" + "\n\nInsert your name here:";
+		String title = "Game Finished";
+		String playerName = ImageGUI.getInstance().showInputDialog(title, message);
 
 		if (playerName == null || playerName.trim().isEmpty()) {
 			playerName = "Unknown"; 

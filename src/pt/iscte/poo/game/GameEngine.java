@@ -141,16 +141,16 @@ public class GameEngine implements Observer {
 			processTick();
 		}
 		ImageGUI.getInstance().update();
-		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + "Temp: " + realTime());
+		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + "Temp: " + realTime()); // invocar sempre que o jogo der update
 	}
 
 	private void processTick() {		
 		lastTickProcessed++;
-		realTime++;
+		realTime++; // um tick = 1 segundo e vai acompanhando o tick do jogo 
 		GameObject.GravityMove(currentRoom); // Esta é a função que faz acontecer o movimento da Gravidade, ela é chamada sempre que o tempo for mexendo no jogo 
 	}
 
-	public String realTime() {
+	public String realTime() { // trata de converter o realTime de segundos para min e segundos
 		Time realTimeLast = Time.convert(realTime);
 		return realTimeLast.toString();
 	}

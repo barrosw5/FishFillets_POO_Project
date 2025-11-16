@@ -1,6 +1,6 @@
 package objects;
 
-public class Time {
+public class Time { // Classe time para fazer o tempo em tempo real 
     private int minutes;
     private int seconds;
 

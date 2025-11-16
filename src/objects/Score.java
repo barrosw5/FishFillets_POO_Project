@@ -27,7 +27,7 @@ public class Score {
         String formattedTime = String.format("%02d:%02d", minutes, seconds);
         
         // 4. Esta é a string que a UI vai mostrar
-        return "Player: " + getName() + " - Time: " + formattedTime;
+        return getName() + " - " + formattedTime;
     }
 
     

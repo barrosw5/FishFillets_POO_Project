@@ -141,7 +141,7 @@ public class GameEngine implements Observer {
 			processTick();
 		}
 		ImageGUI.getInstance().update();
-		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + "Temp: " + realTime()); // invocar sempre que o jogo der update
+		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + " Time: " + realTime()); // invocar sempre que o jogo der update
 	}
 
 	private void processTick() {		

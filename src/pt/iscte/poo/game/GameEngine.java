@@ -198,7 +198,6 @@ public class GameEngine implements Observer {
 		}
 
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
-		realTime = 0;
 		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + "Temp: " + realTime());
 		onePlayer = false;
 		playingFish = true;

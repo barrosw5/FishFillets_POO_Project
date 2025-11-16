@@ -17,6 +17,7 @@ public class Score {
         return scoreInTicks;
     }
 
+
     @Override
     public String toString() {
         

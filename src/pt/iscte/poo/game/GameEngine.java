@@ -17,6 +17,7 @@ import objects.BigFish;
 import objects.GameObject;
 import objects.Score;
 import objects.SmallFish;
+import objects.Time;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.observer.Observer;
@@ -35,6 +36,7 @@ public class GameEngine implements Observer {
 	private boolean onePlayer = false; // verifica se está só um player em jogo ou não
 	private boolean initialized = true;	// serve para carregar no set up fishes os peixes so no inicio
 	private boolean isGameOver = false;	// verifica se o jogo já acabou
+	private int realTime; 
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
@@ -139,11 +141,18 @@ public class GameEngine implements Observer {
 			processTick();
 		}
 		ImageGUI.getInstance().update();
+		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + "Temp: " + realTime());
 	}
 
 	private void processTick() {		
 		lastTickProcessed++;
+		realTime++;
 		GameObject.GravityMove(currentRoom); // Esta é a função que faz acontecer o movimento da Gravidade, ela é chamada sempre que o tempo for mexendo no jogo 
+	}
+
+	public String realTime() {
+		Time realTimeLast = Time.convert(realTime);
+		return realTimeLast.toString();
 	}
 
 	public void updateGUI() {
@@ -189,7 +198,8 @@ public class GameEngine implements Observer {
 		}
 
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
-		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!");
+		realTime = 0;
+		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + "Temp: " + realTime());
 		onePlayer = false;
 		playingFish = true;
 		setupFishesForCurrentRoom();

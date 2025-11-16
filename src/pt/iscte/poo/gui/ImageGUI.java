@@ -159,7 +159,7 @@ public class ImageGUI extends Observed {
         scoreScroll.getViewport().setBackground(Color.BLACK);
         
         JLabel scoreTitle = new JLabel("Pontuações", SwingConstants.CENTER);
-        scoreTitle.setForeground(Color.WHITE);
+        scoreTitle.setForeground(Color.GREEN);
         scoreTitle.setBorder(BorderFactory.createEmptyBorder(6, 4, 6, 4));
         scorePanel.setLayout(new BorderLayout());
         scorePanel.setBackground(Color.BLACK);

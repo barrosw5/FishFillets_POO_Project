@@ -15,10 +15,12 @@ public abstract class LightObject extends MovableObject{
         super(room);
     }
 
+    @Override
     public boolean isLightObject() {
         return true;
     }
     
+    // para saber se um peixe pode mover objetos leves
     public abstract boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla);
     
 }

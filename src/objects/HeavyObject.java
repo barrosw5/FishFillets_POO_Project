@@ -11,11 +11,12 @@ public abstract class HeavyObject extends MovableObject{
         
     }
 
+    @Override
     public boolean isLightObject() {
         return false;
     }
 
-    // para saber se o personagens pesados (peixe grande) pode mover
-    public abstract boolean heavyCanMove(Point2D from, Point2D to, Vector2D dir, GameObject cla);
+    // para saber se um peixe pode mover objetos pesados
+    public abstract boolean canMoveHeavyObject(Point2D from, Point2D to, Vector2D dir, GameObject cla);
     
 }

@@ -15,5 +15,5 @@ public abstract class MovableObject extends GameObject{
         isMovable = !isMovable;
     }
 
-    public abstract boolean isLight();
+    public abstract boolean isLightObject();
 }

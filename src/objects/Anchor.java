@@ -24,11 +24,6 @@ public class Anchor extends HeavyObject implements Gravity {
     }
 
     @Override
-    public boolean isLight() {
-        return false;
-    }
-
-    @Override
     public void reset(){
         if (getStartingPosition() != null)
             MovedOnce = false;
@@ -36,7 +31,7 @@ public class Anchor extends HeavyObject implements Gravity {
     }
     
     @Override
-    public boolean heavyCanMove(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
+    public boolean canMoveHeavyObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 
         if (MovedOnce) {
             return false;

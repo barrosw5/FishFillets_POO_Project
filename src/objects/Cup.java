@@ -21,11 +21,6 @@ public class Cup extends LightObject {
 	}
 
 	@Override
-	public boolean isLight() {
-		return true;
-	}
-
-	@Override
 	public boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 		for (GameObject obj1 : cla.getRoom().getObjects()) {
 				if (obj1.getPosition().equals(to)) {

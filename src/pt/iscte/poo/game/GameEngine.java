@@ -98,7 +98,7 @@ public class GameEngine implements Observer {
 				onePlayer = true;			// faz com que ao um dos peixes ganhar ele fica unplayable 
 			}								// e desta forma só um deles fica ativo
 
-			if(!currentRoom.getObjects().contains(SmallFish.getInstance()) || !currentRoom.getObjects().contains(BigFish.getInstance()))
+			if(SmallFish.getInstance().hasDied() || BigFish.getInstance().hasDied())
 				isGameOver = true;
 		}
 

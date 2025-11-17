@@ -97,6 +97,9 @@ public class GameEngine implements Observer {
 				playingFish = !playingFish;
 				onePlayer = true;			// faz com que ao um dos peixes ganhar ele fica unplayable 
 			}								// e desta forma só um deles fica ativo
+
+			if(!currentRoom.getObjects().contains(SmallFish.getInstance()) || !currentRoom.getObjects().contains(BigFish.getInstance()))
+				isGameOver = true;
 		}
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
@@ -119,11 +122,13 @@ public class GameEngine implements Observer {
 				case KeyEvent.VK_W:
 				case KeyEvent.VK_S:
 				case KeyEvent.VK_D:
-					if(playingFish){
-						SmallFish.getInstance().move(Direction.directionFor(k).asVector());
+					if(!isGameOver){
+						if(playingFish){
+							SmallFish.getInstance().move(Direction.directionFor(k).asVector());
+						}
+						else
+							BigFish.getInstance().move(Direction.directionFor(k).asVector());
 					}
-					else
-						BigFish.getInstance().move(Direction.directionFor(k).asVector());
 					break;
 				default:
 					System.out.println("DEBUG: Tecla numero " + k + " clicada (Sem efeito).");

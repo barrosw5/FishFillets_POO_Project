@@ -157,6 +157,9 @@ public class Room {
 							holedWall.setPosition(new Point2D(j, i));
 							r.addObject(holedWall);
 							break;
+						default:
+							System.err.println("Não era suposto chegar aqui nunca");
+							break;
 					}
 				}
 			}

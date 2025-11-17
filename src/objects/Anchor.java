@@ -99,6 +99,7 @@ public class Anchor extends HeavyObject implements Gravity {
 
             if ( remove instanceof SmallFish) {
                 this.getRoom().removeObject(remove);
+                ((SmallFish) remove).setDeadState(true);
             }
         }
     }

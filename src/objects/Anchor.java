@@ -46,7 +46,7 @@ public class Anchor extends NonLightObject implements Gravity {
         if (!Point2D.sameDirectionHorzontal(from, to)) {
             return false;
         }
-        for (GameObject obj1 : cla.getRoom().getObjects()) {
+        for (GameObject obj1 : getRoom().getObjects()) {
             if (obj1.getPosition().equals(to)) {
                 if ((obj1 instanceof NonMovable 
 				|| obj1 instanceof MovableObject
@@ -60,7 +60,7 @@ public class Anchor extends NonLightObject implements Gravity {
     }
 
     @Override
-    public boolean canDown() {
+    public boolean canFall() {
         Point2D pos = this.getPosition();
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
 
@@ -77,16 +77,15 @@ public class Anchor extends NonLightObject implements Gravity {
     }
 
     @Override
-    public void down() {
-
-        if (canDown()) {
+    public void fall() {
+        if (canFall()) {
             Point2D pos = this.getPosition();
             Point2D below = getBelow(pos);
             pushObject(this, pos, below);
             controlDown = true;
         }
 
-        if ( controlDown = true && !canDown()) {
+        if ( controlDown = true && !canFall()) {
             Explosion();
             return;
         }

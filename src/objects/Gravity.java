@@ -1,7 +1,7 @@
 package objects;
 
 public interface Gravity {
-    public boolean canDown();
-    public void down();
+    public boolean canFall();
+    public void fall();
     public void Explosion();
 }

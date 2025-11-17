@@ -106,7 +106,7 @@ public abstract class GameObject implements ImageTile {
 		}
 	
 		for ( Gravity g: gravityObjects) {
-			g.down();
+			g.fall();
 		}
 	
 	}

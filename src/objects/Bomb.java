@@ -40,7 +40,7 @@ public class Bomb extends LightObject implements Gravity{
 	}
 
 	@Override
-	public boolean canDown() {
+	public boolean canFall() {
 		Point2D pos = this.getPosition();
         Point2D below = getBelow(pos);
 
@@ -58,16 +58,16 @@ public class Bomb extends LightObject implements Gravity{
 	}
 
 	@Override
-	public void down() { // Acho que finalmente conseguir por a bomba explodir como deve ser 
+	public void fall() { // Acho que finalmente conseguir por a bomba explodir como deve ser 
 		
-		if (canDown()){ // Verifica se pode descer ( ou começar a descida), se sim faz todo o movimento e declara a varáivel como true. 
+		if (canFall()){ // Verifica se pode descer ( ou começar a descida), se sim faz todo o movimento e declara a varáivel como true. 
 			Point2D pos = this.getPosition();
 			Point2D below = getBelow(pos);
 			pushObject(this, pos, below);
 			controlDown = true;
 		}
 
-		else if ( controlDown == true && ! canDown()) { // Só quando o movimento de descida foi feito e terminado, daí a variavel de controlo e o !CandDown a bomba explode
+		else if ( controlDown == true && ! canFall()) { // Só quando o movimento de descida foi feito e terminado, daí a variavel de controlo e o !CandDown a bomba explode
 			Explosion();
 			controlDown = false;
 		}

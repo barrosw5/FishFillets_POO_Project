@@ -138,7 +138,10 @@ public class GameEngine implements Observer {
 			processTick();
 		}
 		ImageGUI.getInstance().update();
-		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + " Time: " + realTime()); // invocar sempre que o jogo der update
+		if(!isGameOver)
+			ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + " Time: " + realTime()); // invocar sempre que o jogo der update
+		else
+			ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 5. (R for restart)");
 	}
 
 	private void processTick() {		
@@ -184,7 +187,7 @@ public class GameEngine implements Observer {
 		}
 	}
 
-	public void resetLevel(){										// Reset tem de dar reset em tudo
+	public void resetLevel(){
 
 		if (isGameOver) {
 			playedLevels = 0;
@@ -233,8 +236,8 @@ public class GameEngine implements Observer {
 	private void saveScores() {
 		scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore()));
 		
-		while (scores.size() > 5) {
-			scores.remove(5);
+		while (scores.size() > 10) {
+			scores.remove(10);
 		}
 
 		try {

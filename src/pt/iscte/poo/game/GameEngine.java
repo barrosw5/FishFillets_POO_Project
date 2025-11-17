@@ -33,7 +33,7 @@ public class GameEngine implements Observer {
 	private boolean onePlayer = false; // verifica se está só um player em jogo ou não
 	private boolean initialized = true;	// serve para carregar no set up fishes os peixes so no inicio
 	private boolean isGameOver = false;	// verifica se o jogo já acabou
-	private int realTime; 
+	private int realTime = 0; 
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();

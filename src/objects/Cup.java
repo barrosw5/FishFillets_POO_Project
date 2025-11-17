@@ -29,7 +29,7 @@ public class Cup extends LightObject {
 	public boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 		for (GameObject obj1 : cla.getRoom().getObjects()) {
 				if (obj1.getPosition().equals(to)) {
-					if ((obj1 instanceof MovableObject || obj1 instanceof NonMovable || obj1 instanceof GameCharacter)
+					if ((obj1 instanceof MovableObject || obj1 instanceof NonMovableObject || obj1 instanceof GameCharacter)
 							&& !(obj1 instanceof HoledWall)) {
 						return false;
 					}

@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Anchor extends NonLightObject implements Gravity {
+public class Anchor extends HeavyObject implements Gravity {
 
     private boolean MovedOnce = false;
     private boolean controlDown = false; 
@@ -32,13 +32,11 @@ public class Anchor extends NonLightObject implements Gravity {
     public void reset(){
         if (getStartingPosition() != null)
             MovedOnce = false;
-
         super.reset();
-        
     }
     
     @Override
-    public boolean canMoveNonLight(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
+    public boolean heavyCanMove(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 
         if (MovedOnce) {
             return false;
@@ -48,7 +46,7 @@ public class Anchor extends NonLightObject implements Gravity {
         }
         for (GameObject obj1 : getRoom().getObjects()) {
             if (obj1.getPosition().equals(to)) {
-                if ((obj1 instanceof NonMovable 
+                if ((obj1 instanceof NonMovableObject 
 				|| obj1 instanceof MovableObject
 				|| obj1 instanceof GameCharacter)) {
                     return false;
@@ -86,13 +84,13 @@ public class Anchor extends NonLightObject implements Gravity {
         }
 
         if ( controlDown = true && !canFall()) {
-            Explosion();
+            specialAbillity();
             return;
         }
     }
 
     @Override
-    public void Explosion() {
+    public void specialAbillity() {
         Point2D currenbtlyPos = this.getPosition();
         Point2D belowPos = getBelow(currenbtlyPos);
 

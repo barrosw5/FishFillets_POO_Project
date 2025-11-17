@@ -2,7 +2,7 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class Trunk extends NonMovable {
+public class Trunk extends NonMovableObject {
 
 	public Trunk(Room room) {
 		super(room);

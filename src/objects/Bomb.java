@@ -31,7 +31,7 @@ public class Bomb extends LightObject implements Gravity{
 	public boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 		for ( GameObject obj1: cla.getRoom().getObjects()) {
 			if ( obj1.getPosition().equals(to)) {
-				if ( (obj1 instanceof NonMovable || obj1 instanceof MovableObject || obj1 instanceof GameCharacter)) {
+				if ( (obj1 instanceof NonMovableObject || obj1 instanceof MovableObject || obj1 instanceof GameCharacter)) {
 					return false;
 				}
 			}
@@ -68,13 +68,13 @@ public class Bomb extends LightObject implements Gravity{
 		}
 
 		else if ( controlDown == true && ! canFall()) { // Só quando o movimento de descida foi feito e terminado, daí a variavel de controlo e o !CandDown a bomba explode
-			Explosion();
+			specialAbillity();
 			controlDown = false;
 		}
 	}
 
 	@Override
-	public void Explosion() {
+	public void specialAbillity() {
 
 		Point2D currentlyPos = this.getPosition();
 		List<Point2D> nearObjects = getAdjacentPositions(currentlyPos);

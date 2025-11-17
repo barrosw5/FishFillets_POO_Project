@@ -2,7 +2,7 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class SteelVertical extends NonMovable {
+public class SteelVertical extends NonMovableObject {
 
 	public SteelVertical(Room room) {
 		super(room);

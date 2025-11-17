@@ -34,7 +34,7 @@ public class BigFish extends GameCharacter {
 	// O código ainda, creio eu, pode ser mais descentralizado, ou seja, criar mini funções, farei isso depois. Para já está funcional. 
 	// A gravidade está em construção...
 	@Override
-	public boolean canMoveFish(Point2D pos, Vector2D dir) {
+	public boolean fishCanMove(Point2D pos, Vector2D dir) {
 		if (hasWon())
 			return false;
 
@@ -71,7 +71,7 @@ public class BigFish extends GameCharacter {
 					dead(bf, this);
 				}
 
-				if ( (obj instanceof MovableObject || obj instanceof NonMovable || obj instanceof GameCharacter ) ) {
+				if ( (obj instanceof MovableObject || obj instanceof NonMovableObject || obj instanceof GameCharacter ) ) {
 					return false; // Restrições habituais do movimento do peixe grande 
 				}
 			}

@@ -80,7 +80,6 @@ public class Anchor extends HeavyObject implements Gravity {
 
         if ( controlDown = true && !canFall()) {
             specialAbillity();
-            return;
         }
     }
 

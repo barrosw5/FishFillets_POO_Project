@@ -55,9 +55,7 @@ public class GameEngine implements Observer {
 	private void loadScores(){
 		File file = new File(SCORES_FILE);
 
-		try {
-			File parentDir = file.getParentFile();
-			
+		try {			
 			if (!file.exists()) {
 				file.createNewFile();
 				return; 
@@ -194,6 +192,7 @@ public class GameEngine implements Observer {
 			int currentGuiTicks = ImageGUI.getInstance().getTicks(); 
 			lastTickProcessed = currentGuiTicks;
 			gameStartTimeTicks = currentGuiTicks;
+			realTime = 0;
 			isGameOver = false;
 		}
 

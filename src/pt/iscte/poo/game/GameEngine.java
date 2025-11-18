@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,8 @@ public class GameEngine implements Observer {
 	private boolean initialized = true;	// serve para carregar no set up fishes os peixes so no inicio
 	private boolean isGameOver = false;	// verifica se o jogo já acabou
 	private int realTime = 0; 
+	private SmallFish sf = SmallFish.getInstance();
+	private BigFish bf = BigFish.getInstance();
 	
 	public GameEngine() {
 		rooms = new HashMap<String,Room>();
@@ -89,16 +92,16 @@ public class GameEngine implements Observer {
 	public void update(Observed source) {
 		
 		if(!isGameOver){
-			if(SmallFish.getInstance().hasWon() && BigFish.getInstance().hasWon()){
+			if(sf.hasWon() && bf.hasWon()){
 				nextLevel();
 			}
 
-			if((SmallFish.getInstance().hasWon() || BigFish.getInstance().hasWon()) && !onePlayer){
+			if((sf.hasWon() || bf.hasWon()) && !onePlayer){
 				playingFish = !playingFish;
 				onePlayer = true;			// faz com que ao um dos peixes ganhar ele fica unplayable 
 			}								// e desta forma só um deles fica ativo
 
-			if(SmallFish.getInstance().hasDied() || BigFish.getInstance().hasDied())
+			if(sf.hasDied() || bf.hasDied())
 				isGameOver = true;
 		}
 
@@ -124,10 +127,10 @@ public class GameEngine implements Observer {
 				case KeyEvent.VK_D:
 					if(!isGameOver){
 						if(playingFish){
-							SmallFish.getInstance().move(Direction.directionFor(k).asVector());
+							sf.move(Direction.directionFor(k).asVector());
 						}
 						else
-							BigFish.getInstance().move(Direction.directionFor(k).asVector());
+							bf.move(Direction.directionFor(k).asVector());
 					}
 					break;
 				default:
@@ -199,6 +202,8 @@ public class GameEngine implements Observer {
 			gameStartTimeTicks = currentGuiTicks;
 			realTime = 0;
 			isGameOver = false;
+			sf.setDeadState(false);
+			bf.setDeadState(false);
 		}
 
 		currentRoom = rooms.get("room" + playedLevels + ".txt");
@@ -211,9 +216,6 @@ public class GameEngine implements Observer {
 	}
 
 	private void setupFishesForCurrentRoom() {		// se possivel tentar colocar o colocar os peixes ao dar reset juntamente com o resetAll
-		SmallFish sf = SmallFish.getInstance();
-		BigFish bf = BigFish.getInstance();
-
 		sf.setRoom(currentRoom);
 		bf.setRoom(currentRoom);
 

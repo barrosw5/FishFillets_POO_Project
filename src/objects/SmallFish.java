@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.ArrayList;
+import java.util.List;
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
@@ -58,6 +60,38 @@ public class SmallFish extends GameCharacter {
 
 		return true;
 	}
+
+	@Override
+	public boolean fishSupport() {
+		Point2D currentlyPos = getPosition();
+		int lengthPos = currentlyPos.getY() -1;
+		List<Point2D> upPos = new ArrayList<>();
+
+		for ( int i = lengthPos; i > 0 ; i--) {
+			upPos.add(new Point2D(currentlyPos.getX(), i));
+		}
+
+		int count = 0; 
+		for ( Point2D pos: upPos) {
+			GameObject obj = findObject(pos, getRoom());
+
+			if ( !( obj instanceof MovableObject)) {
+				break;
+			}
+
+			if ( obj instanceof MovableObject ) {
+				count ++;
+			}
+		}
+		
+		if ( count != 0) {
+			return false; 
+		}
+		
+		return true;
+	}
+
+	
 
 	
 }

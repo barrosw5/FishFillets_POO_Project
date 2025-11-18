@@ -63,4 +63,10 @@ public abstract class GameCharacter extends GameObject{
 	// Está implementado como abstrato no GameCharacter 
 	//cada peixe tem o seu visto que os dois têm regras movimentação diferentes
 	public abstract boolean fishCanMove(Point2D pos, Vector2D dir);
+
+	public static boolean fishSupport(GameCharacter fish) {
+		return fish.fishSupport();
+	}
+
+	public abstract boolean fishSupport();
 }

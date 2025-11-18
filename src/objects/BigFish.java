@@ -67,7 +67,7 @@ public class BigFish extends GameCharacter {
 				
 				}
 
-				if ( obj instanceof Trap ) { // adicionado a função que mata o peixe grande quando este toca na Trap 
+				if ( obj instanceof KillBigFish ) { // adicionado a função que mata o peixe grande quando este toca na Trap 
 					dead(bf, this);
 				}
 
@@ -80,5 +80,12 @@ public class BigFish extends GameCharacter {
 		return true;
 	
 	}
+
+	@Override
+	public boolean fishSupport() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'fishSupport'");
+	}
+
 
 }

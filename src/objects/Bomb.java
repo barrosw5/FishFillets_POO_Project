@@ -105,3 +105,5 @@ public class Bomb extends LightObject implements Gravity{
 	}
 
 }
+
+ 

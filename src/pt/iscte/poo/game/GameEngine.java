@@ -55,9 +55,7 @@ public class GameEngine implements Observer {
 	private void loadScores(){
 		File file = new File(SCORES_FILE);
 
-		try {
-			File parentDir = file.getParentFile();
-			
+		try {			
 			if (!file.exists()) {
 				file.createNewFile();
 				return; 
@@ -99,6 +97,9 @@ public class GameEngine implements Observer {
 				playingFish = !playingFish;
 				onePlayer = true;			// faz com que ao um dos peixes ganhar ele fica unplayable 
 			}								// e desta forma só um deles fica ativo
+
+			if(SmallFish.getInstance().hasDied() || BigFish.getInstance().hasDied())
+				isGameOver = true;
 		}
 
 		if (ImageGUI.getInstance().wasKeyPressed()) {
@@ -121,11 +122,13 @@ public class GameEngine implements Observer {
 				case KeyEvent.VK_W:
 				case KeyEvent.VK_S:
 				case KeyEvent.VK_D:
-					if(playingFish){
-						SmallFish.getInstance().move(Direction.directionFor(k).asVector());
+					if(!isGameOver){
+						if(playingFish){
+							SmallFish.getInstance().move(Direction.directionFor(k).asVector());
+						}
+						else
+							BigFish.getInstance().move(Direction.directionFor(k).asVector());
 					}
-					else
-						BigFish.getInstance().move(Direction.directionFor(k).asVector());
 					break;
 				default:
 					System.out.println("DEBUG: Tecla numero " + k + " clicada (Sem efeito).");
@@ -194,6 +197,7 @@ public class GameEngine implements Observer {
 			int currentGuiTicks = ImageGUI.getInstance().getTicks(); 
 			lastTickProcessed = currentGuiTicks;
 			gameStartTimeTicks = currentGuiTicks;
+			realTime = 0;
 			isGameOver = false;
 		}
 

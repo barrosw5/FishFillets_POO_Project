@@ -23,11 +23,6 @@ public class Bomb extends LightObject implements Gravity{
 	}
 
 	@Override
-	public boolean isLight() {
-		return true;
-	}
-
-	@Override
 	public boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 		for ( GameObject obj1: cla.getRoom().getObjects()) {
 			if ( obj1.getPosition().equals(to)) {
@@ -90,11 +85,10 @@ public class Bomb extends LightObject implements Gravity{
 
 		for (Point2D pos: nearObjects) {
 			GameObject remove = findObject(pos, this.getRoom());
-			// Point2D removePos = pos;
 
-			//  if ( removePos.equals(beloPos) && remove instanceof GameCharacter) {
-			//  	break;
-			//  }
+			if (remove instanceof GameCharacter) {
+			((GameCharacter) remove).setDeadState(true);
+			}
 
 			if (remove != null) {
 				this.getRoom().removeObject(remove);

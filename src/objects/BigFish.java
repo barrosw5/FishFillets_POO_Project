@@ -51,7 +51,7 @@ public class BigFish extends GameCharacter {
 							if (obj2.getPosition().equals(firstObjTarget)) {
 								if (obj2 instanceof MovableObject &&
 									(obj2.canMoveLightObject(firstObjTarget, secondObjTarget, dir, this) ||
-									obj2.canMoveNonLight(firstObjTarget, secondObjTarget, dir, this))) {
+									obj2.canMoveHeavyObject(firstObjTarget, secondObjTarget, dir, this))) {
 									pushTwoObject(obj, obj2, pos, firstObjTarget, secondObjTarget); // Ele usa a função pushTwoObject que criei e que está na classe GameCharacter
 									return true;
 								}
@@ -60,7 +60,7 @@ public class BigFish extends GameCharacter {
 					}
 				}
 				
-				if ( obj instanceof MovableObject && (obj.canMoveNonLight(finalPos, finalPos.plus(dir), dir, this) || obj.canMoveLightObject(finalPos, finalPos.plus(dir), dir, this) )) {
+				if ( obj instanceof MovableObject && (obj.canMoveHeavyObject(finalPos, finalPos.plus(dir), dir, this) || obj.canMoveLightObject(finalPos, finalPos.plus(dir), dir, this))) {
 						Point2D FinalObPos = finalPos.plus(dir); // Se for só um objeto ele faz um processo semelhante, mas mais simples 
 						pushObject(obj, finalPos, FinalObPos);				
 					return true;

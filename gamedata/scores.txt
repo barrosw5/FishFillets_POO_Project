@@ -1,10 +1,10 @@
+www,20
 ola,21
 barrosw5,21
 bbb,22
+ww,22
 PedroC,24
+win,24
 abc,25
 pedromau,25
 Coelho,25
-bom dia,26
-x,27
-ruben,27

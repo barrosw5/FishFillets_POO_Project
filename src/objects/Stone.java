@@ -21,12 +21,7 @@ public class Stone extends HeavyObject {
 	}
 
 	@Override
-	public boolean isLight() {
-		return false;
-	}
-
-	@Override
-	public boolean heavyCanMove(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
+	public boolean canMoveHeavyObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
 			for (GameObject obj1 : cla.getRoom().getObjects()) {
 			if (obj1.getPosition().equals(to)) {
 				if ((obj1 instanceof MovableObject || obj1 instanceof NonMovableObject || obj1 instanceof GameCharacter)) {

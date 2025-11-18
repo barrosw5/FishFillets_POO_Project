@@ -7,7 +7,8 @@ import pt.iscte.poo.utils.Vector2D;
 public abstract class GameCharacter extends GameObject{
 	private static final boolean isMovel = true;
 	private boolean direction = true; 	// true é esquerda, false é direita
-	private boolean hasWon = false;	// tentar fazer com que o peixe fora do ecra nao seja mais jogavel
+	private boolean hasWon = false;		// tentar fazer com que o peixe fora do ecra nao seja mais jogavel
+	private boolean hasDied = false;
 
 	public GameCharacter(Room room) {
 		super(room, isMovel);
@@ -45,6 +46,14 @@ public abstract class GameCharacter extends GameObject{
 		return hasWon;
 	}
 
+	public boolean hasDied(){
+		return hasDied;
+	}
+
+	public void setDeadState(boolean t){
+		hasDied = t;
+	}
+
 	public void resetWin(){
 		hasWon = false;
 	}
@@ -56,7 +65,9 @@ public abstract class GameCharacter extends GameObject{
 	}
 
 	public void dead(GameObject remove, GameObject cla){ // Criada a função que vai, basicamente, matar os pexies, removendo-os do Room
+		hasDied = true;
 		cla.getRoom().removeObject(remove);
+		
 	}
 	
 	// O CanMove garante que o peixe não vai em direção ou passe algo que não é suposto

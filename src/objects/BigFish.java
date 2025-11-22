@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.ArrayList;
+import java.util.List;
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
@@ -83,8 +85,33 @@ public class BigFish extends GameCharacter {
 
 	@Override
 	public boolean fishSupport() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'fishSupport'");
+		Point2D CurrentlyPos = getPosition();
+		int lengthPos = CurrentlyPos.getY();
+
+		List<Point2D> posUp = new ArrayList<>(); 
+
+		for ( int i = lengthPos; i > 0; i--) {
+			posUp.add( new Point2D(CurrentlyPos.getX(), i--));
+		}
+
+		int count = 0;
+
+		for ( Point2D objPos: posUp) {
+			GameObject obj = findObject(objPos, getRoom());
+
+			if ( !( obj instanceof MovableObject)) {
+				continue;
+			}
+
+			if ( obj instanceof HeavyObject) {
+				count ++;
+			}
+		}
+		
+		if ( count != 1) {
+			return false;
+		}
+		return true;
 	}
 
 

@@ -62,31 +62,32 @@ public class SmallFish extends GameCharacter {
 
 	@Override
 	public boolean fishSupport() {
-		Point2D currentlyPos = getPosition();
-		int lengthPos = currentlyPos.getY() -1;
-		List<Point2D> upPos = new ArrayList<>();
+		Point2D CurrentlyPos = getPosition();
+		int lengthPos = CurrentlyPos.getY();
 
-		for ( int i = lengthPos; i > 0 ; i--) {
-			upPos.add(new Point2D(currentlyPos.getX(), i));
+		List<Point2D> posUp = new ArrayList<>(); 
+
+		for ( int i = lengthPos; i > 0; i--) {
+			posUp.add( new Point2D(CurrentlyPos.getX(), i--));
 		}
 
-		int count = 0; 
-		for ( Point2D pos: upPos) {
-			GameObject obj = findObject(pos, getRoom());
+		int count = 0;
 
-			if ( !( obj instanceof MovableObject)) {
-				break;
+		for ( Point2D objPos: posUp) {
+			GameObject obj = findObject(objPos, getRoom());
+
+			if ( obj instanceof HeavyObject) {
+				return false;
 			}
 
-			if ( obj instanceof MovableObject ) {
-				count ++;
+			if ( obj instanceof MovableObject) {
+				count++;
 			}
 		}
 		
-		if ( count != 0) {
-			return false; 
+		if ( count != 1) {
+			return false;
 		}
-		
 		return true;
 	}
 

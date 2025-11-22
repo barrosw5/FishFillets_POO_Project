@@ -94,21 +94,26 @@ public class BigFish extends GameCharacter {
 			posUp.add( new Point2D(CurrentlyPos.getX(), i));
 		}
 
-		int count = 0;
+		int countHeavy = 0;
+		int counLight = 0;
 
 		for ( Point2D objPos: posUp) {
 			GameObject obj = findObject(objPos, getRoom());
 
-			if ( !( obj instanceof MovableObject)) {
+			if ( !( obj instanceof MovableObject) && countHeavy == 0 && counLight == 0) {
 				return true;
 			}
 
 			if ( obj instanceof HeavyObject) {
-				count ++;
+				countHeavy ++;
+			}
+
+			if ( obj instanceof LightObject) {
+				counLight ++;
 			}
 		}
 		
-		if ( count > 1) {
+		if ( countHeavy > 1) {
 			return false;
 		}
 		return true;

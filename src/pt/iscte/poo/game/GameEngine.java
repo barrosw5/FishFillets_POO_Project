@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import objects.BigFish;
+import objects.GameCharacter;
 import objects.GameObject;
 import objects.Score;
 import objects.SmallFish;
@@ -154,6 +155,8 @@ public class GameEngine implements Observer {
 		lastTickProcessed++;
 		realTime++; // um tick = 1 segundo e vai acompanhando o tick do jogo 
 		GameObject.GravityMove(currentRoom); // Esta é a função que faz acontecer o movimento da Gravidade, ela é chamada sempre que o tempo for mexendo no jogo 
+		GameCharacter.CharacterSuppor(currentRoom, sf);
+		GameCharacter.CharacterSuppor(currentRoom, bf);
 	}
 
 	public String realTime() { // trata de converter o realTime de segundos para min e segundos

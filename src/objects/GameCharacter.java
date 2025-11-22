@@ -69,6 +69,12 @@ public abstract class GameCharacter extends GameObject{
 		cla.getRoom().removeObject(remove);
 		
 	}
+
+	public static void CharacterSuppor( Room r, GameCharacter fish) {
+		if ( ! fishSupport(fish)) {
+				fish.dead(fish, fish);
+		}
+	}
 	
 	// O CanMove garante que o peixe não vai em direção ou passe algo que não é suposto
 	// Está implementado como abstrato no GameCharacter 

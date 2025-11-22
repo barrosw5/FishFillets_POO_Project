@@ -67,14 +67,18 @@ public class SmallFish extends GameCharacter {
 
 		List<Point2D> posUp = new ArrayList<>(); 
 
-		for ( int i = lengthPos; i > 0; i--) {
-			posUp.add( new Point2D(CurrentlyPos.getX(), i--));
+		for ( int i = lengthPos -1; i > 0; i--) {
+			posUp.add( new Point2D(CurrentlyPos.getX(), i));
 		}
 
 		int count = 0;
 
 		for ( Point2D objPos: posUp) {
 			GameObject obj = findObject(objPos, getRoom());
+
+			if ( !( obj instanceof MovableObject) && count == 0) {
+				return true;
+			}
 
 			if ( obj instanceof HeavyObject) {
 				return false;
@@ -85,7 +89,7 @@ public class SmallFish extends GameCharacter {
 			}
 		}
 		
-		if ( count != 1) {
+		if ( count > 1) {
 			return false;
 		}
 		return true;

@@ -96,6 +96,9 @@ public abstract class GameObject implements ImageTile {
 	}
 
 
+	
+
+
 	public static void GravityMove(Room r) {
 		List<Gravity> gravityObjects = new ArrayList<>(); // Criação de uma lista só para os objetos que contêm a interface gravidade
 

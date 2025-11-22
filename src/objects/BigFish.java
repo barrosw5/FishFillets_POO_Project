@@ -90,8 +90,8 @@ public class BigFish extends GameCharacter {
 
 		List<Point2D> posUp = new ArrayList<>(); 
 
-		for ( int i = lengthPos; i > 0; i--) {
-			posUp.add( new Point2D(CurrentlyPos.getX(), i--));
+		for ( int i = lengthPos - 1; i > 0; i--) {
+			posUp.add( new Point2D(CurrentlyPos.getX(), i));
 		}
 
 		int count = 0;
@@ -100,7 +100,7 @@ public class BigFish extends GameCharacter {
 			GameObject obj = findObject(objPos, getRoom());
 
 			if ( !( obj instanceof MovableObject)) {
-				continue;
+				return true;
 			}
 
 			if ( obj instanceof HeavyObject) {
@@ -108,7 +108,7 @@ public class BigFish extends GameCharacter {
 			}
 		}
 		
-		if ( count != 1) {
+		if ( count > 1) {
 			return false;
 		}
 		return true;

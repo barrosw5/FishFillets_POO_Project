@@ -1,10 +1,1 @@
-www,20
-ola,21
-barrosw5,21
-bbb,22
-Coelho,23
-abc,23
-PedroC,24
-win,24
-ww,26
-pecoelho,38
+barros1,50,141

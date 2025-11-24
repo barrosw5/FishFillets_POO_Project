@@ -24,256 +24,274 @@ import pt.iscte.poo.observer.Observer;
 import pt.iscte.poo.utils.Direction;
 
 public class GameEngine implements Observer {
-	
-	private static final String SCORES_FILE = "gamedata" + File.separator + "scores.txt";
-	private Map<String,Room> rooms;
-	private List<Score> scores; // lista em que iremos colocar as pontuações dos players
-	private int gameStartTimeTicks = 0;
-	private Room currentRoom;
-	private int lastTickProcessed = 0;
-	private boolean playingFish = true; // true se for o peixe pequeno a jogar e false o contrario
-	private int playedLevels = 0;
-	private boolean onePlayer = false; // verifica se está só um player em jogo ou não
-	private boolean initialized = true;	// serve para carregar no set up fishes os peixes so no inicio
-	private boolean isGameOver = false;	// verifica se o jogo já acabou
-	private int realTime = 0; 
-	private SmallFish sf = SmallFish.getInstance();
-	private BigFish bf = BigFish.getInstance();
-	
-	public GameEngine() {
-		rooms = new HashMap<String,Room>();
-		scores = new ArrayList<>();
-		loadGame();
-		loadScores();
-		resetLevel();
-		updateGUI();
-		updateScoresDisplay();
-	}
+    
+    private static final String SCORES_FILE = "gamedata" + File.separator + "scores.txt";
+    private Map<String,Room> rooms;
+    private List<Score> scores; 
+    private int gameStartTimeTicks = 0;
+    private Room currentRoom;
+    private int lastTickProcessed = 0;
+    private boolean playingFish = true; 
+    private int playedLevels = 0;
+    private boolean onePlayer = false; 
+    private boolean initialized = true; 
+    private boolean isGameOver = false; 
+    private int realTime = 0;
+    private int moves = 0; 
 
-	private void loadGame() {
-		File[] files = new File("./rooms").listFiles();
-		for(File f : files) {
-			rooms.put(f.getName(),Room.readRoom(f,this));
-		}
-	}
+    private SmallFish sf = SmallFish.getInstance();
+    private BigFish bf = BigFish.getInstance();
+    
+    public GameEngine() {
+        rooms = new HashMap<String,Room>();
+        scores = new ArrayList<>();
+        loadGame();
+        loadScores();
+        resetLevel();
+        updateGUI();
+        updateScoresDisplay();
+    }
 
-	private void loadScores(){
-		File file = new File(SCORES_FILE);
+    private void loadGame() {
+        File[] files = new File("./rooms").listFiles();
+        if (files != null) {
+            for(File f : files) {
+                rooms.put(f.getName(),Room.readRoom(f,this));
+            }
+        }
+    }
 
-		try {			
-			if (!file.exists()) {
-				file.createNewFile();
-				return; 
-			}
+    private void loadScores(){
+        File file = new File(SCORES_FILE);
 
-		} catch (IOException e) {
-			System.err.println("Erro de I/O ao tentar criar ficheiro de scores: " + e.getMessage());
-		}
-		
-		try {
-			Scanner sc = new Scanner(file);
+        try {           
+            if (!file.exists()) {
+                file.createNewFile();
+                return; 
+            }
 
-			while (sc.hasNextLine()) {
-				String line = sc.nextLine();
-				String[] parts = line.split(",");   // Formato "Nome,Pontos"
-				if (parts.length == 2) {
-					String name = parts[0];
-					int scoreInTicks = Integer.parseInt(parts[1]);
-					scores.add(new Score(name, scoreInTicks));
-				}
-			}
-			scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore()));
-			sc.close();
-			
-		} catch (FileNotFoundException e) {
-			System.err.println("Erro ao carregar pontuações (ficheiro não encontrado): " + e.getMessage());
-		}
-	}
+        } catch (IOException e) {
+            System.err.println("Erro de I/O ao tentar criar ficheiro de scores: " + e.getMessage());
+        }
+        
+        try {
+            Scanner sc = new Scanner(file);
 
-	@Override
-	public void update(Observed source) {
-		
-		if(!isGameOver){
-			if(sf.hasWon() && bf.hasWon()){
-				nextLevel();
-			}
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] parts = line.split(",");   // Formato esperado: "Nome,Pontos,Moves"
+                
+                if (parts.length == 3) { 
+                    try {
+                        String name = parts[0];
+                        int scoreInTicks = Integer.parseInt(parts[1].trim());
+                        int movesCount = Integer.parseInt(parts[2].trim());
+                        
+                        scores.add(new Score(name, scoreInTicks, movesCount));
+                    } catch (NumberFormatException e) {
+                        System.err.println("Erro ao ler linha de score (formato numérico inválido): " + line);
+                    }
+                }
+            }
+            // porque já temos comparable usamos null
+            scores.sort(null);
+            sc.close();
+            
+        } catch (FileNotFoundException e) {
+            System.err.println("Erro ao carregar pontuações: " + e.getMessage());
+        }
+    }
 
-			if((sf.hasWon() || bf.hasWon()) && !onePlayer){
-				playingFish = !playingFish;
-				onePlayer = true;			// faz com que ao um dos peixes ganhar ele fica unplayable 
-			}								// e desta forma só um deles fica ativo
+    @Override
+    public void update(Observed source) {
+        
+        if(!isGameOver){
+            if(sf.hasWon() && bf.hasWon()){
+                nextLevel();
+            }
 
-			if(sf.hasDied() || bf.hasDied())
-				isGameOver = true;
-		}
+            if((sf.hasWon() || bf.hasWon()) && !onePlayer){
+                playingFish = !playingFish;
+                onePlayer = true;           
+            } 
 
-		if (ImageGUI.getInstance().wasKeyPressed()) {
-			int k = ImageGUI.getInstance().keyPressed();
-									// switch para reconhecer input de teclado
-			switch (k) {
-				case KeyEvent.VK_SPACE:
-					if(!onePlayer){
-						playingFish = !playingFish;		// caso um dos peixes já tenha ganho a spacebar fica useless
-					}
-					break;
-				case KeyEvent.VK_R:
-					resetLevel();
-					break;
-				case KeyEvent.VK_LEFT:
-				case KeyEvent.VK_RIGHT:
-				case KeyEvent.VK_DOWN:
-				case KeyEvent.VK_UP:
-				case KeyEvent.VK_A:
-				case KeyEvent.VK_W:
-				case KeyEvent.VK_S:
-				case KeyEvent.VK_D:
-					if(!isGameOver){
-						if(playingFish){
-							sf.move(Direction.directionFor(k).asVector());
-						}
-						else
-							bf.move(Direction.directionFor(k).asVector());
-					}
-					break;
-				default:
-					System.out.println("DEBUG: Tecla numero " + k + " clicada (Sem efeito).");
-					break;
-			}
-		}
+            if(sf.hasDied() || bf.hasDied())
+                isGameOver = true;
+        }
 
-		int t = ImageGUI.getInstance().getTicks();
-		while (lastTickProcessed < t) {
-			processTick();
-		}
-		ImageGUI.getInstance().update();
-		if(!isGameOver)
-			ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + " Time: " + realTime()); // invocar sempre que o jogo der update
-		else
-			ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 5. (R for restart)");
-	}
+        if (ImageGUI.getInstance().wasKeyPressed()) {
+            int k = ImageGUI.getInstance().keyPressed();
+            
+            switch (k) {
+                case KeyEvent.VK_SPACE:
+                    if(!onePlayer){
+                        playingFish = !playingFish; 
+                    }
+                    break;
+                case KeyEvent.VK_R:
+                    resetLevel();
+                    break;
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_A:
+                case KeyEvent.VK_W:
+                case KeyEvent.VK_S:
+                case KeyEvent.VK_D:
+                    if(!isGameOver){
+                        if(playingFish){
+                            sf.move(Direction.directionFor(k).asVector());
+                            moves++; // Incrementa moves
+                        }
+                        else {
+                            bf.move(Direction.directionFor(k).asVector());
+                            moves++; // Incrementa moves
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	private void processTick() {
-		lastTickProcessed++;
-		realTime++; // um tick = 1 segundo e vai acompanhando o tick do jogo 
-		GameObject.GravityMove(currentRoom); // Esta é a função que faz acontecer o movimento da Gravidade, ela é chamada sempre que o tempo for mexendo no jogo 
-		GameCharacter.CharacterSuppor(currentRoom, sf);
-		GameCharacter.CharacterSuppor(currentRoom, bf);
-	}
+        int t = ImageGUI.getInstance().getTicks();
+        while (lastTickProcessed < t) {
+            processTick();
+        }
+        ImageGUI.getInstance().update();
+        
+        if(!isGameOver)
+            ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + " | Time: " + realTime() + " | Moves: " + moves); 
+        else
+            ImageGUI.getInstance().setStatusMessage("Game Over! Check top 5. (R to restart)");
+    }
 
-	public String realTime() { // trata de converter o realTime de segundos para min e segundos
-		Time realTimeLast = Time.convert(realTime);
-		return realTimeLast.toString();
-	}
+    private void processTick() {
+        lastTickProcessed++;
+        realTime++; 
+        GameObject.GravityMove(currentRoom); 
+        GameCharacter.CharacterSuppor(currentRoom, sf);
+        GameCharacter.CharacterSuppor(currentRoom, bf);
+    }
 
-	public void updateGUI() {
-		if(currentRoom != null) {
-			ImageGUI.getInstance().clearImages();
-			ImageGUI.getInstance().addImages(currentRoom.getObjects());
-		}
-	}
+    public String realTime() { 
+        Time realTimeLast = Time.convert(realTime);
+        return realTimeLast.toString();
+    }
 
-	private void updateScoresDisplay() {
-		scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore()));
-		List<String> scoreStrings = new ArrayList<>();
-		
-		for (Score s : scores) {
-			scoreStrings.add(s.toString()); 
-		}
-		
-		ImageGUI.getInstance().setScoreEntries(scoreStrings);
-	}
+    public void updateGUI() {
+        if(currentRoom != null) {
+            ImageGUI.getInstance().clearImages();
+            ImageGUI.getInstance().addImages(currentRoom.getObjects());
+        }
+    }
 
-	public int getPlayedLevels(){
-		return playedLevels;
-	}
+    private void updateScoresDisplay() {
+        scores.sort(null); 
+        
+        List<String> scoreStrings = new ArrayList<>();
+        for (Score s : scores) {
+            scoreStrings.add(s.toString()); 
+        }
+        
+        ImageGUI.getInstance().setScoreEntries(scoreStrings);
+    }
 
-	public void nextLevel(){
-		playedLevels++;
-		if(playedLevels < rooms.size()){
-			resetLevel();
-		}
-		else{
-			processNewScore();
-		}
-	}
+    public int getPlayedLevels(){
+        return playedLevels;
+    }
 
-	public void resetLevel(){
+    public void nextLevel(){
+        playedLevels++;
+        if(playedLevels < rooms.size()){
+            resetLevel();
+        }
+        else{
+            processNewScore();
+        }
+    }
 
-		if (isGameOver) {
-			playedLevels = 0;
-			int currentGuiTicks = ImageGUI.getInstance().getTicks(); 
-			lastTickProcessed = currentGuiTicks;
-			gameStartTimeTicks = currentGuiTicks;
-			realTime = 0;
-			isGameOver = false;
-			sf.setDeadState(false);
-			bf.setDeadState(false);
-		}
+    public void resetLevel(){
 
-		currentRoom = rooms.get("room" + playedLevels + ".txt");
-		ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + ": Good luck!" + "Temp: " + realTime());
-		onePlayer = false;
-		playingFish = true;
-		setupFishesForCurrentRoom();
-		currentRoom.resetAll();			//reseta todos os objetos moviveis
-		updateGUI();
-	}
+        if (isGameOver) {
+            playedLevels = 0;
+            int currentGuiTicks = ImageGUI.getInstance().getTicks(); 
+            lastTickProcessed = currentGuiTicks;
+            gameStartTimeTicks = currentGuiTicks;
+            realTime = 0;
+            isGameOver = false;
+            moves = 0;
+            
+            sf.setDeadState(false);
+            bf.setDeadState(false);
+        }
 
-	private void setupFishesForCurrentRoom() {		// se possivel tentar colocar o colocar os peixes ao dar reset juntamente com o resetAll
-		sf.setRoom(currentRoom);
-		bf.setRoom(currentRoom);
+        currentRoom = rooms.get("room" + playedLevels + ".txt");
+        ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + " | Time: " + realTime() + " | Moves: " + moves);
+        onePlayer = false;
+        playingFish = true;
+        setupFishesForCurrentRoom();
+        currentRoom.resetAll();        
+        updateGUI();
+    }
 
-		sf.setPosition(currentRoom.getSmallFishStartingPosition());
-		bf.setPosition(currentRoom.getBigFishStartingPosition());
+    private void setupFishesForCurrentRoom() {      
+        sf.setRoom(currentRoom);
+        bf.setRoom(currentRoom);
 
-		sf.setDirection(LEFT);
-		bf.setDirection(LEFT);
+        sf.setPosition(currentRoom.getSmallFishStartingPosition());
+        bf.setPosition(currentRoom.getBigFishStartingPosition());
 
-		if(initialized){
-			currentRoom.addObject(sf);
-			currentRoom.addObject(bf);
-			initialized = false;
-		}
+        sf.setDirection(LEFT);
+        bf.setDirection(LEFT);
 
-		if(!currentRoom.getObjects().contains(SmallFish.getInstance()))
-			currentRoom.addObject(sf);
+        if(initialized){
+            currentRoom.addObject(sf);
+            currentRoom.addObject(bf);
+            initialized = false;
+        }
 
-		if(!currentRoom.getObjects().contains(BigFish.getInstance()))
-			currentRoom.addObject(bf);
+        if(!currentRoom.getObjects().contains(SmallFish.getInstance()))
+            currentRoom.addObject(sf);
 
-		sf.resetWin();
-		bf.resetWin();
+        if(!currentRoom.getObjects().contains(BigFish.getInstance()))
+            currentRoom.addObject(bf);
 
-	}
+        sf.resetWin();
+        bf.resetWin();
 
-	private void saveScores() {
-		scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore()));
-		
-		while (scores.size() > 10) {
-			scores.remove(10);
-		}
+    }
 
-		try {
-			PrintWriter writer = new PrintWriter(new File(SCORES_FILE));
-			
-			for (Score s : scores) {
-				writer.println(s.getName() + "," + s.getScore());
-			}
-			writer.close();
-			
-		} catch (IOException e) {
-			System.err.println("Erro ao guardar pontuações: " + e.getMessage());
-		}
-	}
-	
-	private void processNewScore() {
+    private void saveScores() {
+        scores.sort(null);
+        
+        while (scores.size() > 10) {
+            scores.remove(10);
+        }
+
+        try {
+            PrintWriter writer = new PrintWriter(new File(SCORES_FILE));
+            
+            for (Score s : scores) {
+                writer.println(s.getName() + "," + s.getScore() + "," + s.getMoves());
+            }
+            writer.close();
+            
+        } catch (IOException e) {
+            System.err.println("Erro ao guardar pontuações: " + e.getMessage());
+        }
+    }
+    
+    private void processNewScore() {
         if(isGameOver)
             return;
         
         isGameOver = true;
         int finalTimeInTicks = lastTickProcessed - gameStartTimeTicks;
+        int finalMoves = this.moves;
         
-        String message = "Congratulations! You finished the game!" + "\n\nInsert your name here:";
+        String message = "Congratulations! You finished!" + "\n\nInsert your name:";
         String title = "Game Finished";
         
         String playerName = ImageGUI.getInstance().showInputDialog(title, message);
@@ -293,17 +311,17 @@ public class GameEngine implements Observer {
         }
 
         if (existingScore != null) {
-            int response = javax.swing.JOptionPane.showConfirmDialog(null, "The player " + cleanName + " is already on the high score list. Do you want to replace the current score?", "Duplicate Name", javax.swing.JOptionPane.YES_NO_OPTION);
+            int response = javax.swing.JOptionPane.showConfirmDialog(null, "Player " + cleanName + " exists. Replace score?", "Duplicate Name", javax.swing.JOptionPane.YES_NO_OPTION);
 
             if (response == javax.swing.JOptionPane.YES_OPTION) {
                 scores.remove(existingScore);
-                scores.add(new Score(cleanName, finalTimeInTicks));
+                scores.add(new Score(cleanName, finalTimeInTicks, finalMoves));
                 saveScores(); 
                 updateScoresDisplay();
             }
             
         } else {
-            scores.add(new Score(cleanName, finalTimeInTicks));
+            scores.add(new Score(cleanName, finalTimeInTicks, finalMoves));
             saveScores();
             updateScoresDisplay();
         }

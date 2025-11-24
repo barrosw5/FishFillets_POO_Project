@@ -5,7 +5,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Bomb extends LightObject {
+public class Bomb extends LightObject implements Interactable{
 
 	public Bomb(Room room) {
 		super(room);
@@ -61,6 +61,24 @@ public class Bomb extends LightObject {
 		}
 		
 
+	}
+
+	@Override
+	public boolean interagirPeixe(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+		if ( BombPushBy(fish, from, to, dir)) {
+			pushObject(this, from, to);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean BombPushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+		GameObject obj = findObject(to, fish.getRoom());
+
+		if ( obj instanceof NonMovableObject || obj instanceof MovableObject || obj instanceof GameCharacter) {
+			return false;
+		}
+		return true;
 	}
 
 }

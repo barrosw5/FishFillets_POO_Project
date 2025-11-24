@@ -1,8 +1,10 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
+import pt.iscte.poo.utils.Point2D;
+import pt.iscte.poo.utils.Vector2D;
 
-public class Trap extends NonMovableObject implements KillBigFish, SmallFishCanPass{
+public class Trap extends NonMovableObject implements Interactable {
 
 	public Trap(Room room) {
 		super(room);
@@ -16,6 +18,15 @@ public class Trap extends NonMovableObject implements KillBigFish, SmallFishCanP
 	@Override
 	public int getLayer() {
 		return 1;
+	}
+
+	@Override
+	public boolean interagirPeixe(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+		if ( fish instanceof SmallFish) {
+			return true;
+		}
+		removeObject(fish, fish.getRoom());
+		return false;
 	}	
 
 }

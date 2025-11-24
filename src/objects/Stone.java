@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Stone extends HeavyObject {
+public class Stone extends HeavyObject implements Interactable{
 
 	public Stone(Room room) {
 		super(room);
@@ -58,6 +58,24 @@ public class Stone extends HeavyObject {
         }
 	}
 
+	@Override
+	public boolean interagirPeixe(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+		if ( StonePushBy(fish, from, to, dir)) {
+			pushObject(this, from, to);
+			return true;
+		}
+		
+		return false;
+	}
+
+	public boolean StonePushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir ) {
+		GameObject obj = findObject(to, fish.getRoom()) ;
+
+		if ((obj instanceof MovableObject || obj instanceof NonMovableObject || obj instanceof GameCharacter) ) {
+			return false;
+		}
+		return true;
+	}
 	
 
 }

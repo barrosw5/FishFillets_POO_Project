@@ -6,7 +6,6 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public class Bomb extends LightObject {
-	private boolean controlDown = false; // Variável para controlo do Down, verifica se a bomba pode explodir
 
 	public Bomb(Room room) {
 		super(room);

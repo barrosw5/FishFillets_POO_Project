@@ -15,7 +15,7 @@ public abstract class MovableObject extends GameObject implements Gravity{
         isMovable = !isMovable;
     }
 
-     @Override
+    @Override
     public boolean canFall() {
         Point2D pos = this.getPosition();
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
@@ -37,8 +37,9 @@ public abstract class MovableObject extends GameObject implements Gravity{
             controlDown = true;
         }
 
-        if ( controlDown = true && !canFall()) {
+        else if (controlDown && !canFall()) {
             specialAbillity();
+            controlDown = false;
         }
     }
 

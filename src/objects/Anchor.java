@@ -7,7 +7,6 @@ import pt.iscte.poo.utils.Vector2D;
 public class Anchor extends HeavyObject {
 
     private boolean MovedOnce = false;
-    private boolean controlDown = false; 
 
     public Anchor(Room room) {
         super(room);

@@ -34,6 +34,10 @@ public class Cup extends LightObject {
 		return true;
 	}
 
+	@Override
+	public void specialAbillity() {
+	}
+
 	
     
 }

@@ -5,7 +5,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Bomb extends LightObject implements Gravity{
+public class Bomb extends LightObject {
 	private boolean controlDown = false; // Variável para controlo do Down, verifica se a bomba pode explodir
 
 	public Bomb(Room room) {
@@ -32,40 +32,6 @@ public class Bomb extends LightObject implements Gravity{
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public boolean canFall() {
-		Point2D pos = this.getPosition();
-        Point2D below = getBelow(pos);
-
-        if (below.getY() >= 10) { 
-            return false;
-        }
-
-        for (GameObject obj : this.getRoom().getObjects()) {
-            if (obj.getPosition().equals(below) && !(obj instanceof Water)) {
-                return false;
-            }
-        }
-	
-        return true;
-	}
-
-	@Override
-	public void fall() { // Acho que finalmente conseguir por a bomba explodir como deve ser 
-		
-		if (canFall()){ // Verifica se pode descer ( ou começar a descida), se sim faz todo o movimento e declara a varáivel como true. 
-			Point2D pos = this.getPosition();
-			Point2D below = getBelow(pos);
-			pushObject(this, pos, below);
-			controlDown = true;
-		}
-
-		else if ( controlDown == true && ! canFall()) { // Só quando o movimento de descida foi feito e terminado, daí a variavel de controlo e o !CandDown a bomba explode
-			specialAbillity();
-			controlDown = false;
-		}
 	}
 
 	@Override

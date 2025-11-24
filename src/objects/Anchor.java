@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Anchor extends HeavyObject implements Gravity {
+public class Anchor extends HeavyObject {
 
     private boolean MovedOnce = false;
     private boolean controlDown = false; 
@@ -50,33 +50,6 @@ public class Anchor extends HeavyObject implements Gravity {
         }
         MovedOnce = true;
         return true;
-    }
-
-    @Override
-    public boolean canFall() {
-        Point2D pos = this.getPosition();
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
-
-        for (GameObject obj : this.getRoom().getObjects()) {
-            if (obj.getPosition().equals(below) && !(obj instanceof Water)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void fall() {
-        if (canFall()) {
-            Point2D pos = this.getPosition();
-            Point2D below = getBelow(pos);
-            pushObject(this, pos, below);
-            controlDown = true;
-        }
-
-        if ( controlDown = true && !canFall()) {
-            specialAbillity();
-        }
     }
 
     @Override

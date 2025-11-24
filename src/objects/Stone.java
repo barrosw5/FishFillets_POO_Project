@@ -33,6 +33,31 @@ public class Stone extends HeavyObject {
 		return true;
 	}
 
+	@Override
+	public void specialAbillity() {
+		Point2D currenbtlyPos = this.getPosition();
+        Point2D belowPos = getBelow(currenbtlyPos);
+
+        Point2D [] area = {belowPos};
+
+        for ( Point2D pos: area) {
+            GameObject remove = GameObject.findObject(pos, getRoom());
+
+            if ( remove instanceof Water) {
+                continue;
+            }
+
+            if ( remove instanceof SmallFish) {
+                this.getRoom().removeObject(remove);
+                ((SmallFish) remove).setDeadState(true);
+            }
+
+            if ( remove instanceof Trunk) {
+                this.getRoom().removeObject(remove);
+            }
+        }
+	}
+
 	
 
 }

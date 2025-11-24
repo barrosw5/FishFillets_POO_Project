@@ -37,7 +37,7 @@ public abstract class GameCharacter extends GameObject{
 
 		if (fishCanMove(startPosition, dir)) {
 
-			setPosition(startPosition.plus(dir));		
+			setPosition(startPosition.plus(dir));
 			Point2D finalPosition = startPosition.plus(dir);
 
 			if (finalPosition.getX() < 0 || finalPosition.getX() > 9 ||
@@ -54,6 +54,10 @@ public abstract class GameCharacter extends GameObject{
 
 	public Direction getDirection(){
 		return direction;
+	}
+
+	public void resetDirection(){
+		this.direction = LEFT;
 	}
 
 	public boolean hasWon(){

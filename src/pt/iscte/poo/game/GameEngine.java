@@ -224,6 +224,9 @@ public class GameEngine implements Observer {
 		sf.setPosition(currentRoom.getSmallFishStartingPosition());
 		bf.setPosition(currentRoom.getBigFishStartingPosition());
 
+		sf.resetDirection();
+		bf.resetDirection();
+
 		if(initialized){
 			currentRoom.addObject(sf);
 			currentRoom.addObject(bf);

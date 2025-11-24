@@ -57,10 +57,6 @@ public class Anchor extends HeavyObject implements Gravity {
         Point2D pos = this.getPosition();
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
 
-        if (below.getY() >= 10) { 
-            return false;
-        }
-
         for (GameObject obj : this.getRoom().getObjects()) {
             if (obj.getPosition().equals(below) && !(obj instanceof Water)) {
                 return false;

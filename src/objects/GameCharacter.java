@@ -56,8 +56,8 @@ public abstract class GameCharacter extends GameObject{
 		return direction;
 	}
 
-	public void resetDirection(){
-		this.direction = LEFT;
+	public void setDirection(Direction d){
+		this.direction = d;
 	}
 
 	public boolean hasWon(){

@@ -1,5 +1,7 @@
 package pt.iscte.poo.game;
 
+import static pt.iscte.poo.utils.Direction.LEFT;
+
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -150,7 +152,7 @@ public class GameEngine implements Observer {
 			ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 5. (R for restart)");
 	}
 
-	private void processTick() {		
+	private void processTick() {
 		lastTickProcessed++;
 		realTime++; // um tick = 1 segundo e vai acompanhando o tick do jogo 
 		GameObject.GravityMove(currentRoom); // Esta é a função que faz acontecer o movimento da Gravidade, ela é chamada sempre que o tempo for mexendo no jogo 
@@ -224,8 +226,8 @@ public class GameEngine implements Observer {
 		sf.setPosition(currentRoom.getSmallFishStartingPosition());
 		bf.setPosition(currentRoom.getBigFishStartingPosition());
 
-		sf.resetDirection();
-		bf.resetDirection();
+		sf.setDirection(LEFT);
+		bf.setDirection(LEFT);
 
 		if(initialized){
 			currentRoom.addObject(sf);

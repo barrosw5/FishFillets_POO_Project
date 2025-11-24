@@ -18,4 +18,6 @@ public class Trunk extends NonMovableObject {
 		return 1;
 	}
 
+	
+
 }

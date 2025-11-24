@@ -2,7 +2,7 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class HoledWall extends NonMovableObject implements FishCanPass {
+public class HoledWall extends NonMovableObject implements SmallFishCanPass {
 
 	public HoledWall(Room room) {
 		super(room);

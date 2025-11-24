@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -263,25 +262,47 @@ public class GameEngine implements Observer {
 	}
 	
 	private void processNewScore() {
-		if(isGameOver)
-			return;
-		isGameOver = true;
-		int finalTimeInTicks = lastTickProcessed - gameStartTimeTicks;
-		
-		String message = "Congratulations! You finished the game!" + "\n\nInsert your name here:";
-		String title = "Game Finished";
-		String playerName = ImageGUI.getInstance().showInputDialog(title, message);
+        if(isGameOver)
+            return;
+        
+        isGameOver = true;
+        int finalTimeInTicks = lastTickProcessed - gameStartTimeTicks;
+        
+        String message = "Congratulations! You finished the game!" + "\n\nInsert your name here:";
+        String title = "Game Finished";
+        
+        String playerName = ImageGUI.getInstance().showInputDialog(title, message);
 
-		if (playerName == null || playerName.trim().isEmpty()) {
-			playerName = "Unknown"; 
-		}
+        if (playerName == null || playerName.trim().isEmpty()) {
+            playerName = "Unknown"; 
+        }
+        
+        String cleanName = playerName.trim();
 
-		scores.add(new Score(playerName.trim(), finalTimeInTicks));
-		
-		saveScores();
-		
-		updateScoresDisplay();
-		
-		ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 5. (R for restart)");
-	}
+        Score existingScore = null;
+        for (Score s : scores) {
+            if (s.getName().equals(cleanName)) {
+                existingScore = s;
+                break;
+            }
+        }
+
+        if (existingScore != null) {
+            int response = javax.swing.JOptionPane.showConfirmDialog(null, "The player " + cleanName + " is already on the high score list. Do you want to replace the current score?", "Duplicate Name", javax.swing.JOptionPane.YES_NO_OPTION);
+
+            if (response == javax.swing.JOptionPane.YES_OPTION) {
+                scores.remove(existingScore);
+                scores.add(new Score(cleanName, finalTimeInTicks));
+                saveScores(); 
+                updateScoresDisplay();
+            }
+            
+        } else {
+            scores.add(new Score(cleanName, finalTimeInTicks));
+            saveScores();
+            updateScoresDisplay();
+        }
+        
+        ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 5. (R for restart)");
+    }
 }

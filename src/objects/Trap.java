@@ -2,7 +2,7 @@ package objects;
 
 import pt.iscte.poo.game.Room;
 
-public class Trap extends NonMovableObject implements KillBigFish, FishCanPass{
+public class Trap extends NonMovableObject implements KillBigFish, SmallFishCanPass{
 
 	public Trap(Room room) {
 		super(room);

@@ -65,7 +65,7 @@ public class SmallFish extends GameCharacter {
 				}
 
 				if ((obj instanceof MovableObject || obj instanceof NonMovableObject || obj instanceof GameCharacter)		// VERIFICAR LOGICA
-						&& !( obj instanceof FishCanPass)) {
+						&& !( obj instanceof SmallFishCanPass)) {
 					return false;
 				}
 			}

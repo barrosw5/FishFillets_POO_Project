@@ -64,10 +64,15 @@ public class SmallFish extends GameCharacter {
 					return true;
 				}
 
+				if (obj instanceof KillAllFishes) {
+					dead(sf, this);
+				}
+
 				if ((obj instanceof MovableObject || obj instanceof NonMovableObject || obj instanceof GameCharacter)		// VERIFICAR LOGICA
 						&& !( obj instanceof SmallFishCanPass)) {
 					return false;
 				}
+
 			}
 		}
 

@@ -157,10 +157,10 @@ public class Room {
 							holedWall.setPosition(new Point2D(j, i));
 							r.addObject(holedWall);
 							break;
-						case 'P':
-							GameObject pikachu = new Pikachu(r);
-							pikachu.setPosition(new Point2D(j, i));
-							r.addObject(pikachu);
+						case 'J':
+							GameObject juan = new Juan(r);
+							juan.setPosition(new Point2D(j, i));
+							r.addObject(juan);
 							break;
 						default:
 							System.err.println("Não era suposto chegar aqui nunca");

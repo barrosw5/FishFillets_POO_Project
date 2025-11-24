@@ -85,7 +85,6 @@ public abstract class GameCharacter extends GameObject{
 	public void dead(GameObject remove, GameObject cla){ // Criada a função que vai, basicamente, matar os pexies, removendo-os do Room
 		hasDied = true;
 		cla.getRoom().removeObject(remove);
-		
 	}
 
 	public static void CharacterSuppor( Room r, GameCharacter fish) {

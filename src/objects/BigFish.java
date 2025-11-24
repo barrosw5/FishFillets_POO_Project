@@ -83,7 +83,7 @@ public class BigFish extends GameCharacter {
 				
 				}
 
-				if ( obj instanceof KillBigFish ) { // adicionado a função que mata o peixe grande quando este toca na Trap 
+				if ( obj instanceof KillBigFish  || obj instanceof KillAllFishes) { // adicionado a função que mata o peixe grande quando este toca na Trap 
 					dead(bf, this);
 				}
 

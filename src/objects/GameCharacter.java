@@ -1,12 +1,17 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
+import pt.iscte.poo.utils.Direction;
+import static pt.iscte.poo.utils.Direction.DOWN;
+import static pt.iscte.poo.utils.Direction.LEFT;
+import static pt.iscte.poo.utils.Direction.RIGHT;
+import static pt.iscte.poo.utils.Direction.UP;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public abstract class GameCharacter extends GameObject{
 	private static final boolean isMovel = true;
-	private boolean direction = true; 	// true é esquerda, false é direita
+	private Direction direction = LEFT; 
 	private boolean hasWon = false;		// tentar fazer com que o peixe fora do ecra nao seja mais jogavel
 	private boolean hasDied = false;
 
@@ -17,12 +22,19 @@ public abstract class GameCharacter extends GameObject{
 	public void move(Vector2D dir) { 
 		Point2D startPosition = getPosition();
 		if (fishCanMove(startPosition, dir)) {
-			if (dir.getX() > 0 && direction == true) {
-                direction = false; 	// mover png para a direita
+			if (dir == LEFT.asVector()) {
+                direction = LEFT; 	// mover png para a esquerda
             } 
-			else if (dir.getX() < 0 && direction == false) {
-                direction = true;  	// mover png para a esquerda
+			else if (dir == RIGHT.asVector()) {
+                direction = RIGHT;  	// mover png para a direita
             }
+			else if (dir == UP.asVector()) {
+                direction = UP;  	// mover png para cima
+            }
+			else if (dir == DOWN.asVector()) {
+                direction = DOWN;  	// mover png para baixo
+            }
+
 			setPosition(startPosition.plus(dir));		
 			Point2D finalPosition = startPosition.plus(dir);
 
@@ -38,7 +50,7 @@ public abstract class GameCharacter extends GameObject{
 		}
 	}
 
-	public boolean getDirection(){
+	public Direction getDirection(){
 		return direction;
 	}
 

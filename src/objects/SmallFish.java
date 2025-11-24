@@ -3,6 +3,10 @@ package objects;
 import java.util.ArrayList;
 import java.util.List;
 import pt.iscte.poo.game.Room;
+import static pt.iscte.poo.utils.Direction.DOWN;
+import static pt.iscte.poo.utils.Direction.LEFT;
+import static pt.iscte.poo.utils.Direction.RIGHT;
+import static pt.iscte.poo.utils.Direction.UP;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
@@ -11,6 +15,8 @@ public class SmallFish extends GameCharacter {
 	private static SmallFish sf = new SmallFish(null);
 	private static final String sfNameLeft = "smallFishLeft";
 	private static final String sfNameRight = "smallFishRight";
+	private static final String sfNameUp = "smallFishUp";
+	private static final String sfNameDown = "smallFishDown";
 	
 	private SmallFish(Room room) {
 		super(room);
@@ -22,7 +28,15 @@ public class SmallFish extends GameCharacter {
 	
 	@Override
 	public String getName() {
-		return getDirection() ? sfNameLeft : sfNameRight;
+		if(getDirection() == LEFT)
+			return sfNameLeft;
+		if(getDirection() == RIGHT)
+			return sfNameRight;
+		if(getDirection() == UP)
+			return sfNameUp;
+		if(getDirection() == DOWN)
+			return sfNameDown;
+		return null;
 	}
 
 	@Override

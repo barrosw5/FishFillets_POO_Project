@@ -21,19 +21,21 @@ public abstract class GameCharacter extends GameObject{
 	
 	public void move(Vector2D dir) { 
 		Point2D startPosition = getPosition();
+
+		if (dir == LEFT.asVector()) {
+			direction = LEFT; 	// mover png para a esquerda
+		} 
+		else if (dir == RIGHT.asVector()) {
+			direction = RIGHT;  // mover png para a direita
+		}
+		else if (dir == UP.asVector()) {
+			direction = UP;  	// mover png para cima
+		}
+		else if (dir == DOWN.asVector()) {
+			direction = DOWN;  	// mover png para baixo
+		}
+
 		if (fishCanMove(startPosition, dir)) {
-			if (dir == LEFT.asVector()) {
-                direction = LEFT; 	// mover png para a esquerda
-            } 
-			else if (dir == RIGHT.asVector()) {
-                direction = RIGHT;  	// mover png para a direita
-            }
-			else if (dir == UP.asVector()) {
-                direction = UP;  	// mover png para cima
-            }
-			else if (dir == DOWN.asVector()) {
-                direction = DOWN;  	// mover png para baixo
-            }
 
 			setPosition(startPosition.plus(dir));		
 			Point2D finalPosition = startPosition.plus(dir);

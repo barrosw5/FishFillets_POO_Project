@@ -24,11 +24,11 @@ public class Bomb extends LightObject implements Interactable{
 	@Override
 	public void specialAbillity() {
 
-		Point2D currentlyPos = this.getPosition();
-		List<Point2D> nearObjects = getAdjacentPositions(currentlyPos);
-		nearObjects.add(currentlyPos);
+		Point2D currentPos = this.getPosition();
+		List<Point2D> nearObjects = getAdjacentPositions(currentPos);
+		nearObjects.add(currentPos);
 
-		Point2D beloPos = getBelow(currentlyPos);
+		Point2D beloPos = getBelow(currentPos);
 
 		GameObject below = findObject(beloPos, getRoom());
 
@@ -37,15 +37,16 @@ public class Bomb extends LightObject implements Interactable{
 		}
 
 		for (Point2D pos: nearObjects) {
-			GameObject remove = findObject(pos, this.getRoom());
+			GameObject target = findObject(pos, this.getRoom());
 
-			if (remove instanceof GameCharacter) {
-				((GameCharacter) remove).dead(remove);
+			if (target instanceof GameCharacter) {
+				((GameCharacter) target).dead(target);
 			}
 
-			if (remove != null) {
-				this.getRoom().removeObject(remove);
+			if (target != null) {
+				this.getRoom().removeObject(target);
 			}
+			this.getRoom().addObject(new Explosion(pos, this.getRoom()));
 		}
 		
 

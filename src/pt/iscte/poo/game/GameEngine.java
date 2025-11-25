@@ -159,6 +159,7 @@ public class GameEngine implements Observer {
         while (lastTickProcessed < t) {
             processTick();
         }
+        updateGUI();
         ImageGUI.getInstance().update();
         
         if(!isGameOver)
@@ -169,7 +170,9 @@ public class GameEngine implements Observer {
 
     private void processTick() {
         lastTickProcessed++;
-        realTime++; 
+        realTime++;
+        
+        objects.Explosion.update(currentRoom);  // Apenas esta linha limpa as explosões antigas automaticamente
         GameObject.GravityMove(currentRoom); 
         GameCharacter.CharacterSuppor(currentRoom, sf);
         GameCharacter.CharacterSuppor(currentRoom, bf);

@@ -25,7 +25,7 @@ public class Trap extends NonMovableObject implements Interactable {
 		if ( fish instanceof SmallFish) {
 			return true;
 		}
-		fish.setDeadState(true);
+		fish.dead(fish);
 		fish.getRoom().removeObject(fish);
 		return false;
 	}	

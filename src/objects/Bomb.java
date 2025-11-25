@@ -40,7 +40,7 @@ public class Bomb extends LightObject implements Interactable{
 			GameObject remove = findObject(pos, this.getRoom());
 
 			if (remove instanceof GameCharacter) {
-			((GameCharacter) remove).setDeadState(true);
+				((GameCharacter) remove).dead(remove);
 			}
 
 			if (remove != null) {

@@ -80,14 +80,15 @@ public abstract class GameCharacter extends GameObject{
 		return 2;
 	}
 
-	public void dead(GameObject remove, GameObject cla){ // Criada a função que vai, basicamente, matar os pexies, removendo-os do Room
-		hasDied = true;
-		cla.getRoom().removeObject(remove);
+	public void dead(GameObject remove){ 		// Função de morte ou seja objeto chama isto para matar peixe e deixa sprite de sangue
+		setDeadState(true);
+		remove.getRoom().addObject(new Blood(getPosition(), remove.getRoom()));
+		remove.getRoom().removeObject(remove);
 	}
 
 	public static void CharacterSuppor( Room r, GameCharacter fish) {
 		if ( ! fishSupport(fish)) {
-			fish.dead(fish, fish);
+			fish.dead(fish);
 		}
 	}
 	

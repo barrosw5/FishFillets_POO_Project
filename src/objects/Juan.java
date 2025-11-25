@@ -40,8 +40,7 @@ public class Juan extends LightObject implements Interactable{
 		GameObject obj = findObject(to, fish.getRoom());
 
 		if ( fish instanceof BigFish ) {
-            fish.setDeadState(true);
-			this.getRoom().removeObject(fish);
+            fish.dead(fish);
             return false;
 		}
 

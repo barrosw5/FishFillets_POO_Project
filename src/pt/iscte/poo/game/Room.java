@@ -79,6 +79,7 @@ public class Room {
 			if(!r.equals(SmallFish.getInstance()) && !r.equals(BigFish.getInstance()))
 				r.reset();
 		}
+		objects.removeIf(obj -> obj instanceof Blood);
 	}
 	
 	public static Room readRoom(File f, GameEngine engine) {

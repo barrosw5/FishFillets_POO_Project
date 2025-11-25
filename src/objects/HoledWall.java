@@ -4,7 +4,7 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class HoledWall extends NonMovableObject implements SmallFishCanPass, Interactable {
+public class HoledWall extends NonMovableObject implements Interactable {
 
 	public HoledWall(Room room) {
 		super(room);

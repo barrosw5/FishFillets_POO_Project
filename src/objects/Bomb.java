@@ -75,6 +75,13 @@ public class Bomb extends LightObject implements Interactable{
 	public boolean BombPushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 		GameObject obj = findObject(to, fish.getRoom());
 
+		if ( fish instanceof BigFish ) {
+			if ( obj instanceof Interactable ) {
+				Point2D PlusPos = to.plus(dir);
+				return ((Interactable)obj).interagirPeixe(fish, to, PlusPos, dir);
+			}
+		}
+
 		if ( obj instanceof NonMovableObject || obj instanceof MovableObject || obj instanceof GameCharacter) {
 			return false;
 		}

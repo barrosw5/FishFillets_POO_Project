@@ -25,7 +25,7 @@ public class Cup extends LightObject implements Interactable{
 	}
 
 	@Override
-	public boolean interagirPeixe(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 
 		if ( CupPushBy(fish, from, to, dir)) {
 			pushObject(this, from, to);
@@ -40,7 +40,7 @@ public class Cup extends LightObject implements Interactable{
 		if ( fish instanceof BigFish ) {
 			if ( obj instanceof Interactable ) {
 				Point2D PlusPos = to.plus(dir);
-				return ((Interactable)obj).interagirPeixe(fish, to, PlusPos, dir);
+				return ((Interactable)obj).interactWithFish(fish, to, PlusPos, dir);
 			}
 		}
 

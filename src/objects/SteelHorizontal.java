@@ -21,7 +21,7 @@ public class SteelHorizontal extends NonMovableObject implements Interactable {
 	}
 
 	@Override
-	public boolean interagirPeixe(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 		return false;
 	}
 

@@ -77,7 +77,7 @@ public class Anchor extends HeavyObject implements Interactable {
     }
 
     @Override
-    public boolean interagirPeixe(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+    public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         if ( canPushby(fish, from, to, dir)) {
             pushObject(this, from, to);
             return true;

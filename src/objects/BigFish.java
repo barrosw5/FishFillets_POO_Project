@@ -57,7 +57,7 @@ public class BigFish extends GameCharacter {
 		}
 
 		if ( obj instanceof Interactable) {
-			return ((Interactable) obj).interagirPeixe(this, finalPos, finalObjPos, dir);
+			return ((Interactable) obj).interactWithFish(this, finalPos, finalObjPos, dir);
 		}
 
 		return false;

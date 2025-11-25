@@ -5,7 +5,6 @@ import java.util.List;
 import pt.iscte.poo.game.Room;
 import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Point2D;
-import pt.iscte.poo.utils.Vector2D;
 
 public abstract class GameObject implements ImageTile {
 
@@ -95,10 +94,6 @@ public abstract class GameObject implements ImageTile {
 		obj1.setPosition(to1);
 	}
 
-
-	
-
-
 	public static void GravityMove(Room r) {
 		List<Gravity> gravityObjects = new ArrayList<>(); // Criação de uma lista só para os objetos que contêm a interface gravidade
 
@@ -125,17 +120,6 @@ public abstract class GameObject implements ImageTile {
 
 	public static void removeObject(GameObject obj1, Room r) {
 		r.getObjects().remove(obj1);
-	}
-
-	// ---------------------------------------
-	// Método canMove
-	// ---------------------------------------
-	public boolean canMoveLightObject(Point2D form, Point2D to, Vector2D dir,GameObject cla){
-		return false;
-	}
-
-	public boolean canMoveHeavyObject(Point2D form, Point2D to, Vector2D dir,GameObject cla){
-		return false;
 	}
 
 	@Override

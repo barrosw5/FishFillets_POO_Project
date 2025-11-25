@@ -44,7 +44,6 @@ public abstract class GameCharacter extends GameObject{
 				finalPosition.getY() < 0 || finalPosition.getY() > 9){
 					
 				hasWon = true;
-				// remove peixe da sala
     			getRoom().removeObject(this);
 			}
 			else
@@ -75,7 +74,6 @@ public abstract class GameCharacter extends GameObject{
 	public void resetWin(){
 		hasWon = false;
 	}
-
 
 	@Override
 	public int getLayer() {

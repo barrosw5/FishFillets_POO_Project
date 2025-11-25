@@ -19,13 +19,12 @@ public abstract class MovableObject extends GameObject implements Gravity{
     public boolean canFall() {
         Point2D pos = this.getPosition();
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        GameObject obj = findObject(below, this.getRoom());
 
-        for (GameObject obj : this.getRoom().getObjects()) {
-            if (obj.getPosition().equals(below) && !(obj instanceof Water)) {
-                return false;
-            }
-        }
-        return true;
+        if(obj == null)
+            return true;
+
+        return false;
     }
 
     @Override

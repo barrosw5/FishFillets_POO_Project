@@ -38,13 +38,7 @@ public class SmallFish extends GameCharacter {
 			return sfNameDown;
 		return null;
 	}
-
-	@Override
-	public int getLayer() {
-		return 2;
-	}
-
-
+	
 	@Override  
 	public boolean fishCanMove(Point2D pos, Vector2D dir) {
 		if(hasWon())

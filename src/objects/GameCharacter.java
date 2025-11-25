@@ -89,7 +89,7 @@ public abstract class GameCharacter extends GameObject{
 
 	public static void CharacterSuppor( Room r, GameCharacter fish) {
 		if ( ! fishSupport(fish)) {
-				fish.dead(fish, fish);
+			fish.dead(fish, fish);
 		}
 	}
 	

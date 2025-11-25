@@ -22,18 +22,6 @@ public class Bomb extends LightObject implements Interactable{
 	}
 
 	@Override
-	public boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
-		for ( GameObject obj1: cla.getRoom().getObjects()) {
-			if ( obj1.getPosition().equals(to)) {
-				if ( (obj1 instanceof NonMovableObject || obj1 instanceof MovableObject || obj1 instanceof GameCharacter)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	@Override
 	public void specialAbillity() {
 
 		Point2D currentlyPos = this.getPosition();

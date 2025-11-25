@@ -1,8 +1,6 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
-import pt.iscte.poo.utils.Point2D;
-import pt.iscte.poo.utils.Vector2D;
 
 // Tive de criar duas novas classes abstratas porque os peixes têm movimentos distintos para o tipo de objetos moveis
 // O peixe pequeno só mexe nos objetos leves 
@@ -18,9 +16,5 @@ public abstract class LightObject extends MovableObject{
     @Override
     public boolean isLightObject() {
         return true;
-    }
-    
-    // para saber se um peixe pode mover objetos leves
-    public abstract boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla);
-    
+    }    
 }

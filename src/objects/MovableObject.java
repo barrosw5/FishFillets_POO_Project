@@ -41,7 +41,4 @@ public abstract class MovableObject extends GameObject implements Gravity{
             controlDown = false;
         }
     }
-
-
-    public abstract boolean isLightObject();
 }

@@ -21,19 +21,6 @@ public class Stone extends HeavyObject implements Interactable{
 	}
 
 	@Override
-	public boolean canMoveHeavyObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
-			for (GameObject obj1 : cla.getRoom().getObjects()) {
-			if (obj1.getPosition().equals(to)) {
-				if ((obj1 instanceof MovableObject || obj1 instanceof NonMovableObject || obj1 instanceof GameCharacter)) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	@Override
 	public void specialAbillity() {
 		Point2D currenbtlyPos = this.getPosition();
         Point2D belowPos = getBelow(currenbtlyPos);

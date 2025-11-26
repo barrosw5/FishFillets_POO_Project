@@ -76,21 +76,16 @@ public class BigFish extends GameCharacter {
 		}
 
 		int countHeavy = 0;
-		int counLight = 0;
 
 		for ( Point2D objPos: posUp) {
 			GameObject obj = findObject(objPos, getRoom());
 
-			if ( !( obj instanceof MovableObject) && countHeavy == 0 && counLight == 0) {
-				return true;
+			if (!(obj instanceof MovableObject)) {
+				break;
 			}
 
 			if ( obj instanceof HeavyObject) {
 				countHeavy ++;
-			}
-
-			if ( obj instanceof LightObject) {
-				counLight ++;
 			}
 		}
 		

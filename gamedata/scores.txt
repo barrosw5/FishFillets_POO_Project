@@ -1,5 +1,6 @@
 juan,44,199
 barros1,50,141
+Nunes,52,160
 yay,54,240
 Coelho,55,180
 Pedro,60,272

@@ -89,11 +89,6 @@ public abstract class GameObject implements ImageTile {
 		obj.setPosition(to);
 	}
 
-	public void pushTwoObject(GameObject obj1, GameObject obj2, Point2D from, Point2D to1, Point2D to2) {
-		obj2.setPosition(to2);
-		obj1.setPosition(to1);
-	}
-
 	public static void gravityMove(Room r) {
 		List<Gravity> gravityObjects = new ArrayList<>(); // Criação de uma lista só para os objetos que contêm a interface gravidade
 
@@ -102,7 +97,6 @@ public abstract class GameObject implements ImageTile {
 				gravityObjects.add((Gravity) obj); // Percorro toda a room e os objetos contidos nela e os que forem "gravidade" adiciono à lista criada.
 			} 
 		}
-	
 		for ( Gravity g: gravityObjects) {
 			g.fall();
 		}
@@ -118,13 +112,9 @@ public abstract class GameObject implements ImageTile {
 		return null;
 	}
 
-	public static void removeObject(GameObject obj1, Room r) {
-		r.getObjects().remove(obj1);
-	}
-
 	@Override
 	public String toString(){
 		return "| " + this.getName() + " in position: " + this.getPosition() + " |";
 	}
-
+ 
 }

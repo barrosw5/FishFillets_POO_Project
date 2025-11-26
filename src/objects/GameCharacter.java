@@ -93,10 +93,9 @@ public abstract class GameCharacter extends GameObject{
 	}
 
 	public abstract boolean fishCanMove(Point2D pos, Vector2D dir);
+	public abstract boolean fishSupport();
 
 	public static boolean fishSupport(GameCharacter fish) {
 		return fish.fishSupport();
 	}
-
-	public abstract boolean fishSupport();
 }

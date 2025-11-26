@@ -35,7 +35,7 @@ public class Stone extends HeavyObject implements Interactable{
             }
 
             if ( remove instanceof SmallFish) {
-                this.getRoom().removeObject(remove);
+               // this.getRoom().removeObject(remove);
                 ((SmallFish) remove).dead(remove);
             }
 

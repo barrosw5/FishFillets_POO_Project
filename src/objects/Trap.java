@@ -26,7 +26,7 @@ public class Trap extends NonMovableObject implements Interactable {
 			return true;
 		}
 		fish.dead(fish);
-		fish.getRoom().removeObject(fish);
+		//fish.getRoom().removeObject(fish);
 		return false;
 	}	
 

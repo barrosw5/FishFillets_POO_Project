@@ -49,6 +49,6 @@ public class Juan extends LightObject implements Interactable{
 		}
 		return true;
 	}
-    //testar polimorfism a partir daqui
+
     
 }

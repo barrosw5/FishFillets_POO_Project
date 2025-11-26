@@ -8,123 +8,131 @@ import pt.iscte.poo.utils.Point2D;
 
 public abstract class GameObject implements ImageTile {
 
-	private Point2D position;
-	private Point2D startingPosition;
-	private Room room;
-	private boolean isMovable;
+    private Point2D position;
+    private Point2D startingPosition;
+    private Room room;
+    private boolean isMovable;
 
-	public GameObject(Room room, boolean isMovel) {
-		this.room = room;
-		this.isMovable = isMovel;
-	}
+    public GameObject(Room room, boolean isMovable) {
+        this.room = room;
+        this.isMovable = isMovable;
+    }
 
-	public GameObject(Point2D position, Room room) {
-		this.position = position;
-		this.room = room;
-	}
-
-	public void setPosition(int i, int j) {
-		position = new Point2D(i, j);
-	}
-
-	public void setPosition(Point2D position) {
-		this.position = position;
-
-		if (getStartingPosition() == null) {
-            setStartingPosition(position);
+    public GameObject(Point2D position, Room room) {
+        if (position == null) {
+            throw new IllegalArgumentException("A posição inicial não pode ser nula.");
         }
-	}
-
-	@Override
-	public Point2D getPosition() {
-		return position;
-	}
-
-	public Point2D getBelow(Point2D pos){
-		return new Point2D(pos.getX(), pos.getY() + 1);
-	}
-
-	public List<Point2D> getAdjacentPositions(Point2D pos) {
-		List<Point2D> adj = new ArrayList<>();
-
-		adj.add(new Point2D(pos.getX() + 1, pos.getY())); // direita
-		adj.add(new Point2D(pos.getX() - 1, pos.getY())); // esquerda
-		adj.add(new Point2D(pos.getX(), pos.getY() - 1)); // cima
-		adj.add(getBelow(pos));                           // baixo
-
-		return adj;
-	}
-
-	public Point2D getStartingPosition(){
-        return startingPosition;
+        this.position = position;
+        this.room = room;
     }
 
-    public void setStartingPosition(Point2D sp){
-        startingPosition = sp;
+    // --- funçoes movimento ---
+
+    @Override
+    public Point2D getPosition() { 
+        return position; 
     }
 
-	public Room getRoom() {
-		return room;
-	}
+    public void setPosition(int x, int y) { 
+        setPosition(new Point2D(x, y)); 
+    }
 
-	public void setRoom(Room room) {
-		this.room = room;
-	}
+    public void setPosition(Point2D position) {
+        if (position == null) {
+            throw new IllegalArgumentException("Tentativa de definir uma posição nula no objeto " + getName());
+        }
+        this.position = position;
+        
+        if (startingPosition == null) {
+            startingPosition = position;
+        }
+    }
 
-	public boolean getIsMovel() {
-		return isMovable;
-	}
+    public Point2D getStartingPosition() { return startingPosition; }
+    
+    public void setStartingPosition(Point2D sp) { 
+        if (sp == null) throw new IllegalArgumentException("StartingPosition não pode ser nula.");
+        startingPosition = sp; 
+    }
 
-	public void reset() {
-        if (getStartingPosition() != null) {
+    public Point2D getBelow(Point2D pos) {
+        if (pos == null) throw new IllegalArgumentException("Não é possível calcular 'abaixo' de uma posição nula.");
+        return new Point2D(pos.getX(), pos.getY() + 1);
+    }
+
+    public List<Point2D> getAdjacentPositions(Point2D pos) {
+        if (pos == null) throw new IllegalArgumentException("Não é possível calcular adjacências de uma posição nula.");
+        
+        List<Point2D> adj = new ArrayList<>();
+        adj.add(new Point2D(pos.getX() + 1, pos.getY())); // Direita
+        adj.add(new Point2D(pos.getX() - 1, pos.getY())); // Esquerda
+        adj.add(new Point2D(pos.getX(), pos.getY() - 1)); // Cima
+        adj.add(getBelow(pos));                           // Baixo
+        return adj;
+    }
+
+    // --- interaçao com a Sala ---
+
+    public Room getRoom() { return room; }
+    
+    public void setRoom(Room room) { 
+        this.room = room; 
+    }
+    
+    public boolean getIsMovel() { return isMovable; }
+
+    public void reset() {
+        if (startingPosition != null) {
             Room r = getRoom();
-            if (!r.getObjects().contains(this)) {
+            if (r != null && !r.getObjects().contains(this)) {
                 r.addObject(this);
             }
-            setPosition(getStartingPosition());
+            setPosition(startingPosition);
         }
     }
 
-	public void pushObject(GameObject obj, Point2D from, Point2D to) {
-		obj.setPosition(to);
-	}
+    public void pushObject(GameObject obj, Point2D from, Point2D to) {
+        if (obj == null) throw new IllegalArgumentException("Não é possível empurrar um objeto nulo.");
+        obj.setPosition(to);
+    }
 
-	public void pushTwoObject(GameObject obj1, GameObject obj2, Point2D from, Point2D to1, Point2D to2) {
-		obj2.setPosition(to2);
-		obj1.setPosition(to1);
-	}
+    // --- logica objetos ---
 
-	public static void gravityMove(Room r) {
-		List<Gravity> gravityObjects = new ArrayList<>(); // Criação de uma lista só para os objetos que contêm a interface gravidade
+    public static void applyGravity(Room r) {
+        if (r == null) return;
 
-		for ( GameObject obj: r.getObjects())  {
-			if ( obj instanceof Gravity ) {
-				gravityObjects.add((Gravity) obj); // Percorro toda a room e os objetos contidos nela e os que forem "gravidade" adiciono à lista criada.
-			} 
-		}
-	
-		for ( Gravity g: gravityObjects) {
-			g.fall();
-		}
-	
-	}
+        List<Gravity> gravityObjects = new ArrayList<>();
+        
+        for (GameObject obj : r.getObjects()) {
+            if (obj instanceof Gravity) {
+                gravityObjects.add((Gravity) obj);
+            }
+        }
+        
+        for (Gravity g : gravityObjects) {
+            g.fall();
+        }
+    }
 
-	public static GameObject findObject(Point2D pos, Room r) {
-		for (GameObject obj : r.getObjects()) {
-			if ( obj.getPosition().equals(pos) && !(obj instanceof Water) && !(obj instanceof Blood)) {
-				return obj;
-			}
-		}
-		return null;
-	}
+    public static GameObject findObject(Point2D pos, Room r) {
+        if (r == null || pos == null) return null;
 
-	public static void removeObject(GameObject obj1, Room r) {
-		r.getObjects().remove(obj1);
-	}
+        for (GameObject obj : r.getObjects()) {
+            if (obj.getPosition().equals(pos) && !(obj instanceof Water) && !(obj instanceof Blood)) {
+                return obj;
+            }
+        }
+        return null;
+    }
 
-	@Override
-	public String toString(){
-		return "| " + this.getName() + " in position: " + this.getPosition() + " |";
-	}
+    public static void removeObject(GameObject obj, Room r) {
+        if (r != null && r.getObjects() != null) {
+            r.getObjects().remove(obj);
+        }
+    }
 
+    @Override
+    public String toString() {
+        return "| " + getName() + " @ " + getPosition() + " |";
+    }
 }

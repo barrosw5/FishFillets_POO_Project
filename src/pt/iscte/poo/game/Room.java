@@ -73,7 +73,7 @@ public class Room {
         }
     }
 
-    public void resetAll() {			// Reseta objetos não gameCharacters
+    public void resetResettable() {			// Reseta objetos não gameCharacters
         for (GameObject r : resettableObjects) {
             if (!(r instanceof GameCharacter)) {
                 r.reset();
@@ -108,7 +108,7 @@ public class Room {
     private static void processLine(Room r, String line, int y) {
         char[] chars = line.toCharArray();
         for (int x = 0; x < chars.length; x++) {
-			
+
             // adiciona sempre agua
             GameObject water = new Water(r);
             water.setPosition(new Point2D(x, y));

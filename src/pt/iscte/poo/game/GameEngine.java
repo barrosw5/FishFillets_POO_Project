@@ -173,7 +173,7 @@ public class GameEngine implements Observer {
         realTime++;
         
         objects.Explosion.update(currentRoom);  // Apenas esta linha limpa as explosões antigas automaticamente
-        GameObject.GravityMove(currentRoom); 
+        GameObject.gravityMove(currentRoom); 
         GameCharacter.CharacterSuppor(currentRoom, sf);
         GameCharacter.CharacterSuppor(currentRoom, bf);
     }

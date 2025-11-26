@@ -94,7 +94,7 @@ public abstract class GameObject implements ImageTile {
 		obj1.setPosition(to1);
 	}
 
-	public static void GravityMove(Room r) {
+	public static void gravityMove(Room r) {
 		List<Gravity> gravityObjects = new ArrayList<>(); // Criação de uma lista só para os objetos que contêm a interface gravidade
 
 		for ( GameObject obj: r.getObjects())  {

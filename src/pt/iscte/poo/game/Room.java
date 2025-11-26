@@ -9,174 +9,142 @@ import objects.*;
 import pt.iscte.poo.utils.Point2D;
 
 public class Room {
-	
-	private List<GameObject> objects;
-	private String roomName;
-	private GameEngine engine;
-	private Point2D smallFishStartingPosition;
-	private Point2D bigFishStartingPosition;
-	private List<GameObject> resettableObjects = new ArrayList<>();
-	
-	public Room() {
-		objects = new ArrayList<GameObject>();
-	}
 
-	private void setName(String name) {
-		roomName = name;
-	}
-	
-	public String getName() {
+    private String roomName;
+    private GameEngine engine;
+    private List<GameObject> objects;
+    private List<GameObject> resettableObjects;
+    private Point2D smallFishStartingPosition;
+    private Point2D bigFishStartingPosition;
+
+    public Room() {
+        objects = new ArrayList<>();
+        resettableObjects = new ArrayList<>();
+    }
+
+    // --- Getters e Setters ---
+    public String getName() { 
 		return roomName;
 	}
-	
-	private void setEngine(GameEngine engine) {
+    private void setName(String name) {
+		roomName = name;
+	}
+    private void setEngine(GameEngine engine) {
 		this.engine = engine;
 	}
-
-	public void addObject(GameObject obj) {
-		objects.add(obj);
-		registerResettable(obj);
-		engine.updateGUI();
-	}
-	
-	public void removeObject(GameObject obj) {
-		objects.remove(obj);
-		engine.updateGUI();
-	}
-	
-	public List<GameObject> getObjects() {
-		return objects;
-	}
-
-	public void setSmallFishStartingPosition(Point2D heroStartingPosition) {
-		this.smallFishStartingPosition = heroStartingPosition;
-	}
-	
-	public Point2D getSmallFishStartingPosition() {
+    
+    public Point2D getSmallFishStartingPosition() {
 		return smallFishStartingPosition;
 	}
-	
-	public void setBigFishStartingPosition(Point2D heroStartingPosition) {
-		this.bigFishStartingPosition = heroStartingPosition;
+    public void setSmallFishStartingPosition(Point2D pos) {
+		this.smallFishStartingPosition = pos; 
 	}
-	
-	public Point2D getBigFishStartingPosition() {
+    
+    public Point2D getBigFishStartingPosition() {
 		return bigFishStartingPosition;
 	}
-
-	public List<GameObject> getResettableObjects(){
+    public void setBigFishStartingPosition(Point2D pos) {
+		this.bigFishStartingPosition = pos;
+	}
+    
+    public List<GameObject> getObjects() {
+		return objects;
+	}
+    public List<GameObject> getResettableObjects() {
 		return resettableObjects;
 	}
 
-	public void registerResettable(GameObject r) {
-		if (!resettableObjects.contains(r)) {
-			resettableObjects.add(r);
-		}
-	}
+    // --- funções para objetos ---
 
-	public void resetAll() {
-		for (GameObject r : resettableObjects) {
-			if(!r.equals(SmallFish.getInstance()) && !r.equals(BigFish.getInstance()))
-				r.reset();
-		}
-		objects.removeIf(obj -> obj instanceof Blood);
-	}
-	
-	public static Room readRoom(File f, GameEngine engine) {
-		try {
-			Room r = new Room();
-			r.setEngine(engine);
-			r.setName(f.getName());
+    public void addObject(GameObject obj) {
+        objects.add(obj);
+        registerResettable(obj);
+        if(engine != null) engine.updateGUI();
+    }
 
-			Scanner sc = new Scanner(f);
+    public void removeObject(GameObject obj) {
+        objects.remove(obj);
+        if(engine != null) engine.updateGUI();
+    }
 
-			for(int i = 0; i < 10; i++){
-				String linha = sc.nextLine();
-				char[] caracteres = linha.toCharArray();
-				for(int j = 0; j < caracteres.length; j++){
+    public void registerResettable(GameObject r) {
+        if (!resettableObjects.contains(r)) {
+            resettableObjects.add(r);
+        }
+    }
 
-					GameObject water = new Water(r);
-					water.setPosition(new Point2D(j, i));
-					r.addObject(water);
+    public void resetAll() {			// Reseta objetos não gameCharacters
+        for (GameObject r : resettableObjects) {
+            if (!(r instanceof GameCharacter)) {
+                r.reset();
+            }
+        }
+        // remove blood que é temporário
+        objects.removeIf(obj -> obj instanceof Blood);
+    }
 
-					switch(caracteres[j]){
-						case ' ':
-							break;
-						case 'B':
-							r.setBigFishStartingPosition(new Point2D(j, i));
-							break;
-						case 'S':
-							r.setSmallFishStartingPosition(new Point2D(j, i));
-							break;
-						case 'W':
-							GameObject wall = new Wall(r);
-							wall.setPosition(new Point2D(j, i));
-							r.addObject(wall);
-							break;
-						case 'H':
-							GameObject steelHorizontal = new SteelHorizontal(r);
-							steelHorizontal.setPosition(new Point2D(j, i));
-							r.addObject(steelHorizontal);
-							break;
-						case 'V':
-							GameObject steelVertical = new SteelVertical(r);
-							steelVertical.setPosition(new Point2D(j, i));
-							r.addObject(steelVertical);
-							break;
-						case 'C':
-							GameObject cup = new Cup(r);
-							cup.setPosition(new Point2D(j, i));
-							r.addObject(cup);
-							break;
-						case 'R':
-							GameObject stone = new Stone(r);
-							stone.setPosition(new Point2D(j, i));
-							r.addObject(stone);
-							break;
-						case 'A':
-							GameObject anchor = new Anchor(r);
-							anchor.setPosition(new Point2D(j, i));
-							r.addObject(anchor);
-							break;
-						case 'b':
-							GameObject bomb = new Bomb(r);
-							bomb.setPosition(new Point2D(j, i));
-							r.addObject(bomb);
-							break;
-						case 'T':
-							GameObject trap = new Trap(r);
-							trap.setPosition(new Point2D(j, i));
-							r.addObject(trap);
-							break;
-						case 'Y':
-							GameObject trunk = new Trunk(r);
-							trunk.setPosition(new Point2D(j, i));
-							r.addObject(trunk);
-							break;
-						case 'X':
-							GameObject holedWall = new HoledWall(r);
-							holedWall.setPosition(new Point2D(j, i));
-							r.addObject(holedWall);
-							break;
-						case 'J':
-							GameObject juan = new Juan(r);
-							juan.setPosition(new Point2D(j, i));
-							r.addObject(juan);
-							break;
-						default:
-							System.err.println("Não era suposto chegar aqui nunca");
-							break;
-					}
-				}
-			}
+    // --- leitura do ficheiro txt ---
 
-			sc.close();
-		
-			return r;
-		} catch (FileNotFoundException e) {
-			System.err.println("Lembra-te lá de quando fizeste aquela função de ler o ficheiro de texto...");
-		}
-		return null;
-	}
-	
+    public static Room readRoom(File f, GameEngine engine) {
+        try (Scanner sc = new Scanner(f)) {
+            Room r = new Room();
+            r.setEngine(engine);
+            r.setName(f.getName());
+
+            for (int i = 0; i < 10; i++) {
+                if (sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    processLine(r, line, i);
+                }
+            }
+            return r;
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Lembra-te lá de quando fizeste aquela função de ler o ficheiro de texto...");
+            return null;
+        }
+    }
+
+    private static void processLine(Room r, String line, int y) {
+        char[] chars = line.toCharArray();
+        for (int x = 0; x < chars.length; x++) {
+			
+            // adiciona sempre agua
+            GameObject water = new Water(r);
+            water.setPosition(new Point2D(x, y));
+            r.addObject(water);
+
+            createObjectFromChar(r, chars[x], x, y);
+        }
+    }
+
+    private static void createObjectFromChar(Room r, char c, int x, int y) {
+        Point2D pos = new Point2D(x, y);
+        GameObject obj = null;
+
+        switch (c) {
+            case ' ': break; // água por isso nada
+            case 'B': r.setBigFishStartingPosition(pos); break;
+            case 'S': r.setSmallFishStartingPosition(pos); break;
+            case 'W': obj = new Wall(r); break;
+            case 'H': obj = new SteelHorizontal(r); break;
+            case 'V': obj = new SteelVertical(r); break;
+            case 'C': obj = new Cup(r); break;
+            case 'R': obj = new Stone(r); break;
+            case 'A': obj = new Anchor(r); break;
+            case 'b': obj = new Bomb(r); break;
+            case 'T': obj = new Trap(r); break;
+            case 'Y': obj = new Trunk(r); break;
+            case 'X': obj = new HoledWall(r); break;
+            case 'J': obj = new Juan(r); break;
+            default:
+                System.err.println("Não era suposto chegar aqui nunca: " + c);
+                break;
+        }
+
+        if (obj != null) {
+            obj.setPosition(pos);
+            r.addObject(obj);
+        }
+    }
 }

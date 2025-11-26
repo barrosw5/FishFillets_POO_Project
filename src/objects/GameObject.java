@@ -111,7 +111,7 @@ public abstract class GameObject implements ImageTile {
 
 	public static GameObject findObject(Point2D pos, Room r) {
 		for (GameObject obj : r.getObjects()) {
-			if ( obj.getPosition().equals(pos) && !(obj instanceof Water)) {
+			if ( obj.getPosition().equals(pos) && !(obj instanceof Water) && !(obj instanceof Blood)) {
 				return obj;
 			}
 		}

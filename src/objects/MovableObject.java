@@ -21,7 +21,7 @@ public abstract class MovableObject extends GameObject implements Gravity{
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
         GameObject obj = findObject(below, this.getRoom());
 
-        if(obj == null)
+        if(obj == null )
             return true;
 
         return false;

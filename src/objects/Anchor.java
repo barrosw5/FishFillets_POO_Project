@@ -75,10 +75,17 @@ public class Anchor extends HeavyObject implements Interactable {
 
         GameObject obj = findObject(to, fish.getRoom());
 
+         if ( obj instanceof Interactable ) {
+				Point2D PlusPos = to.plus(dir);
+                MovedOnce = true;
+				return ((Interactable)obj).interactWithFish(fish, to, PlusPos, dir);
+			}
+
         if ((obj instanceof NonMovableObject || obj instanceof MovableObject || obj instanceof GameCharacter)) {
             return false;
         }
     
+        MovedOnce = true;
         return true;
     } 
 }

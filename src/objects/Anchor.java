@@ -42,11 +42,9 @@ public class Anchor extends HeavyObject implements Interactable {
             if ( remove instanceof Water) {
                 continue;
             }
-
             if ( remove instanceof SmallFish) {
                 ((SmallFish) remove).dead(remove);
             }
-
             if ( remove instanceof Trunk) {
                 this.getRoom().removeObject(remove);
             }

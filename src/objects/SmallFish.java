@@ -92,8 +92,4 @@ public class SmallFish extends GameCharacter {
 		
 		return true;
 	}
-
-	
-
-	
 }

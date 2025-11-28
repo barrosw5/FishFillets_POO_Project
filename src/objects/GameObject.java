@@ -125,6 +125,10 @@ public abstract class GameObject implements ImageTile {
         return null;
     }
 
+    public boolean isOutOfBounds(Point2D p) {
+        return p.getX() < 0 || p.getX() > 9 || p.getY() < 0 || p.getY() > 9;
+    }
+
     public static void removeObject(GameObject obj, Room r) {
         if (r != null && r.getObjects() != null) {
             r.getObjects().remove(obj);

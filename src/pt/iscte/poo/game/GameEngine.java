@@ -177,6 +177,7 @@ public class GameEngine implements Observer {
             case KeyEvent.VK_D:
                 GameCharacter activeFish = playingFish ? sf : bf;
                 activeFish.move(Direction.directionFor(k).asVector());
+                Krab.moveAllCrabs(currentRoom);
                 moves++;
                 break;
             default:

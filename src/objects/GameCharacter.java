@@ -45,10 +45,6 @@ public abstract class GameCharacter extends GameObject {
         else if (vec.equals(DOWN.asVector())) direction = DOWN;
     }
 
-    private boolean isOutOfBounds(Point2D p) {
-        return p.getX() < 0 || p.getX() > 9 || p.getY() < 0 || p.getY() > 9;
-    }
-
     // --- funçoes para estados ---
 
     public Direction getDirection() { 

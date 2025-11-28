@@ -34,9 +34,6 @@ public class Buoy extends LightObject implements Interactable, Gravity{
         if ( fish instanceof SmallFish && !Point2D.sameDirectionHorzontal(from, to)) {
             return false;
         }
-        if (fish instanceof BigFish && dir.getY() < 0) {
-            return false;
-        }
         if ( obj instanceof Interactable) {
             Point2D PlusPos = to.plus(dir);
             return ((Interactable)obj).interactWithFish(fish, to, PlusPos, dir);

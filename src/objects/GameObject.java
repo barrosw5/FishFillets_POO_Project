@@ -135,6 +135,17 @@ public abstract class GameObject implements ImageTile {
         }
     }
 
+    public void die(GameObject killed) {
+        if (killed == null) return;
+
+        Room r = killed.getRoom();
+        
+        if (r != null) {
+            r.addObject(new Blood(getPosition(), r));   // Deixa sangue
+            r.removeObject(killed);                   // Remove o corpo
+        }
+    }
+
     @Override
     public String toString() {
         return "| " + getName() + " @ " + getPosition() + " |";

@@ -19,5 +19,8 @@ public class Blood extends GameObject{
         return 1;
     }
 
-    
+    @Override
+    public void reset(){
+        getRoom().removeObject(this);
+    }
 }

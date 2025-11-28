@@ -40,7 +40,7 @@ public class Bomb extends LightObject implements Interactable{
 			GameObject target = findObject(pos, this.getRoom());
 
 			if (target instanceof GameCharacter) {
-				((GameCharacter) target).dead(target);
+				((GameCharacter) target).die(target);
 			}
 
 			if (target != null) {

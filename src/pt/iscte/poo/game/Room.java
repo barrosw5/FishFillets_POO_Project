@@ -80,7 +80,7 @@ public class Room {
             }
         }
         // remove blood que é temporário
-        objects.removeIf(obj -> obj instanceof Blood);
+        // objects.removeIf(obj -> obj instanceof Blood);
     }
 
     // --- leitura do ficheiro txt ---

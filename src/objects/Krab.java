@@ -45,8 +45,7 @@ public class Krab extends LightObject implements Interactable{
         }
 
         if (targetObj instanceof Trap) {
-            getRoom().removeObject(this);
-            getRoom().addObject(new Blood(getPosition(), getRoom()));
+            this.die(this);
             return;
         }
 
@@ -71,10 +70,9 @@ public class Krab extends LightObject implements Interactable{
 
     private void handleFishInteraction(GameCharacter fish) {
         if (fish instanceof SmallFish) {
-            fish.dead(fish);
+            fish.die(fish);
         } else if (fish instanceof BigFish) {
-            getRoom().removeObject(this);
-            getRoom().addObject(new Blood(getPosition(), getRoom()));
+            this.die(this);
         }
     }
 
@@ -102,6 +100,11 @@ public class Krab extends LightObject implements Interactable{
 
     @Override
     public void specialAbillity() {
+    }
+
+    @Override
+    public void reset(){
+        getRoom().removeObject(this);
     }
     
 }

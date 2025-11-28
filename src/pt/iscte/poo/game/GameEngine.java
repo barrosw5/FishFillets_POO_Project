@@ -238,7 +238,7 @@ public class GameEngine implements Observer {
         onePlayer = false;
         playingFish = true;
         setupFishesInRoom();
-        currentRoom.resetResettable();        
+        currentRoom.resetResettable();
         
         updateStatusMessage();
         updateGUI();

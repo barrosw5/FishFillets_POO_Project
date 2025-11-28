@@ -62,16 +62,10 @@ public abstract class GameCharacter extends GameObject {
     public boolean hasDied() { return hasDied; }
     public void setDeadState(boolean t) { hasDied = t; }
 
-    public void dead(GameObject killer) {
-        if (killer == null) return;
-
+    @Override
+    public void die(GameObject killed) {
+        super.die(killed);
         setDeadState(true);
-        Room r = killer.getRoom();
-        
-        if (r != null) {
-            r.addObject(new Blood(getPosition(), r));   // Deixa sangue
-            r.removeObject(killer);                   // Remove o corpo
-        }
     }
 
     @Override
@@ -81,7 +75,7 @@ public abstract class GameCharacter extends GameObject {
 
     public static void checkSurvivalStatus(Room r, GameCharacter fish) {
         if (fish != null && !fish.fishSupport()) {
-            fish.dead(fish);
+            fish.die(fish);
         }
     }
 

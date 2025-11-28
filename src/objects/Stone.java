@@ -34,7 +34,7 @@ public class Stone extends HeavyObject implements Interactable{
         GameObject target = findObject(belowPos, getRoom());
 
         if (target instanceof SmallFish) {
-            ((SmallFish) target).dead(target);
+            ((SmallFish) target).die(target);
         }
 		else if (target instanceof Trunk) {
             getRoom().removeObject(target);

@@ -135,6 +135,7 @@ public class Room {
             case 'Y': obj = new Trunk(r); break;
             case 'X': obj = new HoledWall(r); break;
             case 'J': obj = new Juan(r); break;
+            case 'U': obj = new Buoy(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

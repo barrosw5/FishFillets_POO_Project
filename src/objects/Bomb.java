@@ -5,7 +5,8 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Bomb extends LightObject implements Interactable{
+public class Bomb extends LightObject implements Interactable, Gravity{
+	private boolean controlDown = false; 
 
 	public Bomb(Room room) {
 		super(room);
@@ -20,6 +21,33 @@ public class Bomb extends LightObject implements Interactable{
 	public int getLayer() {
 		return 1;
 	}
+
+	@Override
+    public boolean canSpecialMov() {
+        Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        GameObject obj = findObject(below, this.getRoom());
+
+        if(obj == null )
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public void specialmov() {
+        if (canSpecialMov()) {
+            Point2D pos = this.getPosition();
+            Point2D below = getBelow(pos);
+            pushObject(this, pos, below);
+            controlDown = true;
+        }
+
+        else if (controlDown && !canSpecialMov()) {
+            specialAbillity();
+            controlDown = false;
+        }
+    }
 
 	@Override
 	public void specialAbillity() {

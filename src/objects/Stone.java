@@ -4,7 +4,8 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Stone extends HeavyObject implements Interactable{
+public class Stone extends HeavyObject implements Interactable, Gravity{
+	private boolean controlDown = false;
 	private boolean krabSpawned = false;
 
 	public Stone(Room room) {
@@ -26,6 +27,33 @@ public class Stone extends HeavyObject implements Interactable{
 		super.reset();
 		krabSpawned = false;
 	}
+
+	@Override
+    public boolean canSpecialMov() {
+        Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        GameObject obj = findObject(below, this.getRoom());
+
+        if(obj == null )
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public void specialmov() {
+        if (canSpecialMov()) {
+            Point2D pos = this.getPosition();
+            Point2D below = getBelow(pos);
+            pushObject(this, pos, below);
+            controlDown = true;
+        }
+
+        else if (controlDown && !canSpecialMov()) {
+            specialAbillity();
+            controlDown = false;
+        }
+    }
 
 	@Override
 	public void specialAbillity() {

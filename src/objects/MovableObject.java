@@ -1,9 +1,8 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
-import pt.iscte.poo.utils.Point2D;
 
-public abstract class MovableObject extends GameObject implements Gravity{
+public abstract class MovableObject extends GameObject {
     private static boolean isMovable = true;
     private boolean controlDown = false; 
     
@@ -21,30 +20,4 @@ public abstract class MovableObject extends GameObject implements Gravity{
         controlDown = false;    // para a bomba nao pensar que ainda está a cair
     }
 
-    @Override
-    public boolean canFall() {
-        Point2D pos = this.getPosition();
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
-        GameObject obj = findObject(below, this.getRoom());
-
-        if(obj == null )
-            return true;
-
-        return false;
-    }
-
-    @Override
-    public void fall() {
-        if (canFall()) {
-            Point2D pos = this.getPosition();
-            Point2D below = getBelow(pos);
-            pushObject(this, pos, below);
-            controlDown = true;
-        }
-
-        else if (controlDown && !canFall()) {
-            specialAbillity();
-            controlDown = false;
-        }
-    }
 }

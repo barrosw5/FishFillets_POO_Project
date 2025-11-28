@@ -4,8 +4,8 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Anchor extends HeavyObject implements Interactable {
-
+public class Anchor extends HeavyObject implements Interactable, Gravity {
+    private boolean controlDown = false;
     private boolean MovedOnce = false;
 
     public Anchor(Room room) {
@@ -29,6 +29,32 @@ public class Anchor extends HeavyObject implements Interactable {
         super.reset();
     }
 
+   @Override
+    public boolean canSpecialMov() {
+        Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        GameObject obj = findObject(below, this.getRoom());
+
+        if(obj == null )
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public void specialmov() {
+        if (canSpecialMov()) {
+            Point2D pos = this.getPosition();
+            Point2D below = getBelow(pos);
+            pushObject(this, pos, below);
+            controlDown = true;
+        }
+
+        else if (controlDown && !canSpecialMov()) {
+            specialAbillity();
+            controlDown = false;
+        }
+    }
     @Override
     public void specialAbillity() {
         Point2D currenbtlyPos = this.getPosition();

@@ -16,6 +16,12 @@ public abstract class MovableObject extends GameObject implements Gravity{
     }
 
     @Override
+    public void reset() {
+        super.reset();
+        controlDown = false;    // para a bomba nao pensar que ainda está a cair
+    }
+
+    @Override
     public boolean canFall() {
         Point2D pos = this.getPosition();
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);

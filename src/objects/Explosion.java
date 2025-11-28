@@ -33,4 +33,9 @@ public class Explosion extends GameObject{
             return false;
         });
     }
+
+    @Override
+    public void reset(){
+        getRoom().removeObject(this);
+    }
 }

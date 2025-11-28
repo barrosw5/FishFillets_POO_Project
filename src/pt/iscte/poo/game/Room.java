@@ -79,8 +79,6 @@ public class Room {
                 r.reset();
             }
         }
-        // remove blood que é temporário
-        // objects.removeIf(obj -> obj instanceof Blood);
     }
 
     // --- leitura do ficheiro txt ---

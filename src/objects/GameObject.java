@@ -60,6 +60,11 @@ public abstract class GameObject implements ImageTile {
         return new Point2D(pos.getX(), pos.getY() + 1);
     }
 
+     public Point2D getAbove(Point2D pos) {
+        if (pos == null) throw new IllegalArgumentException("Não é possível calcular 'acima' de uma posição nula.");
+        return new Point2D(pos.getX(), pos.getY() -1);
+    }
+
     public List<Point2D> getAdjacentPositions(Point2D pos) {
         if (pos == null) throw new IllegalArgumentException("Não é possível calcular adjacências de uma posição nula.");
         

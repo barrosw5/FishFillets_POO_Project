@@ -60,10 +60,8 @@ public class Buoy extends LightObject implements Interactable, Gravity{
     @Override
     public void specialmov() {
         Point2D pos = this.getPosition();
-        Point2D above = new Point2D(pos.getX(), pos.getY() - 1);
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        Point2D above = getAbove(pos);
         GameObject aboveObj = findObject(above, this.getRoom());
-        GameObject belowObj = findObject(below, this.getRoom());
 
         // Vê em que posição a boia está e vai ver os objetos em cima e embaixo 
 

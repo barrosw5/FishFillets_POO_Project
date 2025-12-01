@@ -207,7 +207,7 @@ public class GameEngine implements Observer {
     private void updateStatusMessage() {
         String msg = !isGameOver 
             ? "Level " + (playedLevels + 1) + " | Time: " + Time.convert(realTime).toString() + " | Moves: " + moves
-            : "Game Over! Check top 5. (R to restart)";
+            : "Game Over! Check top 10. (R to restart)";
         
         ImageGUI.getInstance().setStatusMessage(msg);
     }
@@ -289,7 +289,7 @@ public class GameEngine implements Observer {
         int finalTime = lastTickProcessed - gameStartTimeTicks;
         
         addOrUpdateScore(cleanName, finalTime, moves);
-        ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 5. (R for restart)");
+        ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 10. (R for restart)");
     }
 
     private void addOrUpdateScore(String name, int time, int moves) {

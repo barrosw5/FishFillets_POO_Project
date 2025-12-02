@@ -5,7 +5,10 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public class Juan extends LightObject implements Interactable, Gravity{
-    private boolean controlDown = false;
+    private boolean downDone = false;
+    private int controlOne = 0;
+    private boolean leftBlocked = false;
+    private boolean rightBlocked = true;
     public Juan(Room room){
         super(room);
     }
@@ -26,7 +29,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
         Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
         GameObject obj = findObject(below, this.getRoom());
 
-        if(obj == null )
+        if( obj == null )
             return true;
 
         return false;
@@ -34,24 +37,86 @@ public class Juan extends LightObject implements Interactable, Gravity{
 
     @Override
     public void specialmov() {
-        if (canSpecialMov()) {
+        if (canSpecialMov() && downDone == false) {
             Point2D pos = this.getPosition();
             Point2D below = getBelow(pos);
             pushObject(this, pos, below);
-            controlDown = true;
+        }
+        else {
+            downDone = true;
         }
 
-        else if (controlDown && !canSpecialMov()) {
+        if ( downDone ) {
             specialAbillity();
-            controlDown = false;
+        } 
+        
+    }
+
+    private boolean leftPush(Point2D currentPos) {
+        Point2D leftPos = new Point2D(currentPos.getX() - 1, currentPos.getY());
+        GameObject leftObj = findObject(leftPos, getRoom());
+
+        if ( leftObj == null) {
+            pushObject(this, currentPos, leftPos);
+            return true;
         }
+        return false;
+    }
+
+     private boolean rightPush(Point2D currentPos) {
+        Point2D rightPos = new Point2D(currentPos.getX() + 1, currentPos.getY());
+        GameObject rightObj = findObject(rightPos, getRoom());
+
+        if ( rightObj == null) {
+            pushObject(this, currentPos, rightPos);
+            return true;
+        }
+        return false;
     }
     
+    
     @Override
-    public void specialAbillity() {
+    public void specialAbillity() {   
+        if ( controlOne < 1) {
+            controlOne = 1;
+            if ( rightBlocked ) {
+                boolean pushedLeft = leftPush(getPosition());
+                if (pushedLeft) {
+                    return; // fez o desvio para a esquerda; subida fica para o tick seguinte
+                } else {
+                    leftBlocked = true; // deteta bloqueio à esquerda e pára
+                    rightBlocked = false;
+                    downDone = false;
+                    controlOne = 0;
+                    return;
+            }
+            }
+            else {
+                boolean pushedRight = rightPush(getPosition());
+                if (pushedRight) {
+                    return; // fez o desvio para a esquerda; subida fica para o tick seguinte
+                } else {
+                    rightBlocked = true;
+                    leftBlocked = false; 
+                    downDone = false;
+                    controlOne = 0;
+                    return;
+                }
+            }
+        }
 
-        
-        
+        Point2D pos = getPosition();
+        Point2D upPos = new Point2D(pos.getX(), pos.getY() -1);
+        GameObject obj = findObject(upPos, this.getRoom());
+
+        if ( obj == null) {
+            pushObject(this, pos, upPos);
+        }
+        else {
+            downDone = false;
+            controlOne = 0;
+            leftBlocked = false; // reset quando falha a subida
+        }
     }
 
     @Override
@@ -77,5 +142,12 @@ public class Juan extends LightObject implements Interactable, Gravity{
 		return true;
 	}
 
-    
+     @Override
+    public void reset(){
+        super.reset();
+        downDone = false;
+        controlOne = 0;
+        leftBlocked = false;
+        rightBlocked = true;
+    }
 }

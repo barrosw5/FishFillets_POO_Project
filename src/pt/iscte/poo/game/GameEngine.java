@@ -100,9 +100,10 @@ public class GameEngine implements Observer {
                 System.err.println("Score ignorado (formato inválido): " + line);
             }
         }
+        // se nao forem linhas de 3 partes separadas por , ele ignora
     }
 
-    private void saveScores() throws IOException {
+    private void saveScores() {
         scores.sort(null);
         while (scores.size() > 10) scores.remove(10);
 
@@ -110,6 +111,9 @@ public class GameEngine implements Observer {
             for (Score s : scores) {
                 writer.println(s.getName() + "," + s.getScore() + "," + s.getMoves());
             }
+        }
+        catch(IOException e){
+            System.err.println("Erro ao escrever no ficheiro de scores.txt");
         }
     }
 
@@ -311,11 +315,7 @@ public class GameEngine implements Observer {
         
         scores.add(new Score(name, time, moves));
         
-        try {
-            saveScores();
-        } catch (IOException e) {
-            System.err.println("Erro ao gravar: " + e.getMessage());
-        }
+        saveScores();
         
         updateScoresDisplay();
     }

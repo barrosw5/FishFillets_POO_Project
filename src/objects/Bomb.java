@@ -5,7 +5,8 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Bomb extends LightObject {
+public class Bomb extends LightObject implements Interactable, Gravity{
+	private boolean controlDown = false; 
 
 	public Bomb(Room room) {
 		super(room);
@@ -22,25 +23,40 @@ public class Bomb extends LightObject {
 	}
 
 	@Override
-	public boolean canMoveLightObject(Point2D from, Point2D to, Vector2D dir, GameObject cla) {
-		for ( GameObject obj1: cla.getRoom().getObjects()) {
-			if ( obj1.getPosition().equals(to)) {
-				if ( (obj1 instanceof NonMovableObject || obj1 instanceof MovableObject || obj1 instanceof GameCharacter)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    public boolean canSpecialMov() {
+        Point2D pos = this.getPosition();
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        GameObject obj = findObject(below, this.getRoom());
+
+        if(obj == null )
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public void specialmov() {
+        if (canSpecialMov()) {
+            Point2D pos = this.getPosition();
+            Point2D below = getBelow(pos);
+            pushObject(this, pos, below);
+            controlDown = true;
+        }
+
+        else if (controlDown && !canSpecialMov()) {
+            specialAbillity();
+            controlDown = false;
+        }
+    }
 
 	@Override
 	public void specialAbillity() {
 
-		Point2D currentlyPos = this.getPosition();
-		List<Point2D> nearObjects = getAdjacentPositions(currentlyPos);
-		nearObjects.add(currentlyPos);
+		Point2D currentPos = this.getPosition();
+		List<Point2D> nearObjects = getAdjacentPositions(currentPos);
+		nearObjects.add(currentPos);
 
-		Point2D beloPos = getBelow(currentlyPos);
+		Point2D beloPos = getBelow(currentPos);
 
 		GameObject below = findObject(beloPos, getRoom());
 
@@ -49,18 +65,44 @@ public class Bomb extends LightObject {
 		}
 
 		for (Point2D pos: nearObjects) {
-			GameObject remove = findObject(pos, this.getRoom());
+			GameObject target = findObject(pos, this.getRoom());
 
-			if (remove instanceof GameCharacter) {
-			((GameCharacter) remove).setDeadState(true);
+			if (target instanceof GameCharacter) {
+				((GameCharacter) target).die(target);
 			}
 
-			if (remove != null) {
-				this.getRoom().removeObject(remove);
+			if (target != null) {
+				this.getRoom().removeObject(target);
 			}
+			this.getRoom().addObject(new Explosion(pos, this.getRoom()));
 		}
 		
 
+	}
+
+	@Override
+	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+		if ( BombPushBy(fish, from, to, dir)) {
+			pushObject(this, from, to);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean BombPushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+		GameObject obj = findObject(to, fish.getRoom());
+
+		if ( fish instanceof BigFish ) {
+			if ( obj instanceof Interactable ) {
+				Point2D PlusPos = to.plus(dir);
+				return ((Interactable)obj).interactWithFish(fish, to, PlusPos, dir);
+			}
+		}
+
+		if ( obj instanceof NonMovableObject || obj instanceof MovableObject || obj instanceof GameCharacter) {
+			return false;
+		}
+		return true;
 	}
 
 }

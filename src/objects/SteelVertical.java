@@ -1,8 +1,10 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
+import pt.iscte.poo.utils.Point2D;
+import pt.iscte.poo.utils.Vector2D;
 
-public class SteelVertical extends NonMovableObject {
+public class SteelVertical extends NonMovableObject implements Interactable{
 
 	public SteelVertical(Room room) {
 		super(room);
@@ -16,6 +18,11 @@ public class SteelVertical extends NonMovableObject {
 	@Override
 	public int getLayer() {
 		return 1;
+	}
+
+	@Override
+	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
+		return false;
 	}
 
 }

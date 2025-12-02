@@ -1,331 +1,326 @@
 package pt.iscte.poo.game;
 
-import static pt.iscte.poo.utils.Direction.LEFT;
-
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import objects.BigFish;
-import objects.GameCharacter;
-import objects.GameObject;
-import objects.Score;
-import objects.SmallFish;
-import objects.Time;
+import java.io.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+import objects.*;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.observer.Observer;
 import pt.iscte.poo.utils.Direction;
+import static pt.iscte.poo.utils.Direction.LEFT;
 
 public class GameEngine implements Observer {
+
+    private static final String SCORES_PATH = "gamedata" + File.separator + "scores.txt";
+    private static final String ROOMS_DIR = "./rooms";
+
+    private Map<String, Room> rooms = new HashMap<>();
+    private List<Score> scores = new ArrayList<>();
     
-    private static final String SCORES_FILE = "gamedata" + File.separator + "scores.txt";
-    private Map<String,Room> rooms;
-    private List<Score> scores; 
-    private int gameStartTimeTicks = 0;
     private Room currentRoom;
-    private int lastTickProcessed = 0;
-    private boolean playingFish = true; 
     private int playedLevels = 0;
-    private boolean onePlayer = false; 
-    private boolean initialized = true; 
-    private boolean isGameOver = false; 
+    private int moves = 0;
     private int realTime = 0;
-    private int moves = 0; 
+    private int gameStartTimeTicks = 0;
+    private int lastTickProcessed = 0;
+
+    private boolean playingFish = true; 
+    private boolean onePlayer = false;  
+    private boolean initialized = true;
+    private boolean isGameOver = false;
 
     private SmallFish sf = SmallFish.getInstance();
     private BigFish bf = BigFish.getInstance();
-    
+
     public GameEngine() {
-        rooms = new HashMap<String,Room>();
-        scores = new ArrayList<>();
-        loadGame();
-        loadScores();
+        // assegura que a diretoria exista
+        new File("gamedata").mkdirs();
+        
+        loadGameRooms();
+        
+        try {
+            loadScores();
+        } catch (IOException e) {
+            System.err.println("Aviso: Não foi possível carregar os scores.");
+        }
+        
         resetLevel();
         updateGUI();
         updateScoresDisplay();
     }
 
-    private void loadGame() {
-        File[] files = new File("./rooms").listFiles();
+    // --- Loading & Saving (Com Throws) ---
+
+    private void loadGameRooms() {
+        File dir = new File(ROOMS_DIR);
+        if (!dir.exists()) {
+            System.err.println("Diretoria das rooms não encontrada: " + ROOMS_DIR);
+            return;
+        }
+
+        File[] files = dir.listFiles();
         if (files != null) {
-            for(File f : files) {
-                rooms.put(f.getName(),Room.readRoom(f,this));
+            for (File f : files) {
+                rooms.put(f.getName(), Room.readRoom(f, this));
             }
         }
     }
 
-    private void loadScores(){
-        File file = new File(SCORES_FILE);
-
-        try {           
-            if (!file.exists()) {
-                file.createNewFile();
-                return; 
-            }
-
-        } catch (IOException e) {
-            System.err.println("Erro de I/O ao tentar criar ficheiro de scores: " + e.getMessage());
-        }
+    private void loadScores() throws IOException {
+        File file = new File(SCORES_PATH);
         
-        try {
-            Scanner sc = new Scanner(file);
+        if (!file.exists()) {
+            boolean created = file.createNewFile();
+            if (!created) {
+                throw new IOException("Falha ao criar o ficheiro de scores: " + SCORES_PATH);
+            }
+            return; 
+        }
 
+        try (Scanner sc = new Scanner(file)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                String[] parts = line.split(",");   // Formato esperado: "Nome,Pontos,Moves"
-                
-                if (parts.length == 3) { 
-                    try {
-                        String name = parts[0];
-                        int scoreInTicks = Integer.parseInt(parts[1].trim());
-                        int movesCount = Integer.parseInt(parts[2].trim());
-                        
-                        scores.add(new Score(name, scoreInTicks, movesCount));
-                    } catch (NumberFormatException e) {
-                        System.err.println("Erro ao ler linha de score (formato numérico inválido): " + line);
-                    }
-                }
+                processScoreLine(line);
             }
-            // porque já temos comparable usamos null
             scores.sort(null);
-            sc.close();
-            
-        } catch (FileNotFoundException e) {
-            System.err.println("Erro ao carregar pontuações: " + e.getMessage());
         }
     }
+
+    private void processScoreLine(String line) {
+        String[] parts = line.split(",");
+        if (parts.length == 3) {
+            try {
+                String name = parts[0];
+                int score = Integer.parseInt(parts[1].trim());
+                int mvs = Integer.parseInt(parts[2].trim());
+                scores.add(new Score(name, score, mvs));
+            } catch (NumberFormatException e) {
+                System.err.println("Score ignorado (formato inválido): " + line);
+            }
+        }
+    }
+
+    private void saveScores() throws IOException {
+        scores.sort(null);
+        while (scores.size() > 10) scores.remove(10);
+
+        try (PrintWriter writer = new PrintWriter(new File(SCORES_PATH))) {
+            for (Score s : scores) {
+                writer.println(s.getName() + "," + s.getScore() + "," + s.getMoves());
+            }
+        }
+    }
+
+    // --- loop do jogo ---
 
     @Override
     public void update(Observed source) {
-        
-        if(!isGameOver){
-            if(sf.hasWon() && bf.hasWon()){
-                nextLevel();
-            }
-
-            if((sf.hasWon() || bf.hasWon()) && !onePlayer){
-                playingFish = !playingFish;
-                onePlayer = true;           
-            } 
-
-            if(sf.hasDied() || bf.hasDied())
-                isGameOver = true;
+        if (!isGameOver) {
+            checkWinConditions();
+            checkLossConditions();
         }
 
-        if (ImageGUI.getInstance().wasKeyPressed()) {
-            int k = ImageGUI.getInstance().keyPressed();
-            
-            switch (k) {
-                case KeyEvent.VK_SPACE:
-                    if(!onePlayer){
-                        playingFish = !playingFish; 
-                    }
-                    break;
-                case KeyEvent.VK_R:
-                    resetLevel();
-                    break;
-                case KeyEvent.VK_LEFT:
-                case KeyEvent.VK_RIGHT:
-                case KeyEvent.VK_DOWN:
-                case KeyEvent.VK_UP:
-                case KeyEvent.VK_A:
-                case KeyEvent.VK_W:
-                case KeyEvent.VK_S:
-                case KeyEvent.VK_D:
-                    if(!isGameOver){
-                        if(playingFish){
-                            sf.move(Direction.directionFor(k).asVector());
-                            moves++; // Incrementa moves
-                        }
-                        else {
-                            bf.move(Direction.directionFor(k).asVector());
-                            moves++; // Incrementa moves
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+        handleInput();
 
-        int t = ImageGUI.getInstance().getTicks();
-        while (lastTickProcessed < t) {
+        int currentGuiTicks = ImageGUI.getInstance().getTicks();
+        while (lastTickProcessed < currentGuiTicks) {
             processTick();
         }
+
+        updateGUI();
         ImageGUI.getInstance().update();
-        
-        if(!isGameOver)
-            ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + " | Time: " + realTime() + " | Moves: " + moves); 
-        else
-            ImageGUI.getInstance().setStatusMessage("Game Over! Check top 5. (R to restart)");
+        updateStatusMessage();
+    }
+
+    private void checkWinConditions() {
+        if (sf.hasWon() && bf.hasWon()) {
+            nextLevel();
+        } else if ((sf.hasWon() || bf.hasWon()) && !onePlayer) {
+            playingFish = !playingFish;
+            onePlayer = true;
+        }
+    }
+
+    private void checkLossConditions() {
+        if (sf.hasDied() || bf.hasDied()) {
+            isGameOver = true;
+        }
+    }
+
+    private void handleInput() {
+        if (!ImageGUI.getInstance().wasKeyPressed())
+            return;
+
+        int k = ImageGUI.getInstance().keyPressed();
+
+        if (k == KeyEvent.VK_R) {
+            resetLevel();
+            return;
+        }
+
+        if (isGameOver)
+            return;
+
+        switch (k) {
+            case KeyEvent.VK_SPACE:
+                if (!onePlayer) playingFish = !playingFish;
+                break;
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_D:
+                GameCharacter activeFish = playingFish ? sf : bf;
+                activeFish.move(Direction.directionFor(k).asVector());
+                Krab.moveAllCrabs(currentRoom);
+                moves++;
+                break;
+            default:
+                break;
+        }
     }
 
     private void processTick() {
         lastTickProcessed++;
-        realTime++; 
-        GameObject.GravityMove(currentRoom); 
-        GameCharacter.CharacterSuppor(currentRoom, sf);
-        GameCharacter.CharacterSuppor(currentRoom, bf);
+        realTime++;
+        
+        objects.Explosion.update(currentRoom);
+        GameObject.applyGravity(currentRoom);
+        GameCharacter.checkSurvivalStatus(currentRoom, sf);
+        GameCharacter.checkSurvivalStatus(currentRoom, bf);
     }
 
-    public String realTime() { 
-        Time realTimeLast = Time.convert(realTime);
-        return realTimeLast.toString();
-    }
+    // --- updates visuais ---
 
     public void updateGUI() {
-        if(currentRoom != null) {
+        if (currentRoom != null) {
             ImageGUI.getInstance().clearImages();
             ImageGUI.getInstance().addImages(currentRoom.getObjects());
         }
     }
 
+    private void updateStatusMessage() {
+        String msg = !isGameOver 
+            ? "Level " + (playedLevels + 1) + " | Time: " + Time.convert(realTime).toString() + " | Moves: " + moves
+            : "Game Over! Check top 10. (R to restart)";
+        
+        ImageGUI.getInstance().setStatusMessage(msg);
+    }
+
     private void updateScoresDisplay() {
-        scores.sort(null); 
-        
-        List<String> scoreStrings = new ArrayList<>();
-        for (Score s : scores) {
-            scoreStrings.add(s.toString()); 
-        }
-        
-        ImageGUI.getInstance().setScoreEntries(scoreStrings);
+        scores.sort(null);
+        List<String> scoreList = new ArrayList<>();
+        for (Score s : scores) scoreList.add(s.toString());
+        ImageGUI.getInstance().setScoreEntries(scoreList);
     }
 
-    public int getPlayedLevels(){
-        return playedLevels;
-    }
+    // --- logica dos niveis ---
 
-    public void nextLevel(){
+    public void nextLevel() {
         playedLevels++;
-        if(playedLevels < rooms.size()){
+        if (playedLevels < rooms.size()) {
             resetLevel();
-        }
-        else{
-            processNewScore();
+        } else {
+            handleGameCompletion();
         }
     }
 
-    public void resetLevel(){
-
-        if (isGameOver) {
-            playedLevels = 0;
-            int currentGuiTicks = ImageGUI.getInstance().getTicks(); 
-            lastTickProcessed = currentGuiTicks;
-            gameStartTimeTicks = currentGuiTicks;
-            realTime = 0;
-            isGameOver = false;
-            moves = 0;
-            
-            sf.setDeadState(false);
-            bf.setDeadState(false);
-        }
+    public void resetLevel() {
+        if (isGameOver) performFullReset();
 
         currentRoom = rooms.get("room" + playedLevels + ".txt");
-        ImageGUI.getInstance().setStatusMessage("Level " + (getPlayedLevels() + 1) + " | Time: " + realTime() + " | Moves: " + moves);
+        
         onePlayer = false;
         playingFish = true;
-        setupFishesForCurrentRoom();
-        currentRoom.resetAll();        
+        setupFishesInRoom();
+        currentRoom.resetResettable();
+        
+        updateStatusMessage();
         updateGUI();
     }
 
-    private void setupFishesForCurrentRoom() {      
+    private void performFullReset() {
+        playedLevels = 0;
+        int currentTicks = ImageGUI.getInstance().getTicks();
+        lastTickProcessed = currentTicks;
+        gameStartTimeTicks = currentTicks;
+        realTime = 0;
+        moves = 0;
+        isGameOver = false;
+        sf.setDeadState(false);
+        bf.setDeadState(false);
+    }
+
+    private void setupFishesInRoom() {
         sf.setRoom(currentRoom);
         bf.setRoom(currentRoom);
-
         sf.setPosition(currentRoom.getSmallFishStartingPosition());
         bf.setPosition(currentRoom.getBigFishStartingPosition());
-
         sf.setDirection(LEFT);
         bf.setDirection(LEFT);
-
-        if(initialized){
-            currentRoom.addObject(sf);
-            currentRoom.addObject(bf);
-            initialized = false;
-        }
-
-        if(!currentRoom.getObjects().contains(SmallFish.getInstance()))
-            currentRoom.addObject(sf);
-
-        if(!currentRoom.getObjects().contains(BigFish.getInstance()))
-            currentRoom.addObject(bf);
-
         sf.resetWin();
         bf.resetWin();
 
+        if (initialized || !currentRoom.getObjects().contains(sf)) currentRoom.addObject(sf);
+        if (initialized || !currentRoom.getObjects().contains(bf)) currentRoom.addObject(bf);
+        
+        initialized = false;
     }
 
-    private void saveScores() {
-        scores.sort(null);
-        
-        while (scores.size() > 10) {
-            scores.remove(10);
-        }
+    // --- logica do score ---
 
-        try {
-            PrintWriter writer = new PrintWriter(new File(SCORES_FILE));
-            
-            for (Score s : scores) {
-                writer.println(s.getName() + "," + s.getScore() + "," + s.getMoves());
-            }
-            writer.close();
-            
-        } catch (IOException e) {
-            System.err.println("Erro ao guardar pontuações: " + e.getMessage());
-        }
-    }
-    
-    private void processNewScore() {
-        if(isGameOver)
-            return;
-        
+    private void handleGameCompletion() {
+        if (isGameOver) return;
         isGameOver = true;
-        int finalTimeInTicks = lastTickProcessed - gameStartTimeTicks;
-        int finalMoves = this.moves;
-        
-        String message = "Congratulations! You finished!" + "\n\nInsert your name:";
-        String title = "Game Finished";
-        
-        String playerName = ImageGUI.getInstance().showInputDialog(title, message);
 
-        if (playerName == null || playerName.trim().isEmpty()) {
-            playerName = "Unknown"; 
-        }
+        String playerName = ImageGUI.getInstance().showInputDialog("Game Finished", 
+            "Congratulations! You finished!\n\nInsert your name:");
         
+        if (playerName == null || playerName.trim().isEmpty())
+            playerName = "Unknown";
+
         String cleanName = playerName.trim();
 
-        Score existingScore = null;
+        int finalTime = lastTickProcessed - gameStartTimeTicks;
+        
+        addOrUpdateScore(cleanName, finalTime, moves);
+        ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 10. (R for restart)");
+    }
+
+    private void addOrUpdateScore(String name, int time, int moves) {
+        Score existing = null;
         for (Score s : scores) {
-            if (s.getName().equals(cleanName)) {
-                existingScore = s;
+            if (s.getName().equals(name)) {
+                existing = s;
                 break;
             }
         }
 
-        if (existingScore != null) {
-            int response = javax.swing.JOptionPane.showConfirmDialog(null, "Player " + cleanName + " exists. Replace score?", "Duplicate Name", javax.swing.JOptionPane.YES_NO_OPTION);
-
-            if (response == javax.swing.JOptionPane.YES_OPTION) {
-                scores.remove(existingScore);
-                scores.add(new Score(cleanName, finalTimeInTicks, finalMoves));
-                saveScores(); 
-                updateScoresDisplay();
-            }
+        if (existing != null) {
+            int resp = JOptionPane.showConfirmDialog(null, 
+                "Player " + name + " exists. Replace score?", "Duplicate Name", JOptionPane.YES_NO_OPTION);
+            if (resp != JOptionPane.YES_OPTION) return;
             
-        } else {
-            scores.add(new Score(cleanName, finalTimeInTicks, finalMoves));
-            saveScores();
-            updateScoresDisplay();
+            scores.remove(existing);
         }
         
-        ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 5. (R for restart)");
+        scores.add(new Score(name, time, moves));
+        
+        try {
+            saveScores();
+        } catch (IOException e) {
+            System.err.println("Erro ao gravar: " + e.getMessage());
+        }
+        
+        updateScoresDisplay();
+    }
+    
+    public int getPlayedLevels() {
+        return playedLevels;
     }
 }

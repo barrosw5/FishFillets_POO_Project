@@ -38,45 +38,25 @@ public class SmallFish extends GameCharacter {
 			return sfNameDown;
 		return null;
 	}
-
-	@Override
-	public int getLayer() {
-		return 2;
-	}
-
-	// O peixe pequeno também, em princípio está finalizado, a sua canMove 
-
+	
 	@Override  
 	public boolean fishCanMove(Point2D pos, Vector2D dir) {
 		if(hasWon())
 			return false;
 	
 		Point2D finalPos = pos.plus(dir);
+		GameObject obj = findObject(finalPos, getRoom());
+		Point2D finalObjPos = finalPos.plus(dir);
 
-		for (GameObject obj : getRoom().getObjects()) {
-			if (obj.getPosition().equals(finalPos)) {
-
-				// O SmallFish é bloqueado por tudo, com exceção da Trap e do HoledWall
-				// Can move é usado para mover Objetos que NÃO SÃO peixes
-				if (obj instanceof MovableObject && obj.canMoveLightObject(finalPos,finalPos.plus(dir), dir,this)) {
-					Point2D finalObPos = finalPos.plus(dir);
-					pushObject(obj, finalPos, finalObPos);
-					return true;
-				}
-
-				if (obj instanceof KillAllFishes) {
-					dead(sf, this);
-				}
-
-				if ((obj instanceof MovableObject || obj instanceof NonMovableObject || obj instanceof GameCharacter)		// VERIFICAR LOGICA
-						&& !( obj instanceof SmallFishCanPass)) {
-					return false;
-				}
-
-			}
+		if ( obj == null) {
+			return true;
 		}
 
-		return true;
+		if ( obj instanceof Interactable) {
+			return ((Interactable) obj).interactWithFish(this, finalPos, finalObjPos, dir);
+		}
+
+		return false;
 	}
 
 	@Override
@@ -90,32 +70,26 @@ public class SmallFish extends GameCharacter {
 			posUp.add( new Point2D(CurrentlyPos.getX(), i));
 		}
 
-		int count = 0;
+		int movableCount = 0;
 
 		for ( Point2D objPos: posUp) {
 			GameObject obj = findObject(objPos, getRoom());
 
-			if ( !( obj instanceof MovableObject) && count == 0) {
-				return true;
+			if (!(obj instanceof MovableObject)) {
+				break;
 			}
 
-			if ( obj instanceof HeavyObject) {
+			if (obj instanceof HeavyObject) {
 				return false;
 			}
 
-			if ( obj instanceof MovableObject) {
-				count++;
+			movableCount++;
+
+			if (movableCount > 1) {
+				return false;
 			}
 		}
 		
-		if ( count > 1) {
-			return false;
-		}
 		return true;
 	}
-
-	
-
-	
 }
-

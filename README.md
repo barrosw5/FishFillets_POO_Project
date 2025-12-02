@@ -1,89 +1,111 @@
-# Object-Oriented Programming Project – 2025/2026 [v1.0]
+# 🐟 Fish Fillets NG – OOP Project 2025/2026
 
 ## 🎮 Introduction
+This project consists of the implementation of a game engine inspired by the classic **Fish Fillets NG**. The goal is to control two fish (a small one and a big one) through various aquatic environments, solving puzzles and interacting with objects to reach the exit.
 
-This project consists of creating a game inspired by **Fish Fillets NG**.  
-The main goal is to develop the **game engine** that allows two user-controlled characters — the **small fish** and the **big fish** — to navigate aquatic environments, interact with objects, and reach the exit in each level.  
-
-- Game type: Classic arcade
-- Characters: Small fish and big fish
-- Interactions: Movement, pushing objects, carrying objects, and avoiding hazards
-- Failure condition: Death of any character restarts the level
-
-> Original game videos: [YouTube Playlist](https://www.youtube.com/playlist?list=PL0YH3AsYQfx1julFNzXls1gd9ZRLPinv3)  
-> More info: [Fish Fillets NG - Wikipedia](https://en.wikipedia.org/wiki/Fish_Fillets_NG)  
+This project was developed in **Java** for the Object-Oriented Programming (POO) course, focusing on the application of design patterns, inheritance, polymorphism, and encapsulation.
 
 ---
 
-## 🏆 Project Objectives
+## 🚀 How to Play
 
-- Develop the **game engine** using the GUI provided by the instructors.
-- Allow the two fish to exit multiple aquatic environments while interacting with objects.
-- Ensure the engine is **flexible**, enabling new objects or behaviors to be added at any time.
-- Implement a **persistent highscore table** based on completion time and number of moves.
+### Controls
+The game is controlled via keyboard:
 
----
+| Key | Action |
+| :---: | --- |
+| **Arrows / WASD** | Move the currently selected fish |
+| **Space** | Switch between Small Fish and Big Fish |
+| **R** | Restart the current level |
 
-## 📋 Movement Rules
-
-### Small Fish
-- Can carry **only one light object** at a time
-- Can push **one light object** horizontally or vertically
-- Can pass through **walls with holes**
-- Objects being carried will **sink** if the fish moves horizontally
-
-### Big Fish
-- Can carry **multiple light objects or one heavy object**
-- Can push:
-  - Horizontally: multiple light or heavy objects
-  - Vertically: only one light or heavy object
-- **Cannot pass through walls with holes**
-- Objects being carried will **sink** when moving horizontally
+### Main Rules
+1.  **Victory:** Both fish must leave the game grid to advance to the next level.
+2.  **Defeat:** If any fish dies (crushed, eaten, or exploded), the level must be restarted.
+3.  **Gravity:** Movable objects (except the fish) fall if they have no support, potentially causing damage.
 
 ---
 
-## 🧩 Object Behavior
+## 🧩 Game Elements
 
-### Movable Objects
-| Object   | Weight | Movement / Effect |
-|----------|--------|------------------|
-| Cup      | Light  | Can move in all 4 directions |
-| Stone    | Heavy  | Can move in all 4 directions |
-| Anchor   | Heavy  | Can move horizontally, 1 position |
-| Bomb     | Light  | Explodes when sinking, removes adjacent objects, may kill fish |
-| Trap     | Heavy  | Kills big fish; small fish can pass through |
+### 🐠 Characters
+* **Small Fish:**
+    * Can pass through **Holed Walls**.
+    * Can push only **1 light object**.
+    * Dies if supporting more than one light object or any heavy object.
+* **Big Fish:**
+    * Can push multiple light objects or heavy objects.
+    * **Cannot** pass through holed walls.
+    * Dies if supporting more than one heavy object.
 
-### Fixed Objects
-| Object           | Effect |
-|-----------------|--------|
-| Trunk            | Removed if a heavy object falls on it |
-| Vertical/Horizontal Steel Pipe   | Can support any object |
-| Wall             | Can support any object |
-| Holed Wall   | Can support any object but can be passed by small fish or bowls |
+### 📦 Objects and Interactions
 
----
-
-## 🕹️ Gameplay
-
-- Players must move **both fish** to the exit in each level.
-- Objects can have **positive or negative effects**:
-  - Positive: Allow access to the exit
-  - Negative: Kill a fish (e.g., falling objects)
-- Objects can be **single-use** (disappear after interaction) or **multi-use** (remain in the level).
-- Movement counters are updated in real-time in the **top information bar**.
+| Object | Type | Implemented Behavior |
+| :--- | :--- | :--- |
+| **Wall** | Fixed | Blocks movement. Supports any object. |
+| **Steel (Pipe)** | Fixed | Blocks movement. Indestructible. |
+| **Trunk (Wood)** | Fixed | Breaks and disappears if a heavy object falls on it. |
+| **Cup** | Light | Simple object subject to gravity. |
+| **Stone** | Heavy | Falls and can kill fish. **Extra:** Moving it might uncover a Krab. |
+| **Anchor** | Heavy | Horizontal movement is limited to 1 position per push. |
+| **Bomb** | Light | Explodes upon hitting the ground, destroying adjacent objects (except the fish carrying it). |
+| **Trap** | Heavy | Kills the Big Fish on touch. The Small Fish can pass through it. |
+| **Holed Wall** | Fixed | Allows the Small Fish to pass through. |
 
 ---
 
-## 🏅 Highscores
+## ✨ Extra Features (Creativity)
 
-- A **persistent highscore table** displays the **10 best scores**.
-- Scoring is based on:
-  - Completion time
-  - Number of moves per fish
-- Scores are stored on the system file to maintain them between sessions.
+Beyond the base requirements, advanced mechanics and unique objects were implemented:
+
+### 1. 🧱 Juan (Our Creation)
+A block with rudimentary "AI". When falling, if it encounters an obstacle, it attempts to **slide left or right** before stopping, making puzzles more dynamic and unpredictable.
+
+### 2. 🎈 Buoy
+An object with **inverted gravity**. Unlike other objects that fall, the buoy floats to the top of the screen if there are no obstacles. It can be used to block upper passages or lift other objects.
+
+### 3. 🦀 Krab (Enemy)
+An autonomous enemy that:
+* Moves randomly around the scenario.
+* Kills the **Small Fish** on touch.
+* Is crushed/eaten by the **Big Fish**.
+* *Spawn:* Can appear as a surprise when a Stone is moved.
+
+### 4. 💥 Visual Feedback (Particles)
+Implementation of temporary objects for visual feedback:
+* **Explosion:** Appears when a bomb detonates, removing itself automatically after a few ticks.
+* **Blood:** Appears when a fish or crab dies.
 
 ---
 
-## 📂 Resources
+## 🛠️ Architecture and Design Patterns
 
-- Images and assets used in the game come from [Fish Fillets NG](https://fillets.sourceforge.net/download.php) and are included in the `images/` folder.
+The project follows a robust modular architecture based on SOLID principles.
+
+### Class Hierarchy
+* **GameObject:** Abstract base class. Contains position, room reference, and base rendering logic (`ImageTile`).
+    * **MovableObject / NonMovableObject:** Primary behavior distinction.
+        * **HeavyObject / LightObject:** Defines strength rules for the fish interactions.
+    * **GameCharacter:** Base class for `SmallFish`, `BigFish`, and enemies, managing movement and death states.
+
+### Key Interfaces
+* **`Interactable`:** Allows each object to define its own logic when a fish tries to "enter" its cell (push, die, block, pass).
+* **`Gravity`:** Physics abstraction.
+    * Replacing the standard `fall()` method with `specialMov()` allowed the implementation of the **Buoy** (which goes up) and **Juan** (which slides sideways) using the same physics engine as the **Stone** (which goes down).
+
+### Design Patterns Used
+1.  **Singleton:** Used in `GameEngine`, `ImageGUI`, `SmallFish`, and `BigFish` to ensure unique instances and easy global access.
+2.  **Observer:** The `GameEngine` observes the `ImageGUI` to react to keyboard inputs.
+3.  **Factory Method (Simplified):** The file reader (`Room.java`) acts as a factory, instantiating the correct objects (`new Wall()`, `new Juan()`, etc.) based on the character read from the file.
+
+---
+
+## 🏆 Highscores
+The game maintains a persistent record of the **Top 10** best scores.
+* Criteria: **Lowest Time** (in ticks) and, in case of a tie, **Fewest Moves**.
+* Data is stored persistently in `gamedata/scores.txt`.
+
+---
+
+## 👨‍💻 Authors
+* **[Martim Barros](https://github.com/barrosw5)**
+* **[Pedro Coelho](https://github.com/pecoelho01)** 

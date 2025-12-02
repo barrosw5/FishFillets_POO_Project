@@ -35,7 +35,7 @@ public class GameEngine implements Observer {
     private BigFish bf = BigFish.getInstance();
 
     public GameEngine() {
-        // assegura que a diretoria exista
+        // garante que a pasta exista para nao dar erro
         new File("gamedata").mkdirs();
         
         loadGameRooms();
@@ -51,8 +51,9 @@ public class GameEngine implements Observer {
         updateScoresDisplay();
     }
 
-    // --- Loading & Saving (Com Throws) ---
+    // --- Loading e Saving ---
 
+    //carrega todos os niveis da a pasta rooms para o map
     private void loadGameRooms() {
         File dir = new File(ROOMS_DIR);
         if (!dir.exists()) {
@@ -68,6 +69,7 @@ public class GameEngine implements Observer {
         }
     }
 
+    //le os scores do ficheiro txt para a lista
     private void loadScores() throws IOException {
         File file = new File(SCORES_PATH);
         
@@ -84,6 +86,7 @@ public class GameEngine implements Observer {
                 String line = sc.nextLine();
                 processScoreLine(line);
             }
+            // ordena logo ao carregar
             scores.sort(null);
         }
     }
@@ -103,6 +106,7 @@ public class GameEngine implements Observer {
         // se nao forem linhas de 3 partes separadas por , ele ignora
     }
 
+    // guarda os top 10 scores no ficheiro
     private void saveScores() {
         scores.sort(null);
         while (scores.size() > 10) scores.remove(10);
@@ -117,7 +121,7 @@ public class GameEngine implements Observer {
         }
     }
 
-    // --- loop do jogo ---
+    // --- main game jogo ---
 
     @Override
     public void update(Observed source) {
@@ -128,6 +132,7 @@ public class GameEngine implements Observer {
 
         handleInput();
 
+        // sincroniza o tempo com os ticks
         int currentGuiTicks = ImageGUI.getInstance().getTicks();
         while (lastTickProcessed < currentGuiTicks) {
             processTick();
@@ -153,6 +158,7 @@ public class GameEngine implements Observer {
         }
     }
 
+    // trata do input do jogador
     private void handleInput() {
         if (!ImageGUI.getInstance().wasKeyPressed())
             return;
@@ -181,7 +187,8 @@ public class GameEngine implements Observer {
             case KeyEvent.VK_D:
                 GameCharacter activeFish = playingFish ? sf : bf;
                 activeFish.move(Direction.directionFor(k).asVector());
-                Krab.moveAllCrabs(currentRoom);
+                // move os inimigos (neste caso só o krab)
+                Krab.moveAllKrabs(currentRoom);
                 moves++;
                 break;
             default:
@@ -189,6 +196,7 @@ public class GameEngine implements Observer {
         }
     }
 
+    // atualiza tudo a cada tick
     private void processTick() {
         lastTickProcessed++;
         realTime++;
@@ -260,6 +268,7 @@ public class GameEngine implements Observer {
         bf.setDeadState(false);
     }
 
+    // coloca peixes na sua posição inicial
     private void setupFishesInRoom() {
         sf.setRoom(currentRoom);
         bf.setRoom(currentRoom);

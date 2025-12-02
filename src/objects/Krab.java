@@ -87,7 +87,7 @@ public class Krab extends LightObject implements Interactable, Gravity{
 
     // --- Método Estático para mover todos os caranguejos da sala ---
     
-    public static void moveAllCrabs(Room r) {
+    public static void moveAllKrabs(Room r) {
         List<Krab> krabs = new ArrayList<>();
         for (GameObject obj : r.getObjects()) {
             if (obj instanceof Krab) {

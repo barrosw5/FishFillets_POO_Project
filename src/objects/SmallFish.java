@@ -59,6 +59,7 @@ public class SmallFish extends GameCharacter {
 		return false;
 	}
 
+	// verifica se o peixe consegue suportar o peso
 	@Override
 	public boolean fishSupport() {
 		Point2D CurrentlyPos = getPosition();
@@ -79,12 +80,14 @@ public class SmallFish extends GameCharacter {
 				break;
 			}
 
+			// morre se tiver heavy object em cima
 			if (obj instanceof HeavyObject) {
 				return false;
 			}
 
 			movableCount++;
 
+			// so aguenta 1 objeto leve
 			if (movableCount > 1) {
 				return false;
 			}

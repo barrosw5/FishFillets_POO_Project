@@ -19,7 +19,7 @@ public class Anchor extends HeavyObject implements Interactable, Gravity {
 
     @Override
     public int getLayer() {
-        return 1;
+        return 2;
     }
 
     @Override

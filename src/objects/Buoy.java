@@ -43,6 +43,7 @@ public class Buoy extends LightObject implements Interactable, Gravity{
         }
         return true;
     }
+
     // O canSpecialMov da boia em vez de verificar o que está em baixo verifica o que está acima, basicamente 
     @Override
     public boolean canSpecialMov() {
@@ -56,7 +57,7 @@ public class Buoy extends LightObject implements Interactable, Gravity{
         return false;
     }
 
-    // O SpecialMov é que é um bocado diferente
+    // o specialmov faz a boia subir em vez de descer
     @Override
     public void specialmov() {
         Point2D pos = this.getPosition();

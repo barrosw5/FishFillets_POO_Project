@@ -73,7 +73,8 @@ public class Room {
         }
     }
 
-    public void resetResettable() {			// Reseta objetos não gameCharacters
+    // reseta objetos que nao sao gamecharacters
+    public void resetResettable() {	
         for (GameObject r : resettableObjects) {
             if (!(r instanceof GameCharacter)) {
                 r.reset();
@@ -98,7 +99,7 @@ public class Room {
             return r;
 
         } catch (FileNotFoundException e) {
-            System.err.println("Lembra-te lá de quando fizeste aquela função de ler o ficheiro de texto...");
+            System.err.println("Erro: Ficheiro não encontrado -> " + f.getAbsolutePath());
             return null;
         }
     }
@@ -107,7 +108,7 @@ public class Room {
         char[] chars = line.toCharArray();
         for (int x = 0; x < chars.length; x++) {
 
-            // adiciona sempre agua
+            // adiciona sempre agua no fundo
             GameObject water = new Water(r);
             water.setPosition(new Point2D(x, y));
             r.addObject(water);
@@ -116,6 +117,7 @@ public class Room {
         }
     }
 
+    // criador de objetos dependendo do caracter
     private static void createObjectFromChar(Room r, char c, int x, int y) {
         Point2D pos = new Point2D(x, y);
         GameObject obj = null;

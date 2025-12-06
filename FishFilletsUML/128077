@@ -1,0 +1,2252 @@
+format 224
+"FishFilletsUML" // FishFilletsUML
+  revision 13
+  modified_by 77 "Utilizador"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  classview 128077 "FishFilletsUML"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    classdiagram 128077 "FishFilletsUML"
+      classdiagramsettings draw_all_relations no member_max_width 0 end
+      size D
+    end
+
+    class 128077 "GameObject"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144333 // <realization>
+	relation 144333 -_-|>
+	  a public
+	    classrelation_ref 144333 // <realization>
+	  b parent class_ref 150605 // ImageTile
+      end
+
+      operation 128077 "getStartingPosition"
+	public return_type class_ref 151117 // Point2D
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128205 "setStartingPosition"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128333 "getBelow"
+	public return_type class_ref 151117 // Point2D
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128461 "getAbove"
+	public return_type class_ref 151117 // Point2D
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128589 "getAdjacentPositions"
+	public explicit_return_type "List<Point2D>"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128717 "getIsMovel"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128845 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128973 "pushObject"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129101 "applyGravity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129229 "findObject"
+	public return_type class_ref 128077 // GameObject
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129357 "isOutOfBounds"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129485 "removeObject"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129613 "die"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129741 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 128205 "GameCharacter"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128077 // <generalisation>
+	relation 128077 ---|>
+	  a public
+	    classrelation_ref 128077 // <generalisation>
+	  b parent class_ref 128077 // GameObject
+      end
+
+      operation 129869 "updateDirection"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129997 "getDirection"
+	public return_type class_ref 150989 // Direction
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130125 "setDirection"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130253 "hasWon"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130381 "resetWin"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130509 "hasDied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130637 "setDeadState"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130765 "die"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130893 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131021 "checkSurvivalStatus"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131149 "fishCanMove"
+	abstract cpp_virtual public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131277 "fishSupport"
+	abstract cpp_virtual public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 128333 "MovableObject"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128205 // <generalisation>
+	relation 128205 ---|>
+	  a public
+	    classrelation_ref 128205 // <generalisation>
+	  b parent class_ref 128077 // GameObject
+      end
+
+      operation 133453 "changeMovability"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 133581 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 128461 "NonMovableObject"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128333 // <generalisation>
+	relation 128333 ---|>
+	  a public
+	    classrelation_ref 128333 // <generalisation>
+	  b parent class_ref 128077 // GameObject
+      end
+    end
+
+    class 128589 "SmallFish"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128589 // <generalisation>
+	relation 128589 ---|>
+	  a public
+	    classrelation_ref 128589 // <generalisation>
+	  b parent class_ref 128205 // GameCharacter
+      end
+
+      operation 131661 "fishCanMove"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131789 "fishSupport"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 128717 "BigFish"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128461 // <generalisation>
+	relation 128461 ---|>
+	  a public
+	    classrelation_ref 128461 // <generalisation>
+	  b parent class_ref 128205 // GameCharacter
+      end
+
+      operation 131405 "fishCanMove"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131533 "fishSupport"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 128845 "Wall"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128845 // <generalisation>
+	relation 128845 ---|>
+	  a public
+	    classrelation_ref 128845 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+      classrelation 165325 // <realization>
+	relation 165325 -_-|>
+	  a public
+	    classrelation_ref 165325 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      operation 132941 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 128973 "SteelHorizontal"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128973 // <generalisation>
+	relation 128973 ---|>
+	  a public
+	    classrelation_ref 128973 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+      classrelation 165197 // <realization>
+	relation 165197 -_-|>
+	  a public
+	    classrelation_ref 165197 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      operation 132813 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129101 "Cup"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128717 // <generalisation>
+	relation 128717 ---|>
+	  a public
+	    classrelation_ref 128717 // <generalisation>
+	  b parent class_ref 128333 // MovableObject
+      end
+
+      classrelation 136653 // <generalisation>
+	relation 136653 ---|>
+	  a public
+	    classrelation_ref 136653 // <generalisation>
+	  b parent class_ref 136525 // LightObject
+      end
+
+      classrelation 166093 // <realization>
+	relation 166093 -_-|>
+	  a public
+	    classrelation_ref 166093 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 173261 // <realization>
+	relation 173261 -_-|>
+	  a public
+	    classrelation_ref 173261 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 139469 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 139597 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 139725 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 139853 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 139981 "CupPushBy"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129229 "Stone"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129229 // <generalisation>
+	relation 129229 ---|>
+	  a public
+	    classrelation_ref 129229 // <generalisation>
+	  b parent class_ref 128333 // MovableObject
+      end
+
+      classrelation 137037 // <generalisation>
+	relation 137037 ---|>
+	  a public
+	    classrelation_ref 137037 // <generalisation>
+	  b parent class_ref 136653 // HeavyObject
+      end
+
+      classrelation 165965 // <realization>
+	relation 165965 -_-|>
+	  a public
+	    classrelation_ref 165965 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 173645 // <realization>
+	relation 173645 -_-|>
+	  a public
+	    classrelation_ref 173645 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 134989 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135117 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135245 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135373 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135501 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135629 "trySpawnKrab"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135757 "canBePushed"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129357 "Bomb"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129101 // <generalisation>
+	relation 129101 ---|>
+	  a public
+	    classrelation_ref 129101 // <generalisation>
+	  b parent class_ref 128333 // MovableObject
+      end
+
+      classrelation 136781 // <generalisation>
+	relation 136781 ---|>
+	  a public
+	    classrelation_ref 136781 // <generalisation>
+	  b parent class_ref 136525 // LightObject
+      end
+
+      classrelation 166349 // <realization>
+	relation 166349 -_-|>
+	  a public
+	    classrelation_ref 166349 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 173133 // <realization>
+	relation 173133 -_-|>
+	  a public
+	    classrelation_ref 173133 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 140109 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 140237 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 140365 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 140493 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 140621 "BombPushBy"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129485 "Anchor"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129357 // <generalisation>
+	relation 129357 ---|>
+	  a public
+	    classrelation_ref 129357 // <generalisation>
+	  b parent class_ref 128333 // MovableObject
+      end
+
+      classrelation 136909 // <generalisation>
+	relation 136909 ---|>
+	  a public
+	    classrelation_ref 136909 // <generalisation>
+	  b parent class_ref 136653 // HeavyObject
+      end
+
+      classrelation 165709 // <realization>
+	relation 165709 -_-|>
+	  a public
+	    classrelation_ref 165709 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 173517 // <realization>
+	relation 173517 -_-|>
+	  a public
+	    classrelation_ref 173517 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 133709 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 133837 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 133965 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134093 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134221 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134349 "canPushby"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129613 "Trap"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129485 // <generalisation>
+	relation 129485 ---|>
+	  a public
+	    classrelation_ref 129485 // <generalisation>
+	  b parent class_ref 128333 // MovableObject
+      end
+
+      classrelation 137165 // <generalisation>
+	relation 137165 ---|>
+	  a public
+	    classrelation_ref 137165 // <generalisation>
+	  b parent class_ref 136653 // HeavyObject
+      end
+
+      classrelation 165837 // <realization>
+	relation 165837 -_-|>
+	  a public
+	    classrelation_ref 165837 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 173389 // <realization>
+	relation 173389 -_-|>
+	  a public
+	    classrelation_ref 173389 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 134477 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134605 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134733 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134861 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129741 "Trunk"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129741 // <generalisation>
+	relation 129741 ---|>
+	  a public
+	    classrelation_ref 129741 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+      classrelation 165069 // <realization>
+	relation 165069 -_-|>
+	  a public
+	    classrelation_ref 165069 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      operation 133069 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129869 "HoledWall"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129613 // <generalisation>
+	relation 129613 ---|>
+	  a public
+	    classrelation_ref 129613 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+      classrelation 165453 // <realization>
+	relation 165453 -_-|>
+	  a public
+	    classrelation_ref 165453 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      operation 133197 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 129997 "Water"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129869 // <generalisation>
+	relation 129869 ---|>
+	  a public
+	    classrelation_ref 129869 // <generalisation>
+	  b parent class_ref 128077 // GameObject
+      end
+    end
+
+    class 136525 "LightObject"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136397 // <generalisation>
+	relation 136397 ---|>
+	  a public
+	    classrelation_ref 136397 // <generalisation>
+	  b parent class_ref 128333 // MovableObject
+      end
+    end
+
+    class 136653 "HeavyObject"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136525 // <generalisation>
+	relation 136525 ---|>
+	  a public
+	    classrelation_ref 136525 // <generalisation>
+	  b parent class_ref 128333 // MovableObject
+      end
+    end
+
+    class 136781 "Score"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 144077 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 144205 "getScore"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 144333 "getMoves"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 144461 "compareTo"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 144589 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 136909 "Time"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 143565 "getMinutes"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 143693 "getSeconds"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 143821 "convert"
+	public return_type class_ref 136909 // Time
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 143949 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 137037 "SteelVertical"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 137293 // <generalisation>
+	relation 137293 ---|>
+	  a public
+	    classrelation_ref 137293 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+      classrelation 165581 // <realization>
+	relation 165581 -_-|>
+	  a public
+	    classrelation_ref 165581 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      operation 133325 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 137165 "Gravity"
+      visibility package stereotype "Interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 140749 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 140877 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 141005 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 143693 "GameEngine"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144205 // <realization>
+	relation 144205 -_-|>
+	  a public
+	    classrelation_ref 144205 // <realization>
+	  b parent class_ref 150861 // Observer
+      end
+
+      operation 141517 "loadGameRooms"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 141645 "loadScores"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 141773 "processScoreLine"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 141901 "saveScores"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142029 "checkWinConditions"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142157 "checkLossConditions"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142285 "handleInput"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142413 "updateStatusMessage"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142541 "updateScoresDisplay"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142669 "nextLevel"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142797 "resetLevel"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 142925 "performFullReset"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 143053 "setupFishesInRoom"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 143181 "handleGameCompletion"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 143309 "addOrUpdateScore"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 143437 "getPlayedLevels"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 143821 "Room"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 144845 "registerResettable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 144973 "resetResettable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 145101 "createObjectFromChar"
+	class_operation private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 145229 "processLine"
+	class_operation private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 145357 "addObject"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 145485 "removeObject"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 150349 "Main"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 144717 "main"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 150477 "ImageGUI"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144077 // <generalisation>
+	relation 144077 ---|>
+	  a public
+	    classrelation_ref 144077 // <generalisation>
+	  b parent class_ref 150733 // Observed
+      end
+    end
+
+    class 150605 "ImageTile"
+      visibility package stereotype "Interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 150733 "Observed"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 150861 "Observer"
+      visibility package stereotype "Interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 150989 "Direction"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144461 // <realization>
+	relation 144461 -_-|>
+	  a public
+	    classrelation_ref 144461 // <realization>
+	  b parent class_ref 151373 // Serializable
+      end
+
+      operation 141261 "directionFor"
+	class_operation public return_type class_ref 150989 // Direction
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 151117 "Point2D"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144589 // <realization>
+	relation 144589 -_-|>
+	  a public
+	    classrelation_ref 144589 // <realization>
+	  b parent class_ref 151373 // Serializable
+      end
+
+      operation 141389 "sameDirectionHorzontal"
+	class_operation public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 151245 "Vector2D"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144717 // <realization>
+	relation 144717 -_-|>
+	  a public
+	    classrelation_ref 144717 // <realization>
+	  b parent class_ref 151373 // Serializable
+      end
+    end
+
+    class 151373 "Serializable"
+      visibility package stereotype "Interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 164685 "Juan"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158285 // <generalisation>
+	relation 158285 ---|>
+	  a public
+	    classrelation_ref 158285 // <generalisation>
+	  b parent class_ref 136525 // LightObject
+      end
+
+      classrelation 166221 // <realization>
+	relation 166221 -_-|>
+	  a public
+	    classrelation_ref 166221 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 173005 // <realization>
+	relation 173005 -_-|>
+	  a public
+	    classrelation_ref 173005 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 137293 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 137421 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 137549 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 137677 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 137805 "leftPush"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 137933 "rightPush"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 138061 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 138189 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 138317 "JuanPushBy"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 138445 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 171213 "Interactable"
+      visibility package stereotype "Interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 141133 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 177741 "Krab"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173773 // <generalisation>
+	relation 173773 ---|>
+	  a public
+	    classrelation_ref 173773 // <generalisation>
+	  b parent class_ref 136525 // LightObject
+      end
+
+      classrelation 173901 // <realization>
+	relation 173901 -_-|>
+	  a public
+	    classrelation_ref 173901 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 174029 // <realization>
+	relation 174029 -_-|>
+	  a public
+	    classrelation_ref 174029 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 135885 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136013 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136141 "move"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136269 "canMoveTo"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136397 "handleFishInteraction"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136525 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136653 "moveAllCrabs"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136781 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 136909 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 137037 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 137165 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 177869 "Buoy"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174157 // <generalisation>
+	relation 174157 ---|>
+	  a public
+	    classrelation_ref 174157 // <generalisation>
+	  b parent class_ref 136525 // LightObject
+      end
+
+      classrelation 174285 // <realization>
+	relation 174285 -_-|>
+	  a public
+	    classrelation_ref 174285 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 174413 // <realization>
+	relation 174413 -_-|>
+	  a public
+	    classrelation_ref 174413 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+
+      operation 138573 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 138701 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 138829 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 138957 "canPushBy"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 139085 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 139213 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 139341 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 177997 "Blood"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174541 // <generalisation>
+	relation 174541 ---|>
+	  a public
+	    classrelation_ref 174541 // <generalisation>
+	  b parent class_ref 128077 // GameObject
+      end
+
+      operation 132429 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 132557 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 132685 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 178125 "Explosion"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174669 // <generalisation>
+	relation 174669 ---|>
+	  a public
+	    classrelation_ref 174669 // <generalisation>
+	  b parent class_ref 128077 // GameObject
+      end
+
+      operation 131917 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 132045 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 132173 "update"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 132301 "reset"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+  end
+end

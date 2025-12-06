@@ -1,0 +1,554 @@
+format 224
+
+classcanvas 128077 class_ref 128077 // GameObject
+  classdiagramsettings member_max_width 0 end
+  xyz 361.336 137.524 2000
+end
+classcanvas 128205 class_ref 128205 // GameCharacter
+  classdiagramsettings member_max_width 0 end
+  xyz 232.142 458.955 2000
+end
+classcanvas 129101 class_ref 128333 // MovableObject
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 1537.03 457.572 2000
+end
+classcanvas 129229 class_ref 128461 // NonMovableObject
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 541.368 458.146 2000
+end
+classcanvas 130125 class_ref 128589 // SmallFish
+  classdiagramsettings member_max_width 0 end
+  xyz 249.142 1747.21 2000
+end
+classcanvas 130253 class_ref 128717 // BigFish
+  classdiagramsettings member_max_width 0 end
+  xyz 126.198 1747.21 2000
+end
+classcanvas 130893 class_ref 128845 // Wall
+  classdiagramsettings member_max_width 0 end
+  xyz 690.812 1316.97 2000
+end
+classcanvas 131021 class_ref 128973 // SteelHorizontal
+  classdiagramsettings member_max_width 0 end
+  xyz 601.105 1403.12 2000
+end
+classcanvas 131149 class_ref 129101 // Cup
+  classdiagramsettings member_max_width 0 end
+  xyz 1449.71 1031.55 2005
+end
+classcanvas 131661 class_ref 129229 // Stone
+  classdiagramsettings member_max_width 0 end
+  xyz 912.609 1041.92 2000
+end
+classcanvas 131789 class_ref 129357 // Bomb
+  classdiagramsettings member_max_width 0 end
+  xyz 1539.03 1300.91 2000
+end
+classcanvas 132941 class_ref 129485 // Anchor
+  classdiagramsettings member_max_width 0 end
+  xyz 1191.12 752.019 2000
+end
+classcanvas 133197 class_ref 129613 // Trap
+  classdiagramsettings member_max_width 0 end
+  xyz 1052.67 1147.28 2000
+end
+classcanvas 133965 class_ref 129741 // Trunk
+  classdiagramsettings member_max_width 0 end
+  xyz 332.746 1661.71 2000
+end
+classcanvas 134093 class_ref 129869 // HoledWall
+  classdiagramsettings member_max_width 0 end
+  xyz 422.073 1575.18 2000
+end
+classcanvas 134989 class_ref 129997 // Water
+  classdiagramsettings member_max_width 0 end
+  xyz 40.2705 458.146 2000
+end
+classcanvas 136525 class_ref 136525 // LightObject
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 1550.03 597.589 2000
+end
+classcanvas 136653 class_ref 136653 // HeavyObject
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 1098.64 597.589 2000
+end
+classcanvas 139213 class_ref 136781 // Score
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 1346.18 112.616 2000
+end
+classcanvas 139597 class_ref 136909 // Time
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 1497.66 113.656 2000
+end
+classcanvas 139725 class_ref 137037 // SteelVertical
+  classdiagramsettings member_max_width 0 end
+  xyz 511.779 1489.65 2000
+end
+classcanvas 140237 class_ref 137165 // Gravity
+  classdiagramsettings member_max_width 0 end
+  color lightmagenta
+  xyz 1230.63 1101.61 2000
+end
+classcanvas 140621 class_ref 143693 // GameEngine
+  classdiagramsettings member_max_width 0 end
+  xyz 1724.65 112.64 2000
+end
+classcanvas 142029 class_ref 143821 // Room
+  classdiagramsettings member_max_width 0 end
+  xyz 988.82 113.956 2000
+end
+classcanvas 142157 class_ref 150349 // Main
+  classdiagramsettings member_max_width 0 end
+  xyz 1655.08 114.016 2000
+end
+classcanvas 142285 class_ref 150477 // ImageGUI
+  classdiagramsettings member_max_width 0 end
+  xyz 1197.8 194.756 2000
+end
+classcanvas 142413 class_ref 150605 // ImageTile
+  classdiagramsettings member_max_width 0 end
+  xyz 375.438 41.3442 2000
+end
+classcanvas 142541 class_ref 150733 // Observed
+  classdiagramsettings member_max_width 0 end
+  xyz 1199.8 114.756 2005
+end
+classcanvas 142669 class_ref 150861 // Observer
+  classdiagramsettings member_max_width 0 end
+  xyz 1746.65 16.16 2007
+end
+classcanvas 142925 class_ref 150989 // Direction
+  classdiagramsettings member_max_width 0 end
+  xyz 831.24 242.866 2006
+end
+classcanvas 143053 class_ref 151117 // Point2D
+  classdiagramsettings member_max_width 0 end
+  xyz 660.58 242.866 2000
+end
+classcanvas 143181 class_ref 151245 // Vector2D
+  classdiagramsettings member_max_width 0 end
+  xyz 558.14 245.136 2006
+end
+classcanvas 144845 class_ref 151373 // Serializable
+  classdiagramsettings member_max_width 0 end
+  xyz 682.58 113.376 2000
+end
+classcanvas 151757 class_ref 164685 // Juan
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  xyz 1834.04 1573.14 2000
+end
+classcanvas 153037 class_ref 171213 // Interactable
+  classdiagramsettings member_max_width 0 end
+  color lightmagenta
+  xyz 869.844 1525.69 2000
+end
+classcanvas 164045 class_ref 177741 // Krab
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  xyz 1718.39 1336.37 2006
+end
+classcanvas 167245 class_ref 177869 // Buoy
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  xyz 1360 1177.19 2006
+end
+classcanvas 171213 class_ref 177997 // Blood
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  xyz 388.438 457.821 2008
+end
+classcanvas 171469 class_ref 178125 // Explosion
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  xyz 127.948 457.793 2000
+end
+relationcanvas 128333 relation_ref 128077 // <generalisation>
+  geometry VHV unfixed
+  from ref 128205 z 2001 to point 288.8 418.4
+  line 176333 z 2001 to point 419.02 418.4
+  line 176461 z 2001 to ref 128077
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129357 relation_ref 128205 // <generalisation>
+  geometry VHV unfixed
+  from ref 129101 z 2001 to point 1586.56 418.34
+  line 172877 z 2001 to point 419.02 418.34
+  line 173005 z 2001 to ref 128077
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129485 relation_ref 128333 // <generalisation>
+  geometry VHV unfixed
+  from ref 129229 z 2001 to point 598 418.68
+  line 149965 z 2001 to point 419.02 418.68
+  line 150093 z 2001 to ref 128077
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130381 relation_ref 128461 // <generalisation>
+  geometry VHV unfixed
+  from ref 130253 z 2001 to point 165.54 1708.2
+  line 173389 z 2001 to point 288.8 1708.2
+  line 173517 z 2001 to ref 128205
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130509 relation_ref 128589 // <generalisation>
+  from ref 130125 z 2001 to ref 128205
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131405 relation_ref 128845 // <generalisation>
+  geometry VHV unfixed
+  from ref 130893 z 2001 to point 737.18 1277.98
+  line 172109 z 2001 to point 598 1277.98
+  line 176589 z 2001 to ref 129229
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131533 relation_ref 128973 // <generalisation>
+  geometry VHV unfixed
+  from ref 131021 z 2001 to point 648 1277.98
+  line 175437 z 2001 to point 598 1277.98
+  line 175565 z 2001 to ref 129229
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134221 relation_ref 129613 // <generalisation>
+  geometry VHV unfixed
+  from ref 134093 z 2001 to point 469.02 1277.98
+  line 159693 z 2001 to point 598 1277.98
+  line 176973 z 2001 to ref 129229
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134349 relation_ref 129741 // <generalisation>
+  geometry VHV unfixed
+  from ref 133965 z 2001 to point 379.22 1277.98
+  line 173901 z 2001 to point 598 1277.98
+  line 174029 z 2001 to ref 129229
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135117 relation_ref 129869 // <generalisation>
+  geometry VHV unfixed
+  from ref 134989 z 2001 to point 61.06 418.68
+  line 156877 z 2001 to point 419.02 418.68
+  line 157005 z 2001 to ref 128077
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136781 relation_ref 136397 // <generalisation>
+  from ref 136525 z 2001 to ref 129101
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136909 relation_ref 136525 // <generalisation>
+  geometry VHV unfixed
+  from ref 136653 z 2001 to point 1138.8 557.58
+  line 177101 z 2001 to point 1586.56 557.58
+  line 177229 z 2001 to ref 129101
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137037 relation_ref 136653 // <generalisation>
+  geometry VHV unfixed
+  from ref 131149 z 2006 to point 1496.76 991.02
+  line 160461 z 2006 to point 1586.56 991.02
+  line 171725 z 2006 to ref 136525
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137165 relation_ref 136781 // <generalisation>
+  from ref 131789 z 2001 to ref 136525
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137293 relation_ref 136909 // <generalisation>
+  geometry VHV unfixed
+  from ref 132941 z 2001 to point 1238.8 713.3
+  line 176717 z 2001 to point 1138.8 713.3
+  line 176845 z 2001 to ref 136653
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137421 relation_ref 137037 // <generalisation>
+  geometry VHV unfixed
+  from ref 131661 z 2001 to point 959.82 713.38
+  line 162381 z 2001 to point 1138.8 713.38
+  line 162509 z 2001 to ref 136653
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137549 relation_ref 137165 // <generalisation>
+  geometry VHV unfixed
+  from ref 133197 z 2001 to point 1099.62 713.3
+  line 174669 z 2001 to point 1138.8 713.3
+  line 174797 z 2001 to ref 136653
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139853 relation_ref 137293 // <generalisation>
+  geometry VHV unfixed
+  from ref 139725 z 2001 to point 558.2 1277.98
+  line 176077 z 2001 to point 598 1277.98
+  line 176205 z 2001 to ref 129229
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142797 relation_ref 144077 // <generalisation>
+  from ref 142285 z 2006 to ref 142541
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144589 relation_ref 144205 // <realization>
+  from ref 140621 z 2008 to ref 142669
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144717 relation_ref 144333 // <realization>
+  from ref 128077 z 2001 to ref 142413
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144973 relation_ref 144461 // <realization>
+  geometry VHV unfixed
+  from ref 142925 z 2007 to point 867 203.18
+  line 156621 z 2007 to point 724 203.18
+  line 156749 z 2007 to ref 144845
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145101 relation_ref 144589 // <realization>
+  from ref 143053 z 2001 to ref 144845
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145229 relation_ref 144717 // <realization>
+  geometry VHV unfixed
+  from ref 143181 z 2007 to point 588 204.6
+  line 173645 z 2007 to point 724 204.6
+  line 173773 z 2007 to ref 144845
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 151885 relation_ref 158285 // <generalisation>
+  geometry VHV unfixed
+  from ref 151757 z 2001 to point 1881.46 992.28
+  line 163277 z 2001 to point 1586.56 992.28
+  line 177485 z 2001 to ref 136525
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 153165 relation_ref 165069 // <realization>
+  geometry HV unfixed
+  from ref 133965 z 2001 to point 916.16 1682.08
+  line 155853 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 153293 relation_ref 165197 // <realization>
+  decenter_begin 808
+  decenter_end 379
+  from ref 131021 z 2001 to point 789.42 1442.88
+  line 154829 z 2001 to point 789.42 1548.6
+  line 154957 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 153421 relation_ref 165325 // <realization>
+  decenter_begin 808
+  decenter_end 142
+  from ref 130893 z 2001 to point 829.22 1355.94
+  line 155597 z 2001 to point 829.22 1531.06
+  line 155725 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 153549 relation_ref 165453 // <realization>
+  decenter_begin 211
+  decenter_end 90
+  from ref 134093 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 153677 relation_ref 165581 // <realization>
+  decenter_begin 808
+  decenter_end 634
+  from ref 139725 z 2001 to point 650.24 1528.2
+  line 157133 z 2001 to point 650.24 1564.52
+  line 157261 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 153805 relation_ref 165709 // <realization>
+  decenter_end 90
+  from ref 132941 z 2001 to point 1330.84 812.28
+  line 156365 z 2001 to point 1330.84 672.48
+  line 156493 z 2001 to point 872.88 673.5
+  line 177357 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 153933 relation_ref 165837 // <realization>
+  geometry VHV unfixed
+  decenter_begin 90
+  decenter_end 433
+  from ref 133197 z 2001 to point 1058 1277.98
+  line 174413 z 2001 to point 909 1277.98
+  line 174541 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 154061 relation_ref 165965 // <realization>
+  geometry VHV unfixed
+  decenter_begin 101
+  decenter_end 261
+  from ref 131661 z 2001 to point 919 1236.16
+  line 161613 z 2001 to point 892 1236.16
+  line 161741 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 154189 relation_ref 166093 // <realization>
+  decenter_end 908
+  from ref 131149 z 2006 to point 1678.6 1083.3
+  line 154573 z 2006 to point 1678.6 1485.54
+  line 154701 z 2006 to point 962.68 1486.56
+  line 175949 z 2006 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 154317 relation_ref 166221 // <realization>
+  decenter_begin 48
+  decenter_end 856
+  from ref 151757 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 154445 relation_ref 166349 // <realization>
+  geometry VHV unfixed
+  decenter_begin 101
+  decenter_end 767
+  from ref 131789 z 2001 to point 1546 1445.74
+  line 156109 z 2001 to point 942 1445.74
+  line 156237 z 2001 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158285 relation_ref 173005 // <realization>
+  decenter_end 372
+  from ref 151757 z 2001 to point 1973.5 1665.54
+  line 159181 z 2001 to point 1973.5 912.68
+  line 174157 z 2001 to point 1264.92 912.68
+  line 174285 z 2001 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158413 relation_ref 173133 // <realization>
+  geometry HV unfixed
+  from ref 131789 z 2001 to point 1273.5 1351.86
+  line 163021 z 2001 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158541 relation_ref 173261 // <realization>
+  decenter_begin 718
+  decenter_end 96
+  from ref 131149 z 2006 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158669 relation_ref 173389 // <realization>
+  decenter_begin 405
+  decenter_end 892
+  from ref 133197 z 2001 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158797 relation_ref 173517 // <realization>
+  decenter_end 108
+  from ref 132941 z 2001 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158925 relation_ref 173645 // <realization>
+  decenter_end 96
+  from ref 131661 z 2001 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 164173 relation_ref 173773 // <generalisation>
+  geometry VHV unfixed
+  from ref 164045 z 2007 to point 1778.6 992.28
+  line 175693 z 2007 to point 1586.56 992.28
+  line 175821 z 2007 to ref 136525
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 164301 relation_ref 173901 // <realization>
+  decenter_begin 953
+  decenter_end 158
+  from ref 164045 z 2007 to point 1678.6 1524.72
+  line 166477 z 2007 to point 1678.6 1534.92
+  line 166605 z 2007 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 164429 relation_ref 174029 // <realization>
+  decenter_end 658
+  from ref 164045 z 2007 to point 1923.5 1436.56
+  line 164941 z 2007 to point 1923.5 952.48
+  line 175181 z 2007 to point 1290.04 952.48
+  line 175309 z 2007 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 168141 relation_ref 174157 // <generalisation>
+  geometry VHV unfixed
+  from ref 167245 z 2007 to point 1407.58 992.28
+  line 174925 z 2007 to point 1586.56 992.28
+  line 175053 z 2007 to ref 136525
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 168269 relation_ref 174285 // <realization>
+  geometry VHV unfixed
+  decenter_begin 101
+  decenter_end 606
+  from ref 167245 z 2007 to point 1367 1392.88
+  line 168525 z 2007 to point 926 1392.88
+  line 168653 z 2007 to ref 153037
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 168397 relation_ref 174413 // <realization>
+  decenter_begin 64
+  decenter_end 892
+  from ref 167245 z 2007 to ref 140237
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 171341 relation_ref 174541 // <generalisation>
+  from ref 171213 z 2009 to ref 128077
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 171597 relation_ref 174669 // <generalisation>
+  geometry VHV unfixed
+  from ref 171469 z 2001 to point 157.58 418.34
+  line 172237 z 2001 to point 419.02 418.34
+  line 172365 z 2001 to ref 128077
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+preferred_whz 0 0 1.10923
+end

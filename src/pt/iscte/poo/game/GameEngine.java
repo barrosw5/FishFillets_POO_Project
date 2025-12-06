@@ -196,7 +196,7 @@ public class GameEngine implements Observer {
                 GameCharacter activeFish = playingFish ? sf : bf;
                 activeFish.move(Direction.directionFor(k).asVector());
                 // move os inimigos (neste caso só o krab)
-                Krab.moveAllKrabs(currentRoom);
+                Krab.moveAllCrabs(currentRoom);
                 moves++;
                 break;
             default:

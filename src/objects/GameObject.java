@@ -117,8 +117,6 @@ public abstract class GameObject implements ImageTile {
         if (r == null) return;
 
         List<Gravity> gravityObjects = new ArrayList<>();
-        
-    
 
         for (GameObject obj : r.getObjects()) {
             if (obj instanceof Gravity) {

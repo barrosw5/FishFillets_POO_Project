@@ -47,7 +47,7 @@ public class BigFish extends GameCharacter {
 	}
 
 	// O método que ditas as condiçõs para o peixe se mover ou não 
-
+	@Override
 	public boolean fishCanMove(Point2D pos, Vector2D dir) {
 		if (hasWon()) // Se já venceu, não mexe 
 			return false;

@@ -22,9 +22,6 @@ public abstract class GameCharacter extends GameObject {
         if (vec == null) { // Se o vetor for nulo ele lança logo uma exceção. 
             throw new IllegalArgumentException("O vetor de movimento não pode ser nulo.");
         }
-
-
-
         Point2D startPosition = getPosition(); // Vai muscar a posição em que o peixe está com o getPosition
         updateDirection(vec); // Atualiza a direção . Exemplo: o vector é LEFT.asVector, então atualiza-se a direction para LEFT. Direction é uma variável definida no incio desta classe
 

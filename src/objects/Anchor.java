@@ -19,7 +19,7 @@ public class Anchor extends HeavyObject implements Interactable, Gravity {
 
     @Override
     public int getLayer() {
-        return 1;
+        return 2;
     }
 
     // No reset volta ao sítio inicial e volta a poder ser empurrada uma vez

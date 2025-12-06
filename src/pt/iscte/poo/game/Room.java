@@ -109,7 +109,7 @@ public class Room {
             return r;
 
         } catch (FileNotFoundException e) {
-            System.err.println("Lembra-te lá de quando fizeste aquela função de ler o ficheiro de texto...");
+            System.err.println("Erro: Ficheiro não encontrado -> " + f.getAbsolutePath());
             return null;
         }
     }
@@ -119,7 +119,7 @@ public class Room {
         char[] chars = line.toCharArray();
         for (int x = 0; x < chars.length; x++) {
 
-            // adiciona sempre agua
+            // adiciona sempre agua no fundo
             GameObject water = new Water(r);
             water.setPosition(new Point2D(x, y));
             r.addObject(water);

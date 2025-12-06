@@ -85,12 +85,14 @@ public class SmallFish extends GameCharacter {
 				break;
 			}
 
+			// morre se tiver heavy object em cima
 			if (obj instanceof HeavyObject) {
 				return false;
 			}
 
 			movableCount++;
 
+			// so aguenta 1 objeto leve
 			if (movableCount > 1) {
 				return false;
 			}

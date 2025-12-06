@@ -39,7 +39,7 @@ public class GameEngine implements Observer {
 
     // Construtor: garante diretoria, carrega rooms, scores e inicia GUI
     public GameEngine() {
-        // assegura que a diretoria exista
+        // garante que a pasta exista para nao dar erro
         new File("gamedata").mkdirs();
         
         loadGameRooms();
@@ -55,7 +55,7 @@ public class GameEngine implements Observer {
         updateScoresDisplay();
     }
 
-    // --- Loading & Saving (Com Throws) ---
+    // --- Loading e Saving ---
 
     // Varre a pasta rooms e cria as instâncias correspondentes
     private void loadGameRooms() {
@@ -90,6 +90,7 @@ public class GameEngine implements Observer {
                 String line = sc.nextLine();
                 processScoreLine(line);
             }
+            // ordena logo ao carregar
             scores.sort(null);
         }
     }
@@ -107,6 +108,7 @@ public class GameEngine implements Observer {
                 System.err.println("Score ignorado (formato inválido): " + line);
             }
         }
+        // se nao forem linhas de 3 partes separadas por , ele ignora
     }
 
     // Método em que basicamente salva os Scores
@@ -119,9 +121,12 @@ public class GameEngine implements Observer {
                 writer.println(s.getName() + "," + s.getScore() + "," + s.getMoves());
             }
         }
+        catch(IOException e){
+            System.err.println("Erro ao escrever no ficheiro de scores.txt");
+        }
     }
 
-    // --- loop do jogo ---
+    // --- main game jogo ---
 
     // Chamado pela GUI: trata vitória/derrota, input e ticks pendentes
     @Override
@@ -133,6 +138,7 @@ public class GameEngine implements Observer {
 
         handleInput();
 
+        // sincroniza o tempo com os ticks
         int currentGuiTicks = ImageGUI.getInstance().getTicks();
         while (lastTickProcessed < currentGuiTicks) {
             processTick();
@@ -189,7 +195,8 @@ public class GameEngine implements Observer {
             case KeyEvent.VK_D:
                 GameCharacter activeFish = playingFish ? sf : bf;
                 activeFish.move(Direction.directionFor(k).asVector());
-                Krab.moveAllCrabs(currentRoom);
+                // move os inimigos (neste caso só o krab)
+                Krab.moveAllKrabs(currentRoom);
                 moves++;
                 break;
             default:

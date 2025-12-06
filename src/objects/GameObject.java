@@ -125,7 +125,7 @@ public abstract class GameObject implements ImageTile {
         }
         
         for (Gravity g : gravityObjects) {
-            g.specialmov();
+            g.specialmov();     // chama o movimento especial (cair ou subir no caso da boia)
         }
     }
 

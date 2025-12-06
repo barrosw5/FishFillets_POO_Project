@@ -29,7 +29,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
    @Override
     public boolean canSpecialMov() {
         Point2D pos = this.getPosition();
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
+        Point2D below = getBelow(pos);
         GameObject obj = findObject(below, this.getRoom());
 
         if( obj == null )
@@ -113,7 +113,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
         }
 
         Point2D pos = getPosition();
-        Point2D upPos = new Point2D(pos.getX(), pos.getY() -1);
+        Point2D upPos = getAbove(pos);
         GameObject obj = findObject(upPos, this.getRoom());
 
         if ( obj == null) {

@@ -10,13 +10,19 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Room {
 
+    // Variáveis globais 
+
     private String roomName;
     private GameEngine engine;
+
+    // A lista de Objetos que está na Room
     private List<GameObject> objects;
     private List<GameObject> resettableObjects;
     private Point2D smallFishStartingPosition;
     private Point2D bigFishStartingPosition;
 
+   
+   // O Construtor da Room, inicializa as Listas 
     public Room() {
         objects = new ArrayList<>();
         resettableObjects = new ArrayList<>();
@@ -56,25 +62,28 @@ public class Room {
 
     // --- funções para objetos ---
 
+    // Adiciona objeto à sala e atualiza a GUI
     public void addObject(GameObject obj) {
         objects.add(obj);
         registerResettable(obj);
         if(engine != null) engine.updateGUI();
     }
 
+    // Remove objeto e força refresh na GUI
     public void removeObject(GameObject obj) {
         objects.remove(obj);
         if(engine != null) engine.updateGUI();
     }
 
+    // Mantém lista de objetos que podem ser repostos num reset
     public void registerResettable(GameObject r) {
         if (!resettableObjects.contains(r)) {
             resettableObjects.add(r);
         }
     }
 
-    // reseta objetos que nao sao gamecharacters
-    public void resetResettable() {	
+    // Faz reset a tudo o que não são GameCharacters
+    public void resetResettable() {			// Reseta objetos não gameCharacters
         for (GameObject r : resettableObjects) {
             if (!(r instanceof GameCharacter)) {
                 r.reset();
@@ -84,6 +93,7 @@ public class Room {
 
     // --- leitura do ficheiro txt ---
 
+    // Lê um ficheiro de room (10 linhas) e cria a respetiva instância
     public static Room readRoom(File f, GameEngine engine) {
         try (Scanner sc = new Scanner(f)) {
             Room r = new Room();
@@ -104,6 +114,7 @@ public class Room {
         }
     }
 
+    // Processa uma linha do ficheiro (y) criando água + objetos dessa linha
     private static void processLine(Room r, String line, int y) {
         char[] chars = line.toCharArray();
         for (int x = 0; x < chars.length; x++) {
@@ -117,7 +128,7 @@ public class Room {
         }
     }
 
-    // criador de objetos dependendo do caracter
+    // Tradução de cada char do mapa para o objeto correspondente
     private static void createObjectFromChar(Room r, char c, int x, int y) {
         Point2D pos = new Point2D(x, y);
         GameObject obj = null;

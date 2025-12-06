@@ -7,4 +7,6 @@ public abstract class HeavyObject extends MovableObject{
     public HeavyObject(Room room) {
         super(room);
     }    
+
+    // Marcador para objetos pesados (pedra, âncora, etc.) que só o BigFish consegue empurrar
 }

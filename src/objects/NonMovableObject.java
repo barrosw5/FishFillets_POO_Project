@@ -8,5 +8,6 @@ public abstract class NonMovableObject extends GameObject{
     public NonMovableObject( Room room) {
         super(room, isMovable);
     }
-    
+
+    // Base para obstáculos fixos (paredes, troncos, aço, etc.)
 }

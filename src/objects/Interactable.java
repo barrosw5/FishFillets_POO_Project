@@ -4,5 +4,6 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public interface Interactable {
+    // Interface comum para objetos que reagem a um peixe (entrar, empurrar, etc.)
     boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir);
 }

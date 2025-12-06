@@ -5,6 +5,7 @@ public class Score implements Comparable<Score> {
     private int scoreInTicks;   // 1 tick == 1 segundo
     private int moves;
 
+    // Guarda um registo de pontuação para o quadro de scores
     public Score(String name, int score, int moves) {
         this.name = name;
         this.scoreInTicks = score;
@@ -23,6 +24,8 @@ public class Score implements Comparable<Score> {
         return moves;
     }
 
+    // Função para comprar Scores, serve essencialmente para ordená-los. 
+
     @Override
     public int compareTo(Score other) {
         if (this.scoreInTicks != other.scoreInTicks) {
@@ -31,6 +34,7 @@ public class Score implements Comparable<Score> {
         return Integer.compare(this.moves, other.moves);
     }
 
+    // Converte o tempo em mm:ss para apresentação
     @Override
     public String toString() {
         int minutes = getScore() / 60;

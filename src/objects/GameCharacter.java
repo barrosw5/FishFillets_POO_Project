@@ -16,18 +16,19 @@ public abstract class GameCharacter extends GameObject {
         super(room, true); // true = isMovable
     }
     
+
+    // Função move dos "personagens": basicamente dos dois peixes. 
     public void move(Vector2D vec) { 
-        if (vec == null) {
+        if (vec == null) { // Se o vetor for nulo ele lança logo uma exceção. 
             throw new IllegalArgumentException("O vetor de movimento não pode ser nulo.");
         }
+        Point2D startPosition = getPosition(); // Vai muscar a posição em que o peixe está com o getPosition
+        updateDirection(vec); // Atualiza a direção . Exemplo: o vector é LEFT.asVector, então atualiza-se a direction para LEFT. Direction é uma variável definida no incio desta classe
 
-        Point2D startPosition = getPosition();
-        updateDirection(vec);
+        if (fishCanMove(startPosition, vec)) { // Se o peixe se puder mover, move
+            Point2D nextPos = startPosition.plus(vec);  // Encontra-se a nova pos
 
-        if (fishCanMove(startPosition, vec)) {
-            Point2D nextPos = startPosition.plus(vec);
-
-            if (isOutOfBounds(nextPos)) {
+            if (isOutOfBounds(nextPos)) { // Se tiver fora do "terreno" a próxima pos, significa que aquele peixe "já venceu", caso contrário, o peixe move-se para lá 
                 hasWon = true;
                 if (getRoom() != null) {
                     getRoom().removeObject(this);
@@ -37,6 +38,8 @@ public abstract class GameCharacter extends GameObject {
             }
         }
     }
+
+    // Atualiza a direção do peixe 
 
     private void updateDirection(Vector2D vec) {
         if (vec.equals(LEFT.asVector())) direction = LEFT;
@@ -73,11 +76,16 @@ public abstract class GameCharacter extends GameObject {
 
     // --- logica peixes ---
 
+
+    // Verifica se o peixe pode viver ou não. Ela é chamada a cada Tick (tempo do jogo)
+
     public static void checkSurvivalStatus(Room r, GameCharacter fish) {
         if (fish != null && !fish.fishSupport()) {
             fish.die(fish);
         }
     }
+
+    // Funções abstrastra presente em cada peixe
 
     public abstract boolean fishCanMove(Point2D pos, Vector2D dir);
     public abstract boolean fishSupport();

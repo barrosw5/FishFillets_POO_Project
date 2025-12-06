@@ -4,12 +4,12 @@ import pt.iscte.poo.game.Room;
 
 public abstract class MovableObject extends GameObject {
     private static boolean isMovable = true;
-    private boolean controlDown = false; 
     
     public MovableObject(Room room) {
         super(room, isMovable);
     }
 
+    // Permite alternar o estado global de movimentação dos móveis (se for necessário bloquear tudo)
     public void changeMovability(){
         isMovable = !isMovable;
     }
@@ -17,7 +17,6 @@ public abstract class MovableObject extends GameObject {
     @Override
     public void reset() {
         super.reset();
-        controlDown = false;    // para a bomba nao pensar que ainda está a cair
     }
 
 }

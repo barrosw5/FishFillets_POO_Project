@@ -139,7 +139,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
     public boolean JuanPushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 		GameObject obj = findObject(to, fish.getRoom());
 
-		if ( fish instanceof BigFish ) { // Se o bigFish tentar empurrá-lo morre§
+		if ( fish instanceof BigFish ) { // Se o bigFish tentar empurrá-lo morre
             fish.die(fish);
             return false;
 		}

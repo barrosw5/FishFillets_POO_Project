@@ -8,6 +8,7 @@ public class Water extends GameObject{
 		super(room, true);
 	}
 
+	// Tile de fundo da sala
 	@Override
 	public String getName() {
 		return "water";

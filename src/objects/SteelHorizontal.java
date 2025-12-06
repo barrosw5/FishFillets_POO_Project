@@ -20,6 +20,7 @@ public class SteelHorizontal extends NonMovableObject implements Interactable {
 		return 1;
 	}
 
+	// Não permite atravessar nem ser empurrado
 	@Override
 	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 		return false;

@@ -22,6 +22,7 @@ public class Anchor extends HeavyObject implements Interactable, Gravity {
         return 1;
     }
 
+    // No reset volta ao sítio inicial e volta a poder ser empurrada uma vez
     @Override
     public void reset(){
         if (getStartingPosition() != null)
@@ -29,18 +30,20 @@ public class Anchor extends HeavyObject implements Interactable, Gravity {
         super.reset();
     }
 
+   // Só cai se a posição de baixo estiver vazia
    @Override
     public boolean canSpecialMov() {
-        Point2D pos = this.getPosition();
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1);
-        GameObject obj = findObject(below, this.getRoom());
+        Point2D pos = this.getPosition(); // Pega a pos do objeto 
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1); // a posição abaico do obj
+        GameObject obj = findObject(below, this.getRoom()); // e o obj abaixo da âncora
 
-        if(obj == null )
+        if(obj == null ) // se for vazio pode descer, caso contrário não 
             return true;
 
         return false;
     }
 
+    // Cai até assentar e depois ativa a habilidade especial
     @Override
     public void specialmov() {
         if (canSpecialMov()) {
@@ -55,59 +58,55 @@ public class Anchor extends HeavyObject implements Interactable, Gravity {
             controlDown = false;
         }
     }
+
+    // Quando "assenta" destrói o que estiver imediatamente abaixo, nomeadamente o SF e o Trunk 
     @Override
     public void specialAbillity() {
-        Point2D currenbtlyPos = this.getPosition();
-        Point2D belowPos = getBelow(currenbtlyPos);
+        Point2D currenbtlyPos = this.getPosition(); // pega pos da âncora
+        Point2D belowPos = getBelow(currenbtlyPos); // a pos abaixo da âncora 
+        GameObject remove = findObject(belowPos, getRoom()); // procura objeto que está embaixo 
 
-        Point2D [] area = {belowPos};
-
-        for ( Point2D pos: area) {
-            GameObject remove = GameObject.findObject(pos, getRoom());
-
-            if ( remove instanceof Water) {
-                continue;
-            }
-            if ( remove instanceof SmallFish) {
-                ((SmallFish) remove).die(remove);
-            }
-            if ( remove instanceof Trunk) {
-                this.getRoom().removeObject(remove);
-            }
+        if (remove instanceof SmallFish) { // se for o smalFish mata-o
+            ((SmallFish) remove).die(remove);
+        }
+        if (remove instanceof Trunk) { // se for o tronco destroi-o
+            this.getRoom().removeObject(remove);
         }
     }
 
+    // Interação com peixe: só pode ser empurrada uma vez e apenas na horizontal pelo BigFish
     @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
-        if ( canPushby(fish, from, to, dir)) {
-            pushObject(this, from, to);
+        if ( canPushby(fish, from, to, dir)) { // verifica se pode ser "empurrado" 
+            pushObject(this, from, to); // se sim, faz isso 
             return true;
         }
         return false;
     }
 
 
-    private boolean canPushby(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
-        if (MovedOnce) {
+    // Valida se o BigFish a consegue empurrar naquela direção
+    private boolean canPushby(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) { 
+        if (MovedOnce) { // Verifica se já foi movido
             return false;
         }
-        if (!Point2D.sameDirectionHorzontal(from, to)) {
-            return false;
-        }
-
-        if ( ! (fish instanceof BigFish )) {
+        if (!Point2D.sameDirectionHorzontal(from, to)) { // Se está a ser empurrado na mesma direção, no caso horizontal 
             return false;
         }
 
-        GameObject obj = findObject(to, fish.getRoom());
+        if ( ! (fish instanceof BigFish )) { // Se é ou ñ o BF a tentar empurrar
+            return false;
+        }
 
-         if ( obj instanceof Interactable ) {
-				Point2D PlusPos = to.plus(dir);
+        GameObject obj = findObject(to, fish.getRoom()); // procura o objeto que está a seguir ao objeto 
+
+         if ( obj instanceof Interactable ) { // se for um interável vai faz uma espécie de recursividade 
+				Point2D PlusPos = to.plus(dir); // o que está à frente desse objeto 
                 MovedOnce = true;
-				return ((Interactable)obj).interactWithFish(fish, to, PlusPos, dir);
+				return ((Interactable)obj).interactWithFish(fish, to, PlusPos, dir); // e chama pela função de interação desse objeto 
 			}
 
-        if ((obj instanceof NonMovableObject || obj instanceof MovableObject || obj instanceof GameCharacter)) {
+        if ((obj instanceof NonMovableObject || obj instanceof MovableObject || obj instanceof GameCharacter)) { // se for algum destes objetos não avança 
             return false;
         }
     

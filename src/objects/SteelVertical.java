@@ -10,6 +10,7 @@ public class SteelVertical extends NonMovableObject implements Interactable{
 		super(room);
 	}
 
+
 	@Override
 	public String getName() {
 		return "steelVertical";
@@ -20,6 +21,7 @@ public class SteelVertical extends NonMovableObject implements Interactable{
 		return 1;
 	}
 
+	// Atua como parede intransponível
 	@Override
 	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 		return false;

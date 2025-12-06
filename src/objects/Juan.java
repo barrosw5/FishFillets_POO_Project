@@ -13,6 +13,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
         super(room);
     }
 
+    // Um personagem especial com movimento próprio
     @Override
     public String getName() {
         return "juan";
@@ -23,6 +24,8 @@ public class Juan extends LightObject implements Interactable, Gravity{
         return 1;
     }
 
+   // Ele tem um movimento especial, que consiste no seguinte: começa por descer se puder, depois vai para a esq, sobe, desce, e vai para a esq, até não conseguir mais
+   // Quando não consegue mais ir para a esq, vai para a direita e repete o procedimento até não puder mais, voltando outra vez para a esquerda 
    @Override
     public boolean canSpecialMov() {
         Point2D pos = this.getPosition();
@@ -35,6 +38,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
         return false;
     }
 
+    // Primeiro desce; depois alterna entre esquerda/direita e tenta subir
     @Override
     public void specialmov() {
         if (canSpecialMov() && downDone == false) {
@@ -52,6 +56,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
         
     }
 
+    // Empurra para a esquerda se estiver livre
     private boolean leftPush(Point2D currentPos) {
         Point2D leftPos = new Point2D(currentPos.getX() - 1, currentPos.getY());
         GameObject leftObj = findObject(leftPos, getRoom());
@@ -63,6 +68,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
         return false;
     }
 
+     // Empurra para a direita se estiver livre
      private boolean rightPush(Point2D currentPos) {
         Point2D rightPos = new Point2D(currentPos.getX() + 1, currentPos.getY());
         GameObject rightObj = findObject(rightPos, getRoom());
@@ -75,6 +81,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
     }
     
     
+    // Tenta deslocar-se lateralmente e depois tenta subir 
     @Override
     public void specialAbillity() {   
         if ( controlOne < 1) {
@@ -119,6 +126,7 @@ public class Juan extends LightObject implements Interactable, Gravity{
         }
     }
 
+    // Se o BigFish o empurrar, morre; caso contrário segue regras normais de bloqueio
     @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         	if ( JuanPushBy(fish, from, to, dir)) {
@@ -131,17 +139,18 @@ public class Juan extends LightObject implements Interactable, Gravity{
     public boolean JuanPushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 		GameObject obj = findObject(to, fish.getRoom());
 
-		if ( fish instanceof BigFish ) {
+		if ( fish instanceof BigFish ) { // Se o bigFish tentar empurrá-lo morre§
             fish.die(fish);
             return false;
 		}
 
 		if ( (obj instanceof MovableObject || obj instanceof NonMovableObject || obj instanceof GameCharacter) && !(obj instanceof HoledWall)) {
-			return false;
+			return false; // Se tiver estes objetos à frente não move
 		}
 		return true;
 	}
 
+    // Repõe estado interno para repetir o padrão de movimento
      @Override
     public void reset(){
         super.reset();

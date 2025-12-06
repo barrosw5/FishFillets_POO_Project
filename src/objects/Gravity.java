@@ -1,13 +1,8 @@
 package objects;
 
-
-// A Interface Gravity passa a estar integrada diretamente em cada objeto em vez de na classe Movable
-// Isto acontece porque a partir de agora nem todos têm os mesmo movimentos por ação da gravidade
-// Uns sobem (outros deixem)
-// Por isso é que também mudei o nome dos métodos. Passou de canFall para canSpecialNov e de fall para specialMov 
-// Se quiseres mudar o nome estás à vontade. Tens mais criatividade do que eu, portanto, tua escolha
+// Interface a implementar nos objetos que têm movimentos que ocorrem conforme os ticks do jogo 
 public interface Gravity {
-    public boolean canSpecialMov();
-    public void specialmov();
-    public void specialAbillity();
+    public boolean canSpecialMov(); // Verifica se esse movimento pode ocorrer
+    public void specialmov(); // O movimento em si 
+    public void specialAbillity(); // E se há algum tipo de habilidade especial no fnal do movimento 
 }

@@ -22,7 +22,7 @@ public class Explosion extends GameObject{
         return 2;
     }
 
-    // gere todas as explosões da sala
+    // Gere todas as explosões da sala e remove as que já passaram o tempo de vida
     public static void update(Room room) {
         room.getObjects().removeIf(obj -> {
             if (obj instanceof Explosion) {
@@ -34,6 +34,7 @@ public class Explosion extends GameObject{
         });
     }
 
+    // Num reset também desaparece
     @Override
     public void reset(){
         getRoom().removeObject(this);

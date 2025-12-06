@@ -25,6 +25,8 @@ public class BigFish extends GameCharacter {
 	public static BigFish getInstance() {
 		return bf;
 	}
+
+	// Função que vai mudar a imagem do peixe coforme a direção que ele segue
 	
 	@Override
 	public String getName() {
@@ -44,19 +46,21 @@ public class BigFish extends GameCharacter {
 		return 2;
 	}
 
+	// O método que ditas as condiçõs para o peixe se mover ou não 
+
 	public boolean fishCanMove(Point2D pos, Vector2D dir) {
-		if (hasWon())
+		if (hasWon()) // Se já venceu, não mexe 
 			return false;
 
-		Point2D finalPos = pos.plus(dir);
-		GameObject obj = findObject(finalPos, getRoom());
-		Point2D finalObjPos = finalPos.plus(dir);
+		Point2D finalPos = pos.plus(dir); // verifica pos para onde se quer deslocar
+		GameObject obj = findObject(finalPos, getRoom()); // encontra o obj presente na pos para onde quer ir 
+		Point2D finalObjPos = finalPos.plus(dir); // a pos após aquela para onde o peixe quer ir
 
-		if ( obj == null) {
+		if ( obj == null) { // se não houver nenhum obj nessa pos ele move-se
 			return true;
 		}
 
-		if ( obj instanceof Interactable) {
+		if ( obj instanceof Interactable) { // se houver um e for Interactable vai retornar true ou falso conforme o que as restrições que o obj tem definidas
 			return ((Interactable) obj).interactWithFish(this, finalPos, finalObjPos, dir);
 		}
 
@@ -64,32 +68,35 @@ public class BigFish extends GameCharacter {
 
 	}
 
+
+	// Função fishSupport: esta é chamada pela função heckSurvivalStatus do GC
+
 	@Override
 	public boolean fishSupport() {
-		Point2D CurrentlyPos = getPosition();
-		int lengthPos = CurrentlyPos.getY();
+		Point2D CurrentlyPos = getPosition(); // busca a pos onde está o peixe 
+		int lengthPos = CurrentlyPos.getY(); // // encontra o Y em que o peixe está
 
-		List<Point2D> posUp = new ArrayList<>(); 
+		List<Point2D> posUp = new ArrayList<>(); // Cria uma lista de pos
 
-		for ( int i = lengthPos - 1; i > 0; i--) {
+		for ( int i = lengthPos - 1; i > 0; i--) { // Preenche a lista com todas as pos acima do peixe
 			posUp.add( new Point2D(CurrentlyPos.getX(), i));
 		}
 
-		int countHeavy = 0;
+		int countHeavy = 0; // Var contadora
 
-		for ( Point2D objPos: posUp) {
+		for ( Point2D objPos: posUp) { // Um for para correr a lista
 			GameObject obj = findObject(objPos, getRoom());
 
-			if (!(obj instanceof MovableObject)) {
+			if (!(obj instanceof MovableObject)) { // Se não houver um movable naquela pos pára de verificar 
 				break;
 			}
 
-			if ( obj instanceof HeavyObject) {
+			if ( obj instanceof HeavyObject) { // Se houver um HeavyObject incrementa a var contadora
 				countHeavy ++;
 			}
 		}
 		
-		if ( countHeavy > 1) {
+		if ( countHeavy > 1) { // Se houver mais q um grande o peixe não suporta, caso contrário sim
 			return false;
 		}
 		return true;

@@ -9,7 +9,6 @@ public class Wall extends NonMovableObject implements Interactable{
 	public Wall(Room room) {
 		super(room);
 	}
-
 	@Override
 	public String getName() {
 		return "wall";
@@ -19,7 +18,7 @@ public class Wall extends NonMovableObject implements Interactable{
 	public int getLayer() {
 		return 1;
 	}
-
+	
 	@Override
 	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
 		return false;

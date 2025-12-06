@@ -9,6 +9,7 @@ public class Blood extends GameObject{
         super(position, room);
     }
 
+    // Representa o vestígio deixado quando um peixe morre
     @Override
     public String getName() {
         return "blood";
@@ -19,6 +20,7 @@ public class Blood extends GameObject{
         return 1;
     }
 
+    // Sangue desaparece num reset da sala
     @Override
     public void reset(){
         getRoom().removeObject(this);

@@ -5,7 +5,7 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public class Cup extends LightObject implements Interactable, Gravity{
-	private boolean controlDown = false;
+	private boolean downDone = false;
 
 	public Cup(Room room) {
 		super(room);
@@ -41,12 +41,12 @@ public class Cup extends LightObject implements Interactable, Gravity{
             Point2D pos = this.getPosition();
             Point2D below = getBelow(pos);
             pushObject(this, pos, below);
-            controlDown = true;
+            downDone = true;
         }
 
-        else if (controlDown && !canSpecialMov()) { // se não, ativa a habilidade especial, neste caso nenhuma
+        else if (downDone && !canSpecialMov()) { // se não, ativa a habilidade especial, neste caso nenhuma
             specialAbillity();
-            controlDown = false;
+            downDone = false;
         }
     }
 

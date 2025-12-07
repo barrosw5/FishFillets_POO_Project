@@ -6,7 +6,7 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public class Bomb extends LightObject implements Interactable, Gravity{
-	private boolean controlDown = false; 
+	private boolean downDone = false; 
 
 	public Bomb(Room room) {
 		super(room);
@@ -42,12 +42,12 @@ public class Bomb extends LightObject implements Interactable, Gravity{
             Point2D pos = this.getPosition(); // pos da bomba
             Point2D below = getBelow(pos); // abaixo dels
             pushObject(this, pos, below); // puxa a bomba para baixo 
-            controlDown = true;
+            downDone = true;
         }
 
-        else if (controlDown && !canSpecialMov()) { // caso não possa 
+        else if (downDone && !canSpecialMov()) { // caso não possa 
             specialAbillity(); // ativa a specialAbility, ou seja, a explosão 
-            controlDown = false;
+            downDone = false;
         }
     }
 
@@ -113,7 +113,7 @@ public class Bomb extends LightObject implements Interactable, Gravity{
 	@Override
 	public void reset(){
 		super.reset();
-		controlDown = false;
+		downDone = false;
 	}
 }
 

@@ -4,15 +4,15 @@ import pt.iscte.poo.game.Room;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Gate extends NonMovableObject implements Interactable{
+public class SpinningWheel extends NonMovableObject implements Interactable{
 
-    public Gate(Room r){
-        super(r);
+    public SpinningWheel(Room room) {
+        super(room);
     }
 
     @Override
     public String getName() {
-        return "gate";
+        return "spinningWheel";
     }
 
     @Override
@@ -20,10 +20,11 @@ public class Gate extends NonMovableObject implements Interactable{
         return 1;
     }
 
-
     @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
-        return false;
+        fish.spin();
+        return true;
     }
+
     
 }

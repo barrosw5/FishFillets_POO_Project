@@ -21,6 +21,7 @@ public class Key extends LightObject implements Interactable, Gravity{
         return 1;
     }
 
+    // se for para a posicao de um portão ambos desaparecem tipo a porta a abrir, senao pode ser empurrado por qualquer um
     @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         GameObject targetObj = findObject(to, this.getRoom());
@@ -38,7 +39,7 @@ public class Key extends LightObject implements Interactable, Gravity{
         return false;
     }
 
-
+    // mete a gravidade a funcionar daqui para baixo
     @Override
     public boolean canSpecialMov() {
         Point2D belowPos = this.getBelow(this.getPosition());

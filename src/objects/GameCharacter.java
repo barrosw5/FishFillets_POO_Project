@@ -11,6 +11,7 @@ public abstract class GameCharacter extends GameObject {
     private Direction direction = LEFT; 
     private boolean hasWon = false;
     private boolean hasDied = false;
+    private boolean spinned = false;
 
     public GameCharacter(Room room) {
         super(room, true); // true = isMovable
@@ -19,6 +20,10 @@ public abstract class GameCharacter extends GameObject {
 
     // Função move dos "personagens": basicamente dos dois peixes. 
     public void move(Vector2D vec) { 
+        if(hasSpinned()){
+            vec = new Vector2D(vec.getX() * -1, vec.getY() * -1);
+        }
+
         if (vec == null) { // Se o vetor for nulo ele lança logo uma exceção. 
             throw new IllegalArgumentException("O vetor de movimento não pode ser nulo.");
         }
@@ -64,6 +69,12 @@ public abstract class GameCharacter extends GameObject {
 
     public boolean hasDied() { return hasDied; }
     public void setDeadState(boolean t) { hasDied = t; }
+
+    public boolean hasSpinned() { return spinned; }
+
+    public void spin(){
+        spinned = ! spinned;
+    }
 
     @Override
     public void die(GameObject killed) {

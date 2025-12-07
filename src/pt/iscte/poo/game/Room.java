@@ -158,7 +158,7 @@ public class Room {
             case 'K': obj = new Key(r); break;
             case 'L': obj = new Spinach(r); break;
             case 'w': obj = new SpinningWheel(r); break;
-            //case 'c': obj = new Coin(r); break;
+            case 'c': obj = new Coin(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

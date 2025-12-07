@@ -149,6 +149,8 @@ public class Room {
             case 'X': obj = new HoledWall(r); break;
             case 'J': obj = new Juan(r); break;
             case 'U': obj = new Buoy(r); break;
+            case 'G': obj = new Gate(r); break;
+            case 'K': obj = new Key(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

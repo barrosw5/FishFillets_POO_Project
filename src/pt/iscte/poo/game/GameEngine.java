@@ -60,6 +60,10 @@ public class GameEngine implements Observer {
         return realTime;
     }
 
+    public void setRealTime(int time) {
+        realTime = time;
+    }
+
     // --- Loading e Saving ---
 
     // Varre a pasta rooms e cria as instâncias correspondentes

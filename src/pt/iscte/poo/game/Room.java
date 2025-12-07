@@ -119,6 +119,10 @@ public class Room {
         engine.setRealTime(timeFinal);
     }
 
+    public static void reduceTime(int time) {
+        reduceTime(time);
+    }
+
     // Processa uma linha do ficheiro (y) criando água + objetos dessa linha
     private static void processLine(Room r, String line, int y) {
         char[] chars = line.toCharArray();

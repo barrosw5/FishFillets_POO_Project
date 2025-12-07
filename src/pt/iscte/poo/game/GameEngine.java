@@ -292,7 +292,9 @@ public class GameEngine implements Observer {
         bf.setDirection(LEFT);
         sf.resetWin(); // reset as vitórias 
         bf.resetWin();
-
+        sf.resetSpinned();
+        bf.resetSpinned();
+        
         if (initialized || !currentRoom.getObjects().contains(sf)) currentRoom.addObject(sf);
         if (initialized || !currentRoom.getObjects().contains(bf)) currentRoom.addObject(bf);
         

@@ -20,7 +20,7 @@ public class Gate extends NonMovableObject implements Interactable{
         return 1;
     }
 
-
+    // nao é movivel por nada
     @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         return false;

@@ -20,11 +20,10 @@ public class SpinningWheel extends NonMovableObject implements Interactable{
         return 1;
     }
 
+    // quando um peixe passa pela roda rotativa ele inverte os comandos do peixe
     @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         fish.spin();
         return true;
     }
-
-    
 }

@@ -71,6 +71,7 @@ public abstract class GameCharacter extends GameObject {
     public void setDeadState(boolean t) { hasDied = t; }
 
     public boolean hasSpinned() { return spinned; }
+    public void resetSpinned() { spinned = false; }
 
     public void spin(){
         spinned = ! spinned;

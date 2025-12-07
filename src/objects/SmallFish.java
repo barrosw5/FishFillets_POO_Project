@@ -130,4 +130,14 @@ public class SmallFish extends GameCharacter {
 		super.reset();
 		superMoves = 0;
 	}
+
+	@Override
+	public boolean canPassSmallSpaces() {
+		return true;
+	}
+
+	@Override
+	public boolean canPushHeavyObjects() {
+		return false;
+	}
 }

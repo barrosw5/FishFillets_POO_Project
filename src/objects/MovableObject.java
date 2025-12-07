@@ -9,11 +9,6 @@ public abstract class MovableObject extends GameObject {
         super(room, isMovable);
     }
 
-    // Permite alternar o estado global de movimentação dos móveis (se for necessário bloquear tudo)
-    public void changeMovability(){
-        isMovable = !isMovable;
-    }
-
     @Override
     public void reset() {
         super.reset();

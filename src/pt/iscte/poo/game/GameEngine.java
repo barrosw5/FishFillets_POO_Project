@@ -55,6 +55,11 @@ public class GameEngine implements Observer {
         updateScoresDisplay();
     }
 
+
+    public int getRealTime() {
+        return realTime;
+    }
+
     // --- Loading e Saving ---
 
     // Varre a pasta rooms e cria as instâncias correspondentes

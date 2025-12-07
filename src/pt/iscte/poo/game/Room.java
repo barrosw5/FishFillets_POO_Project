@@ -114,6 +114,11 @@ public class Room {
         }
     }
 
+    public void reduceRealTime(int time)  {
+        int timeFinal = engine.getRealTime() - time;
+        engine.setRealTime(timeFinal);
+    }
+
     // Processa uma linha do ficheiro (y) criando água + objetos dessa linha
     private static void processLine(Room r, String line, int y) {
         char[] chars = line.toCharArray();
@@ -153,6 +158,7 @@ public class Room {
             case 'K': obj = new Key(r); break;
             case 'L': obj = new Spinach(r); break;
             case 'w': obj = new SpinningWheel(r); break;
+            //case 'c': obj = new Coin(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

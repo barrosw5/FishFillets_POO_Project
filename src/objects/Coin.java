@@ -19,7 +19,9 @@ public class Coin extends NonMovableObject implements Interactable {
         return 1;
     }
 
-     @Override
+
+    // se a moeda puder ser removida do jogo (sempre, praticamente), ele irá reduzir o tempo do player em 10s sempre q o fish comer uma. 
+    @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         if ( CoinPushBy(fish, from, to, dir)) {
             getRoom().reduceRealTime(10);
@@ -28,6 +30,8 @@ public class Coin extends NonMovableObject implements Interactable {
         }
         return false;
     }
+
+    // Basicamente, se for qql um dos fishes a tocar na coin, a moeda é removida do jogo 
     
     public boolean CoinPushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         GameObject.removeObject(this, getRoom());

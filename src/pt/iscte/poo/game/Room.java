@@ -114,6 +114,7 @@ public class Room {
         }
     }
 
+    // Função para reduzir o tempo do jogador em habilidade especial de algum tipo de objeto 
     public void reduceRealTime(int time)  {
         int timeFinal = engine.getRealTime() - time;
         if ( timeFinal < 0) {

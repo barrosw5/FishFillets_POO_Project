@@ -101,4 +101,7 @@ public abstract class GameCharacter extends GameObject {
 
     public abstract boolean fishCanMove(Point2D pos, Vector2D dir);
     public abstract boolean fishSupport();
+    public abstract boolean canPassSmallSpaces();
+    public abstract boolean canPushHeavyObjects();
+    
 }

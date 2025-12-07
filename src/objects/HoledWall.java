@@ -23,7 +23,7 @@ public class HoledWall extends NonMovableObject implements Interactable {
 	// Só o SmallFish consegue atravessar este obstáculo
 	@Override
 	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
-		return fish instanceof SmallFish;
+		return fish.canPassSmallSpaces();
 	}
 
 }

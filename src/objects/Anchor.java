@@ -94,7 +94,7 @@ public class Anchor extends HeavyObject implements Interactable, Gravity {
             return false;
         }
 
-        if ( !(fish instanceof BigFish )) { // se for um GC diferente do BF não pode movimentar a stone
+        if ( !fish.canPushHeavyObjects()) { // se for um GC diferente do BF não pode movimentar a stone
 			if(!((SmallFish) fish).hasSuperMoves())
 				return false; 
 		}

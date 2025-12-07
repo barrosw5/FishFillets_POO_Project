@@ -151,6 +151,7 @@ public class Room {
             case 'U': obj = new Buoy(r); break;
             case 'G': obj = new Gate(r); break;
             case 'K': obj = new Key(r); break;
+            case 'L': obj = new Spinach(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

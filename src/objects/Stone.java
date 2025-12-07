@@ -106,8 +106,9 @@ public class Stone extends HeavyObject implements Interactable, Gravity{
 	public boolean canBePushed(GameCharacter fish, Point2D from, Point2D to, Vector2D dir ) {
 		GameObject obj = findObject(to, fish.getRoom()) ; // verifica qual objeto é que está presente na posição à frente da stone 
 
-		if ( !(fish instanceof BigFish)) { // se for um GC diferente do BF não pode movimentar a stone
-			return false; 
+		if ( !(fish instanceof BigFish )) { // se for um GC diferente do BF não pode movimentar a stone
+			if(!((SmallFish) fish).hasSuperMoves())
+				return false; 
 		}
 
 		if ( obj instanceof Interactable ) { // se o obj for Interactable pode haver um movimento em cadeia e usamos a recursividade 

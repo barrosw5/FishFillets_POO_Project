@@ -17,6 +17,7 @@ public class SmallFish extends GameCharacter {
 	private static final String sfNameRight = "smallFishRight";
 	private static final String sfNameUp = "smallFishUp";
 	private static final String sfNameDown = "smallFishDown";
+	private int superMoves = 0;
 	
 	private SmallFish(Room room) {
 		super(room);
@@ -39,6 +40,10 @@ public class SmallFish extends GameCharacter {
 		if(getDirection() == DOWN)
 			return sfNameDown;
 		return null;
+	}
+
+	public boolean hasSuperMoves(){
+		return superMoves > 0;
 	}
 	
 	// O método que ditas as condiçõs para o peixe se mover ou não 
@@ -67,6 +72,9 @@ public class SmallFish extends GameCharacter {
 
 	@Override
 	public boolean fishSupport() {
+		if(superMoves > 0)
+			return true;
+
 		Point2D CurrentlyPos = getPosition(); // encontra a pos onde está o peixe
 		int lengthPos = CurrentlyPos.getY(); // encontra o Y em que o peixe está
 
@@ -99,5 +107,27 @@ public class SmallFish extends GameCharacter {
 		}
 		
 		return true;
+	}
+
+    public void activateSuperPower() {
+       this.superMoves = 10;
+    }
+
+	@Override
+	public void move(Vector2D vec){
+		super.move(vec);
+
+		if(superMoves > 0){
+			superMoves--;
+			if(superMoves == 0){
+				System.out.println("The effect finished");
+			}
+		}
+	}
+
+	@Override
+	public void reset(){
+		super.reset();
+		superMoves = 0;
 	}
 }

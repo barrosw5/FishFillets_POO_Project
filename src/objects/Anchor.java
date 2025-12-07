@@ -94,9 +94,10 @@ public class Anchor extends HeavyObject implements Interactable, Gravity {
             return false;
         }
 
-        if ( ! (fish instanceof BigFish )) { // Se é ou ñ o BF a tentar empurrar
-            return false;
-        }
+        if ( !(fish instanceof BigFish )) { // se for um GC diferente do BF não pode movimentar a stone
+			if(!((SmallFish) fish).hasSuperMoves())
+				return false; 
+		}
 
         GameObject obj = findObject(to, fish.getRoom()); // procura o objeto que está a seguir ao objeto 
 

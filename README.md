@@ -75,6 +75,24 @@ Implementation of temporary objects for visual feedback:
 * **Explosion:** Appears when a bomb detonates, removing itself automatically after a few ticks.
 * **Blood:** Appears when a fish or crab dies.
 
+### 5. 🔑 Key & Gate (Puzzle Mechanics)
+Classical lock and key mechanic implemented with physics:
+* **Key:** A **Light Object** (subject to gravity). It must be pushed onto the Gate's position.
+* **Gate:** A **Fixed Object** that blocks the path. It disappears (opens) only when the Key interacts with it.
+
+### 6. 🥬 Spinach (Power-up)
+A consumable item exclusive to the **Small Fish**.
+* **Effect:** When eaten, it grants the Small Fish "Super Strength" for **10 moves**.
+* During this state, the Small Fish can push **Heavy Objects** (like Stones or Anchors) without dying.
+
+### 7. 😵 Spinning Wheel (Trap)
+A mechanical device that disorients the fish.
+* **Interaction:** When a fish passes through the wheel, its movement controls are **inverted** (e.g., pressing Left makes the fish go Right).
+
+### 8. 🪙 Coin (Bonus)
+A collectible treasure found in the levels.
+* **Effect:** Collecting a coin subtracts **10 seconds** from the player's total time, helping achieve a better position on the Highscore board.
+
 ---
 
 ## 🛠️ Architecture and Design Patterns
@@ -108,4 +126,4 @@ The game maintains a persistent record of the **Top 10** best scores.
 
 ## 👨‍💻 Authors
 * **[Martim Barros](https://github.com/barrosw5)**
-* **[Pedro Coelho](https://github.com/pecoelho01)** 
+* **[Pedro Coelho](https://github.com/pecoelho01)**

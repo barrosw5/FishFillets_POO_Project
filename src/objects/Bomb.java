@@ -110,6 +110,11 @@ public class Bomb extends LightObject implements Interactable, Gravity{
 		return true; // se for o Smalfish e não houver nada à frente pode empurra a bomba
 	}
 
+	@Override
+	public void reset(){
+		super.reset();
+		controlDown = false;
+	}
 }
 
  

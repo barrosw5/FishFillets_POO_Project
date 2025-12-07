@@ -1,6 +1,6 @@
 format 224
 "FishFilletsUML" // FishFilletsUML
-  revision 13
+  revision 14
   modified_by 77 "Utilizador"
   // class settings
   
@@ -52,7 +52,7 @@ format 224
      end
     classdiagram 128077 "FishFilletsUML"
       classdiagramsettings draw_all_relations no member_max_width 0 end
-      size D
+      size E
     end
 
     class 128077 "GameObject"
@@ -349,6 +349,36 @@ format 224
 	
 	
       end
+
+      operation 152525 "hasSpinned"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 152653 "resetSpinned"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 152781 "spin"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
     end
 
     class 128333 "MovableObject"
@@ -500,13 +530,6 @@ format 224
 	  b parent class_ref 128461 // NonMovableObject
       end
 
-      classrelation 165325 // <realization>
-	relation 165325 -_-|>
-	  a public
-	    classrelation_ref 165325 // <realization>
-	  b parent class_ref 171213 // Interactable
-      end
-
       operation 132941 "interactWithFish"
 	public explicit_return_type "boolean"
 	nparams 0
@@ -533,13 +556,6 @@ format 224
 	  a public
 	    classrelation_ref 128973 // <generalisation>
 	  b parent class_ref 128461 // NonMovableObject
-      end
-
-      classrelation 165197 // <realization>
-	relation 165197 -_-|>
-	  a public
-	    classrelation_ref 165197 // <realization>
-	  b parent class_ref 171213 // Interactable
       end
 
       operation 132813 "interactWithFish"
@@ -1035,13 +1051,6 @@ format 224
 	  b parent class_ref 128461 // NonMovableObject
       end
 
-      classrelation 165069 // <realization>
-	relation 165069 -_-|>
-	  a public
-	    classrelation_ref 165069 // <realization>
-	  b parent class_ref 171213 // Interactable
-      end
-
       operation 133069 "interactWithFish"
 	public explicit_return_type "boolean"
 	nparams 0
@@ -1347,16 +1356,6 @@ format 224
 	  b parent class_ref 150861 // Observer
       end
 
-      operation 141517 "loadGameRooms"
-	private explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
       operation 141645 "loadScores"
 	private explicit_return_type "void"
 	nparams 0
@@ -1506,6 +1505,26 @@ format 224
 	
 	
       end
+
+      operation 152141 "getRealTime"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 152269 "setRealTime"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
     end
 
     class 143821 "Room"
@@ -1569,6 +1588,16 @@ format 224
       end
 
       operation 145485 "removeObject"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 152397 "reduceRealTime"
 	public explicit_return_type "void"
 	nparams 0
 	
@@ -2246,6 +2275,343 @@ ${members}};
 	
 	
 	
+      end
+    end
+
+    class 184653 "GameRoomsLoader"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 152013 "loadAllRooms"
+	public explicit_return_type "Map<String, Room>"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 184781 "Coin"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 152909 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 153037 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 153165 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 153293 "CoinPushBy"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 181197 // <generalisation>
+	relation 181197 ---|>
+	  a public
+	    classrelation_ref 181197 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+      classrelation 181325 // <realization>
+	relation 181325 -_-|>
+	  a public
+	    classrelation_ref 181325 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+    end
+
+    class 184909 "Gate"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 153421 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 153549 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 153677 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 181453 // <generalisation>
+	relation 181453 ---|>
+	  a public
+	    classrelation_ref 181453 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+    end
+
+    class 185037 "Key"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 153805 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 153933 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 154061 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 154189 "canSpecialMov"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 154317 "specialmov"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 154445 "specialAbillity"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 181709 // <generalisation>
+	relation 181709 ---|>
+	  a public
+	    classrelation_ref 181709 // <generalisation>
+	  b parent class_ref 136525 // LightObject
+      end
+
+      classrelation 181837 // <realization>
+	relation 181837 -_-|>
+	  a public
+	    classrelation_ref 181837 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+
+      classrelation 181965 // <realization>
+	relation 181965 -_-|>
+	  a public
+	    classrelation_ref 181965 // <realization>
+	  b parent class_ref 137165 // Gravity
+      end
+    end
+
+    class 185165 "Spinach"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 154573 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 154701 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 154829 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 182093 // <generalisation>
+	relation 182093 ---|>
+	  a public
+	    classrelation_ref 182093 // <generalisation>
+	  b parent class_ref 136525 // LightObject
+      end
+
+      classrelation 182221 // <realization>
+	relation 182221 -_-|>
+	  a public
+	    classrelation_ref 182221 // <realization>
+	  b parent class_ref 171213 // Interactable
+      end
+    end
+
+    class 185293 "SpinningWheel"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 154957 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 155085 "getLayer"
+	public explicit_return_type "int"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 155213 "interactWithFish"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 182349 // <generalisation>
+	relation 182349 ---|>
+	  a public
+	    classrelation_ref 182349 // <generalisation>
+	  b parent class_ref 128461 // NonMovableObject
+      end
+
+      classrelation 182477 // <realization>
+	relation 182477 -_-|>
+	  a public
+	    classrelation_ref 182477 // <realization>
+	  b parent class_ref 171213 // Interactable
       end
     end
   end

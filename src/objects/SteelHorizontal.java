@@ -1,10 +1,8 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
-import pt.iscte.poo.utils.Point2D;
-import pt.iscte.poo.utils.Vector2D;
 
-public class SteelHorizontal extends NonMovableObject implements Interactable {
+public class SteelHorizontal extends NonMovableObject{
 
 	public SteelHorizontal(Room room) {
 		super(room);
@@ -19,11 +17,4 @@ public class SteelHorizontal extends NonMovableObject implements Interactable {
 	public int getLayer() {
 		return 1;
 	}
-
-	// Não permite atravessar nem ser empurrado
-	@Override
-	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
-		return false;
-	}
-
 }

@@ -7,4 +7,4 @@ Nunes,52,160
 yay,54,240
 emilia,55,173
 Coelho,55,180
-juan,237,342
+juan,96,217

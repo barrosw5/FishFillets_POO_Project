@@ -14,10 +14,9 @@ import static pt.iscte.poo.utils.Direction.LEFT;
 public class GameEngine implements Observer {
 
     private static final String SCORES_PATH = "gamedata" + File.separator + "scores.txt";
-    private static final String ROOMS_DIR = "./rooms";
 
     // Estado do jogo: rooms carregadas e leaderboard
-    private Map<String, Room> rooms = new HashMap<>();
+    private Map<String, Room> rooms;
     private List<Score> scores = new ArrayList<>();
     
 
@@ -42,7 +41,12 @@ public class GameEngine implements Observer {
         // garante que a pasta exista para nao dar erro
         new File("gamedata").mkdirs();
         
-        loadGameRooms();
+        GameRoomsLoader loader = new GameRoomsLoader();
+        try {
+            this.rooms = loader.loadAllRooms(this);
+        } catch (Exception e) {
+            System.err.println("ERRO CRÍTICO: " + e.getMessage());
+        }
         
         try {
             loadScores();
@@ -65,22 +69,6 @@ public class GameEngine implements Observer {
     }
 
     // --- Loading e Saving ---
-
-    // Varre a pasta rooms e cria as instâncias correspondentes
-    private void loadGameRooms() {
-        File dir = new File(ROOMS_DIR); // usa a diretoria em que as rooms estão presentes 
-        if (!dir.exists()) { // se não existe ele lança um erro diz que não foram encontradas rooms 
-            System.err.println("Diretoria das rooms não encontrada: " + ROOMS_DIR);
-            return;
-        }
-
-        File[] files = dir.listFiles(); // exitindo, cria uma lista com em que cada indice representa um file
-        if (files != null) {
-            for (File f : files) { // percorre a Lista de files e adiciona no HashMap das Rooms o file que corresponde a cada Room
-                rooms.put(f.getName(), Room.readRoom(f, this)); // usa a função readRoom para ler o file em si e as informações 
-            }
-        }
-    }
 
     // Lê ficheiro de scores (cria se não existir) e ordena
     private void loadScores() throws IOException {

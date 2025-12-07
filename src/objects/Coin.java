@@ -34,7 +34,10 @@ public class Coin extends NonMovableObject implements Interactable {
     // Basicamente, se for qql um dos fishes a tocar na coin, a moeda é removida do jogo 
     
     public boolean CoinPushBy(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
-        GameObject.removeObject(this, getRoom());
-        return true;
+        if ( fish instanceof BigFish || fish instanceof SmallFish) {
+            GameObject.removeObject(this, getRoom());
+            return true;
+        }
+       return false;
     }
 }

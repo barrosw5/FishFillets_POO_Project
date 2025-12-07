@@ -1,0 +1,40 @@
+window_sizes 1920 1009 197 1718 963 0
+
+diagrams
+  active  classdiagram_ref 128077 // FishFilletsUML
+    1718 963 81 D 0 0
+end
+show_stereotypes
+selected operation_ref 145485 // removeObject
+open
+  class_ref 128077 // GameObject
+  class_ref 128205 // GameCharacter
+  class_ref 128333 // MovableObject
+  class_ref 128589 // SmallFish
+  class_ref 128717 // BigFish
+  class_ref 128845 // Wall
+  class_ref 128973 // SteelHorizontal
+  class_ref 129101 // Cup
+  class_ref 129229 // Stone
+  class_ref 129357 // Bomb
+  class_ref 129485 // Anchor
+  class_ref 129613 // Trap
+  class_ref 129741 // Trunk
+  class_ref 129869 // HoledWall
+  class_ref 136781 // Score
+  class_ref 136909 // Time
+  class_ref 137037 // SteelVertical
+  class_ref 137165 // Gravity
+  class_ref 143693 // GameEngine
+  class_ref 143821 // Room
+  class_ref 150349 // Main
+  class_ref 150989 // Direction
+  class_ref 151117 // Point2D
+  class_ref 164685 // Juan
+  class_ref 171213 // Interactable
+  class_ref 177741 // Krab
+  class_ref 177869 // Buoy
+  class_ref 177997 // Blood
+  class_ref 178125 // Explosion
+end
+end

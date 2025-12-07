@@ -1,6 +1,6 @@
 format 224
 "FishFilletsUML" // FishFilletsUML
-  revision 14
+  revision 15
   modified_by 77 "Utilizador"
   // class settings
   
@@ -372,6 +372,26 @@ format 224
 
       operation 152781 "spin"
 	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 162381 "canPassSmallSpaces"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 162509 "canPushHeavyObjects"
+	public explicit_return_type "boolean"
 	nparams 0
 	
 	
@@ -1356,36 +1376,6 @@ format 224
 	  b parent class_ref 150861 // Observer
       end
 
-      operation 141645 "loadScores"
-	private explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 141773 "processScoreLine"
-	private explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 141901 "saveScores"
-	private explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
       operation 142029 "checkWinConditions"
 	private explicit_return_type "void"
 	nparams 0
@@ -1477,16 +1467,6 @@ format 224
       end
 
       operation 143181 "handleGameCompletion"
-	private explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 143309 "addOrUpdateScore"
 	private explicit_return_type "void"
 	nparams 0
 	
@@ -2410,7 +2390,6 @@ ${members}};
 	    classrelation_ref 181453 // <generalisation>
 	  b parent class_ref 128461 // NonMovableObject
       end
-
     end
 
     class 185037 "Key"
@@ -2612,6 +2591,67 @@ ${members}};
 	  a public
 	    classrelation_ref 182477 // <realization>
 	  b parent class_ref 171213 // Interactable
+      end
+    end
+
+    class 191821 "ScoreManager"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 161741 "getScores"
+	public explicit_return_type "List<Score>"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 161869 "loadScores"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 161997 "processScoreLine"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 162125 "saveScores"
+	private explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 162253 "addOrUpdateScore"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
       end
     end
   end

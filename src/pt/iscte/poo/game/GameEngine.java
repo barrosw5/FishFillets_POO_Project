@@ -59,11 +59,8 @@ public class GameEngine implements Observer {
     public int getRealTime() {
         return realTime;
     }
-    public void setRealTime(int time){
-        realTime = time;
-    }
 
-    public void setRealTime(int time) {
+    public void setRealTime(int time){
         realTime = time;
     }
 

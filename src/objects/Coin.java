@@ -22,7 +22,7 @@ public class Coin extends NonMovableObject implements Interactable {
      @Override
     public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
         if ( CoinPushBy(fish, from, to, dir)) {
-            Room.reduceTime(10);
+            getRoom().reduceRealTime(10);
             pushObject(fish, from, to);
             return true;  
         }

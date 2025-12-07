@@ -116,12 +116,14 @@ public class Room {
 
     public void reduceRealTime(int time)  {
         int timeFinal = engine.getRealTime() - time;
+        if ( timeFinal < 0) {
+            engine.setRealTime(0);
+            return;
+        }
         engine.setRealTime(timeFinal);
     }
 
-    public static void reduceTime(int time) {
-        reduceTime(time);
-    }
+
 
     // Processa uma linha do ficheiro (y) criando água + objetos dessa linha
     private static void processLine(Room r, String line, int y) {

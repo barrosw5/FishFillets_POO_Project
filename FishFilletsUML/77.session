@@ -1,11 +1,11 @@
-window_sizes 1920 1009 219 1696 963 0
+window_sizes 1920 1009 352 1563 963 0
 
 diagrams
   active  classdiagram_ref 128077 // FishFilletsUML
-    1696 963 81 E 16 318
+    1563 963 81 E 0 0
 end
 show_stereotypes
-selected operation_ref 155213 // interactWithFish
+selected operation_ref 162509 // canPushHeavyObjects
 open
   class_ref 128077 // GameObject
   class_ref 128205 // GameCharacter
@@ -42,5 +42,6 @@ open
   class_ref 185037 // Key
   class_ref 185165 // Spinach
   class_ref 185293 // SpinningWheel
+  class_ref 191821 // ScoreManager
 end
 end

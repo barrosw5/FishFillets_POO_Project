@@ -8,7 +8,7 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public class Krab extends LightObject implements Interactable, Gravity{
-    private boolean controlDown = false;
+    private boolean downDone = false;
 
     public Krab(Room room, Point2D pos){
         super(room);
@@ -126,12 +126,12 @@ public class Krab extends LightObject implements Interactable, Gravity{
             Point2D pos = this.getPosition();
             Point2D below = getBelow(pos);
             pushObject(this, pos, below);
-            controlDown = true;
+            downDone = true;
         }
 
-        else if (controlDown && !canSpecialMov()) {
+        else if (downDone && !canSpecialMov()) {
             specialAbillity();
-            controlDown = false;
+            downDone = false;
         }
     }
 

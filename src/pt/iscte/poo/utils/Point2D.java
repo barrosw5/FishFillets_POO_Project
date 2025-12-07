@@ -77,6 +77,10 @@ public class Point2D implements Serializable { // Added 23-Apr-2018
 		return new Point2D(x + v.getX(), y + v.getY());
 	}
 
+	public Point2D minus(Vector2D v) { // subtrai o vetor às coordenadas do ponto
+		return new Point2D(x - v.getX(), y - v.getY());
+	}
+
 	public static boolean sameDirectionHorzontal(Point2D from, Point2D to) {
 		return from.getY() == to.getY();
 	}

@@ -5,7 +5,7 @@ import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
 public class Key extends LightObject implements Interactable, Gravity{
-    private boolean controlDown = false;
+    private boolean downDone = false;
 
     public Key(Room r){
         super(r);
@@ -54,9 +54,9 @@ public class Key extends LightObject implements Interactable, Gravity{
             pushObject(this, this.getPosition(), this.getBelow(this.getPosition()));
         }
 
-        else if (controlDown && !canSpecialMov()) { // se não, ativa a habilidade especial, neste caso nenhuma
+        else if (downDone && !canSpecialMov()) { // se não, ativa a habilidade especial, neste caso nenhuma
             specialAbillity();
-            controlDown = false;
+            downDone = false;
         }
     }
 

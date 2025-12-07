@@ -3,7 +3,6 @@ package pt.iscte.poo.game;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.*;
-import javax.swing.JOptionPane;
 import objects.*;
 import pt.iscte.poo.gui.ImageGUI;
 import pt.iscte.poo.observer.Observed;
@@ -14,12 +13,9 @@ import static pt.iscte.poo.utils.Direction.LEFT;
 public class GameEngine implements Observer {
 
     private static final String SCORES_PATH = "gamedata" + File.separator + "scores.txt";
-    private static final String ROOMS_DIR = "./rooms";
 
     // Estado do jogo: rooms carregadas e leaderboard
-    private Map<String, Room> rooms = new HashMap<>();
-    private List<Score> scores = new ArrayList<>();
-    
+    private Map<String, Room> rooms;
 
     // Atributos globais do projeto 
     private Room currentRoom;
@@ -36,94 +32,35 @@ public class GameEngine implements Observer {
 
     private SmallFish sf = SmallFish.getInstance();
     private BigFish bf = BigFish.getInstance();
+    private final ScoreManager scoreManager;
 
     // Construtor: garante diretoria, carrega rooms, scores e inicia GUI
     public GameEngine() {
         // garante que a pasta exista para nao dar erro
         new File("gamedata").mkdirs();
         
-        loadGameRooms();
-        
+        GameRoomsLoader loader = new GameRoomsLoader();
+
         try {
-            loadScores();
-        } catch (IOException e) {
-            System.err.println("Aviso: Não foi possível carregar os scores.");
+            this.rooms = loader.loadAllRooms(this);
+        } catch (Exception e) {
+            System.err.println("ERRO CRÍTICO: " + e.getMessage());
         }
+    
+        this.scoreManager = new ScoreManager();
         
         resetLevel();
         updateGUI();
         updateScoresDisplay();
     }
 
-    // --- Loading e Saving ---
 
-    // Varre a pasta rooms e cria as instâncias correspondentes
-    private void loadGameRooms() {
-        File dir = new File(ROOMS_DIR); // usa a diretoria em que as rooms estão presentes 
-        if (!dir.exists()) { // se não existe ele lança um erro diz que não foram encontradas rooms 
-            System.err.println("Diretoria das rooms não encontrada: " + ROOMS_DIR);
-            return;
-        }
-
-        File[] files = dir.listFiles(); // exitindo, cria uma lista com em que cada indice representa um file
-        if (files != null) {
-            for (File f : files) { // percorre a Lista de files e adiciona no HashMap das Rooms o file que corresponde a cada Room
-                rooms.put(f.getName(), Room.readRoom(f, this)); // usa a função readRoom para ler o file em si e as informações 
-            }
-        }
+    public int getRealTime() {
+        return realTime;
     }
 
-    // Lê ficheiro de scores (cria se não existir) e ordena
-    private void loadScores() throws IOException {
-        File file = new File(SCORES_PATH); // o file onde contrm os scores 
-        
-        if (!file.exists()) {
-            boolean created = file.createNewFile();
-            if (!created) {
-                throw new IOException("Falha ao criar o ficheiro de scores: " + SCORES_PATH);
-            }
-            return; 
-        }
-
-        try (Scanner sc = new Scanner(file)) {
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                processScoreLine(line);
-            }
-            // ordena logo ao carregar
-            scores.sort(null);
-        }
-    }
-
-    // Converte uma linha do file num Score válido, ignorando erros
-    private void processScoreLine(String line) {
-        String[] parts = line.split(","); // separa a linha num array em que os indices foram separados por ","
-        if (parts.length == 3) { // se tiver três de tamanho avança 
-            try {
-                String name = parts[0];
-                int score = Integer.parseInt(parts[1].trim());
-                int mvs = Integer.parseInt(parts[2].trim());
-                scores.add(new Score(name, score, mvs)); // faz o devido seperador e adiciona o score à lista 
-            } catch (NumberFormatException e) {
-                System.err.println("Score ignorado (formato inválido): " + line);
-            }
-        }
-        // se nao forem linhas de 3 partes separadas por , ele ignora
-    }
-
-    // Método em que basicamente salva os Scores
-    private void saveScores() throws IOException {
-        scores.sort(null); //  ordena 
-        while (scores.size() > 10) scores.remove(10); // while para garantir que só tem mesmo o TOP10 dos scores na lista 
-
-        try (PrintWriter writer = new PrintWriter(new File(SCORES_PATH))) { // tenta escrever os scores no file pré-definido 
-            for (Score s : scores) {
-                writer.println(s.getName() + "," + s.getScore() + "," + s.getMoves());
-            }
-        }
-        catch(IOException e){
-            System.err.println("Erro ao escrever no ficheiro de scores.txt");
-        }
+    public void setRealTime(int time){
+        realTime = time;
     }
 
     // --- main game jogo ---
@@ -236,9 +173,12 @@ public class GameEngine implements Observer {
 
     // Atualiza painel lateral com scores ordenados
     private void updateScoresDisplay() {
-        scores.sort(null);
+        // tira a lista ao manager
+        List<Score> scores = scoreManager.getScores(); 
+        scores.sort(null); 
         List<String> scoreList = new ArrayList<>();
-        for (Score s : scores) scoreList.add(s.toString());
+        for (Score s : scores)
+            scoreList.add(s.toString());
         ImageGUI.getInstance().setScoreEntries(scoreList);
     }
 
@@ -292,7 +232,9 @@ public class GameEngine implements Observer {
         bf.setDirection(LEFT);
         sf.resetWin(); // reset as vitórias 
         bf.resetWin();
-
+        sf.resetSpinned();
+        bf.resetSpinned();
+        
         if (initialized || !currentRoom.getObjects().contains(sf)) currentRoom.addObject(sf);
         if (initialized || !currentRoom.getObjects().contains(bf)) currentRoom.addObject(bf);
         
@@ -314,40 +256,11 @@ public class GameEngine implements Observer {
 
         String cleanName = playerName.trim(); 
 
-        int finalTime = lastTickProcessed - gameStartTimeTicks; // o teu final do jogador 
+        int finalTime = lastTickProcessed - gameStartTimeTicks; // o temp final do jogador 
         
-        addOrUpdateScore(cleanName, finalTime, moves); // adiciona ao score
-        ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 10. (R for restart)"); // e a msg final
-    }
-
-    // Adiciona ou atualia o Score
-
-    private void addOrUpdateScore(String name, int time, int moves) {
-        Score existing = null;
-        for (Score s : scores) {  // se exitir já, verifica isso 
-            if (s.getName().equals(name)) {
-                existing = s;
-                break;
-            }
-        }
-
-        if (existing != null) { // se realmente assistir. o jogo pergunta se quer mesmo confirmar a nova pontuação 
-            int resp = JOptionPane.showConfirmDialog(null, 
-                "Player " + name + " exists. Replace score?", "Duplicate Name", JOptionPane.YES_NO_OPTION);
-            if (resp != JOptionPane.YES_OPTION) return;
-            
-            scores.remove(existing); // remove a antiga
-        }
-        
-        scores.add(new Score(name, time, moves)); // e adiciona a nova ou substitui 
-        
-        try { // tenta salvar o score
-            saveScores();
-        } catch (IOException e) {
-            System.err.println("Erro ao gravar: " + e.getMessage());
-        }
-        
+        scoreManager.addOrUpdateScore(cleanName, finalTime, moves); // adiciona ao score
         updateScoresDisplay();
+        ImageGUI.getInstance().setStatusMessage("The game is Over! Check the top 10. (R for restart)"); // e a msg final
     }
     
     public int getPlayedLevels() {

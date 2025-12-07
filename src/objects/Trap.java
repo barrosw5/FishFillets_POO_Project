@@ -24,7 +24,7 @@ public class Trap extends HeavyObject implements Interactable, Gravity {
 	// SF atravessa, outros morrem ao tocar na trap
 	@Override
 	public boolean interactWithFish(GameCharacter fish, Point2D from, Point2D to, Vector2D dir) {
-		if ( fish instanceof SmallFish) {
+		if ( fish.canPassSmallSpaces()) {
 			return true;
 		}
 		fish.die(fish);

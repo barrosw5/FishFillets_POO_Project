@@ -1,10 +1,10 @@
+a,8,43
+bom dia,25,93
 barrosw5,36,168
 niihao,37,189
 ahyaa,44,193
-juan,44,199
 Pedro,46,159
 barros1,50,141
 Nunes,52,160
 yay,54,240
 emilia,55,173
-Coelho,55,180

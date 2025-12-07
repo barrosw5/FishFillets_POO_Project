@@ -114,6 +114,18 @@ public class Room {
         }
     }
 
+    // Função para reduzir o tempo do jogador em habilidade especial de algum tipo de objeto 
+    public void reduceRealTime(int time)  {
+        int timeFinal = engine.getRealTime() - time;
+        if ( timeFinal < 0) {
+            engine.setRealTime(0);
+            return;
+        }
+        engine.setRealTime(timeFinal);
+    }
+
+
+
     // Processa uma linha do ficheiro (y) criando água + objetos dessa linha
     private static void processLine(Room r, String line, int y) {
         char[] chars = line.toCharArray();
@@ -149,6 +161,11 @@ public class Room {
             case 'X': obj = new HoledWall(r); break;
             case 'J': obj = new Juan(r); break;
             case 'U': obj = new Buoy(r); break;
+            case 'G': obj = new Gate(r); break;
+            case 'K': obj = new Key(r); break;
+            case 'L': obj = new Spinach(r); break;
+            case 'w': obj = new SpinningWheel(r); break;
+            case 'c': obj = new Coin(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

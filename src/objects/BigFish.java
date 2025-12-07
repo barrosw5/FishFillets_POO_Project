@@ -102,5 +102,15 @@ public class BigFish extends GameCharacter {
 		return true;
 	}
 
+	@Override
+	public boolean canPassSmallSpaces() {
+		return false;
+	}
+
+	@Override
+	public boolean canPushHeavyObjects() {
+		return true;
+	}
+
 
 }

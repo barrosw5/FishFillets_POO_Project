@@ -1,11 +1,11 @@
-window_sizes 1920 1009 197 1718 963 0
+window_sizes 1920 1009 352 1563 963 0
 
 diagrams
   active  classdiagram_ref 128077 // FishFilletsUML
-    1718 963 81 D 0 0
+    1563 963 81 E 0 0
 end
 show_stereotypes
-selected operation_ref 145485 // removeObject
+selected operation_ref 162509 // canPushHeavyObjects
 open
   class_ref 128077 // GameObject
   class_ref 128205 // GameCharacter
@@ -36,5 +36,12 @@ open
   class_ref 177869 // Buoy
   class_ref 177997 // Blood
   class_ref 178125 // Explosion
+  class_ref 184653 // GameRoomsLoader
+  class_ref 184781 // Coin
+  class_ref 184909 // Gate
+  class_ref 185037 // Key
+  class_ref 185165 // Spinach
+  class_ref 185293 // SpinningWheel
+  class_ref 191821 // ScoreManager
 end
 end

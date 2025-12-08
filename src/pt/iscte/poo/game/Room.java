@@ -168,6 +168,7 @@ public class Room {
             case 'c': obj = new Coin(r); break;
             case 't': obj = new Torpedo(r); break;
             case 'P': obj = new Portal(r); break;
+            case 'p': obj = new ToxicBubble(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

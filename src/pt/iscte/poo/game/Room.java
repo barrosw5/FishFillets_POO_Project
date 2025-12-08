@@ -167,6 +167,7 @@ public class Room {
             case 'w': obj = new SpinningWheel(r); break;
             case 'c': obj = new Coin(r); break;
             case 't': obj = new Torpedo(r); break;
+            case 'P': obj = new Portal(r); break;
             default:
                 System.err.println("Não era suposto chegar aqui nunca: " + c);
                 break;

@@ -12,8 +12,6 @@ import static pt.iscte.poo.utils.Direction.LEFT;
 
 public class GameEngine implements Observer {
 
-    private static final String SCORES_PATH = "gamedata" + File.separator + "scores.txt";
-
     // Estado do jogo: rooms carregadas e leaderboard
     private Map<String, Room> rooms;
 

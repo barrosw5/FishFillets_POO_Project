@@ -1,6 +1,7 @@
 package objects;
 
 import pt.iscte.poo.game.Room;
+import pt.iscte.poo.utils.Direction;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
@@ -49,11 +50,11 @@ public class Buoy extends LightObject implements Interactable, Gravity{
     //  verifica o espaço acima em vez de abaixo
     @Override
     public boolean canSpecialMov() {
-        Point2D pos = this.getPosition();
-        Point2D up = new Point2D(pos.getX(), pos.getY() - 1);
-        GameObject obj = findObject(up, this.getRoom());
+        Point2D pos = this.getPosition(); // Pega a pos do objeto 
+        Point2D below = new Point2D(pos.getX(), pos.getY() + 1); // a posição abaico do obj
+        GameObject obj = findObject(below, this.getRoom()); // e o obj abaixo da boia
 
-        if(obj == null )
+        if(obj == null ) // se for vazio pode descer, caso contrário não 
             return true;
 
         return false;
@@ -63,38 +64,40 @@ public class Buoy extends LightObject implements Interactable, Gravity{
     @Override
     public void specialmov() {
         Point2D pos = this.getPosition(); // busca a pos da boia
-        Point2D above = getAbove(pos); // vê a pos acima da boia 
-        GameObject aboveObj = findObject(above, this.getRoom()); // procura o obj nessa posição 
+        Point2D below = getBelow(pos);
 
         // Vê em que posição a boia está e vai ver os objetos em cima e embaixo 
 
         // Se puder ir para cima, muito bem, vai. 
         if (canSpecialMov()) {
-            pushObject(this, pos, above); 
-            return;
+            pushObject(this, pos, below);
         }
 
-        // Se não puder e o objeto que estiver em cima de si for um Movable ativa a specialAbility
-        
-        if (aboveObj instanceof MovableObject) {
-            specialAbillity();
-        }
+        specialAbillity();
     }
-
-
-    //  Afunda uma casa se estiver bloqueada em cima e tiver água/livre em baixo
 
     @Override
     public void specialAbillity() {
-        Point2D pos = this.getPosition(); // encontra a pos da boia 
-        Point2D below = new Point2D(pos.getX(), pos.getY() + 1); // a pos abaixo dela
-        GameObject obj = findObject(below, this.getRoom()); // o obj nessa pos
-
-         if(obj == null ) { // se não houver nenhum obj afunda uma pos.
-            Point2D posDown = this.getPosition();
-            Point2D belowDown = getBelow(posDown);
-            pushObject(this, posDown, belowDown);
+        Direction dir = Math.random() < 0.5 ? Direction.LEFT : Direction.RIGHT; // Se for menos que 0,5 LEFT, caso contrário RIGHT
+        Vector2D vec = dir.asVector(); // define um vetor 
+        Point2D currentPos = getPosition(); // a pos atual do krab 
+        Point2D targetPos = currentPos.plus(vec); // e a pos para onde vai 
+        GameObject target = findObject(targetPos, getRoom());
+        
+        if (target == null) {
+            pushObject(this, currentPos, targetPos);
         }
-
+        else{
+            if(dir == Direction.LEFT){
+                target = findObject(currentPos.plus(Direction.RIGHT.asVector()), getRoom());
+                if(target == null)
+                    pushObject(this, getPosition(), currentPos.plus(Direction.RIGHT.asVector()));
+            }
+            else{
+                target = findObject(currentPos.plus(Direction.LEFT.asVector()), getRoom());
+                if(target == null)
+                    pushObject(this, getPosition(), currentPos.plus(Direction.LEFT.asVector()));
+            }
+        }
     }
 }

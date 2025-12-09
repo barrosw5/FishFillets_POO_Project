@@ -1,20 +1,10 @@
 WWWWWWWWWW
-<<<<<<< Updated upstream
 WAP   Pw W
 W    HHH W
 Wt c CCbBW
-=======
-WAU    w W
-W    HHH W
-W    CCbBW
->>>>>>> Stashed changes
 W  S WXXXW
 W    W    
 W   WW   W
 W C  W   W
-<<<<<<< Updated upstream
 W Up   T W
-=======
-W      T W
->>>>>>> Stashed changes
 WWWWWWWWWW
